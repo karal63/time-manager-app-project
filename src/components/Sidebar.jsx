@@ -11,45 +11,45 @@ const Sidebar = () => {
     const buttonRef = useRef(null);
 
     let openTimeoutId = null;
-    let closeTimeoutId = null;
 
     const handleDelayOpen = (e, type) => {
-        console.log(e);
         switch (type) {
             case "enter":
+                if (openTimeoutId) {
+                    clearTimeout(openTimeoutId);
+                }
                 openTimeoutId = setTimeout(() => {
-                    if (!isOpen) {
-                        setIsOpen(true);
-                    }
+                    setIsOpen(true);
                 }, 300);
                 break;
             case "leave":
+                if (openTimeoutId) {
+                    clearTimeout(openTimeoutId);
+                }
                 if (
                     sidebarRef.current &&
                     buttonRef.current &&
                     !sidebarRef.current.contains(e.target) &&
                     !buttonRef.current.contains(e.target)
                 ) {
-                    if (openTimeoutId) {
-                        clearTimeout(openTimeoutId);
-                    }
                     setIsOpen(false);
                 }
+                break;
         }
     };
 
     const handleDelayClose = (e, type) => {
         switch (type) {
             case "enter":
-                if (closeTimeoutId) {
-                    clearTimeout(closeTimeoutId);
+                if (openTimeoutId) {
+                    clearTimeout(openTimeoutId);
                 }
                 break;
             case "leave":
-                console.log("close sidebar");
-                closeTimeoutId = setTimeout(() => {
+                openTimeoutId = setTimeout(() => {
                     setIsOpen(false);
                 }, 400);
+                break;
         }
     };
 
