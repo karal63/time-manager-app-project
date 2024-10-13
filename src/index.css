@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    overflow-y: hidden;
+}
+
 .screen-max-width {
-  @apply max-w-[1540px] m-auto;
+    @apply max-w-[1540px] m-auto;
 }
 
 .flex-center {
-  @apply flex items-center justify-center;
+    @apply flex items-center justify-center;
 }

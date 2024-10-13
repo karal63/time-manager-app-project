@@ -8,8 +8,11 @@ export default {
       },
       backgroundColor: {
         darkPink: "rgb(219, 39, 119)",
-        darkPinkTransp: "rgba(219, 39, 119, 0.5)",
+        darkPinkTransp: "rgba(219, 39, 119, 0.3)",
         modal: "rgba(0, 0, 0, 0.3)",
+      },
+      backgroundImage: {
+        "hero-pattern": "url('src/assets/grid.png')",
       },
       borderColor: {
         darkPink: "rgb(219, 39, 119)",
