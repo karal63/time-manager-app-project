@@ -16,4 +16,9 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 
 ### **[ver. 0.00 Beta] - 2024-09-19**
 
-- stworzenie podstawy aplikacji
+-   stworzenie podstawy aplikacji
+
+### **[ver. 0.10 Beta] - 2024-10-13**
+
+-   stworzenie wygodnej interakcji z navigacją boczną (zamykanie, otwieranie).
+-   stworzenie nawigacji pomiędzy aplikacjami
