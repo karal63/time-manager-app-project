@@ -22,3 +22,23 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 
 -   stworzenie wygodnej interakcji z navigacją boczną (zamykanie, otwieranie).
 -   stworzenie nawigacji pomiędzy aplikacjami
+
+### **[ver. 0.11 Beta] - 2024-10-13**
+
+-   użycie metody clean code: KISS
+
+### **[ver. 0.12 Beta] - 2024-10-13**
+
+-   użycie metody clean code: YAGNI
+
+### **[ver. 0.13 Beta] - 2024-10-13**
+
+-   użycie metody clean code: DRY
+
+### **[ver. 0.14 Beta] - 2024-10-13**
+
+-   użycie metody clean code: Fail Fast
+
+### **[ver. 0.15 Beta] - 2024-10-13**
+
+-   użycie metody clean code: Use Meaningful Names
