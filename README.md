@@ -42,3 +42,7 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 ### **[ver. 0.15 Beta] - 2024-10-13**
 
 -   użycie metody clean code: Use Meaningful Names
+
+### **[ver. 0.16 Beta] - 2024-10-26**
+
+-   Usunięcie poprzedniego bocznego bloku nawigacyjnego i utworzenie nowego.

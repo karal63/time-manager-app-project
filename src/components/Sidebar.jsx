@@ -1,6 +1,5 @@
 import { PiNotePencil } from "react-icons/pi";
 import { CiCalendar } from "react-icons/ci";
-import { FiEdit2 } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -9,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [projectName, setProjectName] = useState("project 123");
-    const [isEditingName, setIsEditingName] = useState(false);
 
     const sidebarRef = useRef();
 
@@ -27,12 +25,6 @@ const Sidebar = () => {
             } flex flex-col justify-between`}
             onMouseLeave={() => {
                 setIsOpen(false);
-                setIsEditingName(false);
-            }}
-            onClick={(e) => {
-                if (e.target === sidebarRef.current) {
-                    setIsEditingName(false);
-                }
             }}
         >
             <div>
