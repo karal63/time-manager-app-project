@@ -1,136 +1,122 @@
-import { useRef, useState } from "react";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdKeyboardArrowLeft } from "react-icons/md";
+import { PiNotePencil } from "react-icons/pi";
+import { CiCalendar } from "react-icons/ci";
+import { FiEdit2 } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const [projectName, setProjectName] = useState("project 123");
+    const [isEditingName, setIsEditingName] = useState(false);
+
     const sidebarRef = useRef();
-    const buttonRef = useRef(null);
 
-    let openTimeoutId = null;
-
-    const handleDelayOpen = (e, type) => {
-        switch (type) {
-            case "enter":
-                if (openTimeoutId) {
-                    clearTimeout(openTimeoutId);
-                }
-                openTimeoutId = setTimeout(() => {
-                    setIsOpen(true);
-                }, 300);
-                break;
-            case "leave":
-                if (openTimeoutId) {
-                    clearTimeout(openTimeoutId);
-                }
-                if (
-                    sidebarRef.current &&
-                    buttonRef.current &&
-                    !sidebarRef.current.contains(e.target) &&
-                    !buttonRef.current.contains(e.target)
-                ) {
-                    setIsOpen(false);
-                }
-                break;
-        }
-    };
-
-    const handleDelayClose = (e, type) => {
-        switch (type) {
-            case "enter":
-                if (openTimeoutId) {
-                    clearTimeout(openTimeoutId);
-                }
-                break;
-            case "leave":
-                openTimeoutId = setTimeout(() => {
-                    setIsOpen(false);
-                }, 400);
-                break;
-        }
-    };
+    useEffect(() => {
+        setProjectName(projectName.replace(/ /g, "\u00A0"));
+    }, [projectName]);
 
     return (
-        <>
-            <section
-                className={`fixed top-0 ${
-                    isOpen ? "left-0" : "-left-[280px]"
-                } w-[280px] bg-white h-full flex z-10 shadow-xl`}
-                id="sidebar"
-                ref={sidebarRef}
-                onMouseEnter={(e) => handleDelayClose(e, "enter")}
-                onMouseLeave={(e) => handleDelayClose(e, "leave")}
-            >
-                {/* content */}
-                <div className="w-[100%] z-10 bg-white pt-32 pb-5 flex flex-col justify-between">
-                    <ul className="w-full">
-                        <li>
+        <section
+            ref={sidebarRef}
+            className={`${
+                isOpen ? "w-[280px]" : "w-16"
+            } absolute left-0 top-[68px] h-[calc(100vh-68px)] shadow-lg bg-white transition-all pl-2 ${
+                isOpen ? "pr-10" : ""
+            } flex flex-col justify-between`}
+            onMouseLeave={() => {
+                setIsOpen(false);
+                setIsEditingName(false);
+            }}
+            onClick={(e) => {
+                if (e.target === sidebarRef.current) {
+                    setIsEditingName(false);
+                }
+            }}
+        >
+            <div>
+                {isOpen ? (
+                    <div className="mt-6 ml-3">
+                        <p className="text-xl">Project&nbsp;name</p>
+
+                        <div className="mt-2">
+                            <input
+                                type="text"
+                                className="px-4 py-2 border-[1px] border-transparent rounded-md text-md w-full text-md hover:border-gray-200 outline-gray-300"
+                                value={projectName}
+                                onChange={(e) => setProjectName(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    <div className="mt-6 h-[77.6px]"></div>
+                )}
+
+                <div className="mt-10">
+                    <hr className={`${isOpen ? "-mr-8" : "-ml-2"}`} />
+                    <p
+                        className={`mt-1 text-center text-gray-400 ${
+                            isOpen ? "" : "-ml-2"
+                        }`}
+                    >
+                        Apps
+                    </p>
+
+                    <ul className="mt-2 max-w-max">
+                        <li className="">
                             <Link
                                 to="/planner"
-                                className="hover:bg-darkPinkTransp transition-all block py-2 px-5 text-xl mx-4 rounded-xl"
-                                onClick={() => setIsOpen(false)}
+                                className="flex items-center gap-3 "
+                                onMouseOver={() => setIsOpen(true)}
                             >
-                                Projektant
+                                <CiCalendar className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+
+                                {isOpen ? (
+                                    <span className="text-xl">Planner</span>
+                                ) : (
+                                    ""
+                                )}
                             </Link>
                         </li>
+
                         <li>
                             <Link
                                 to="/notes"
-                                className="hover:bg-darkPinkTransp transition-all block py-2 px-5 text-xl mx-4 rounded-xl"
-                                onClick={() => setIsOpen(false)}
+                                className="flex items-center gap-3"
+                                onMouseOver={() => setIsOpen(true)}
                             >
-                                Twoje notatki
+                                <PiNotePencil className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+                                {isOpen ? (
+                                    <span className="text-xl">Notes</span>
+                                ) : (
+                                    ""
+                                )}
                             </Link>
                         </li>
                     </ul>
-
-                    <div className="flex flex-col items-center">
-                        <ul className="mb-5 flex gap-3 text-3xl">
-                            <li>
-                                <a
-                                    href="https://github.com/karal63"
-                                    target="_blank"
-                                >
-                                    <FaGithub />
-                                </a>
-                            </li>
-                            <li>
-                                <FaGithub />
-                            </li>
-                            <li>
-                                <FaGithub />
-                            </li>
-                        </ul>
-
-                        <span className="text-gray-500">
-                            ©Productive | All rights reserved
-                        </span>
-                    </div>
                 </div>
+            </div>
 
-                {/* side button */}
-                <div className="relative flex items-center z-10 bg-transparent">
-                    <button
-                        className="py-10 rounded-tr-2xl rounded-br-2xl bg-darkPink absolute top-[50%] translate-y-[-50%]"
-                        onClick={() => {
-                            setIsOpen(!isOpen);
-                        }}
-                        onMouseEnter={(e) => handleDelayOpen(e, "enter")}
-                        onMouseLeave={(e) => handleDelayOpen(e, "leave")}
-                        ref={buttonRef}
-                    >
-                        {isOpen ? (
-                            <MdKeyboardArrowLeft className="text-3xl pointer-events-none" />
-                        ) : (
-                            <MdKeyboardArrowRight className="text-3xl pointer-events-none" />
-                        )}
-                    </button>
+            {isOpen && (
+                <div className="mb-10 flex flex-col items-center">
+                    <ul className="flex gap-3">
+                        <li>
+                            <a
+                                href="https://github.com/karal63"
+                                className="text-3xl grayscale-1 hover:grayscale-0"
+                            >
+                                <FaGithub />
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p className="mt-3 text-gray-500">
+                        ©Copyright&nbsp;productIVE
+                    </p>
                 </div>
-            </section>
-        </>
+            )}
+        </section>
     );
 };
 
