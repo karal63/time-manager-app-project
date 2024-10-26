@@ -97,6 +97,7 @@ const Sidebar = () => {
                             <a
                                 href="https://github.com/karal63"
                                 className="text-3xl grayscale-1 hover:grayscale-0"
+                                target="_blank"
                             >
                                 <FaGithub />
                             </a>
