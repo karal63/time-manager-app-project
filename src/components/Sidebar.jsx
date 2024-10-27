@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [projectName, setProjectName] = useState("project 123");
 
     const sidebarRef = useRef();
@@ -22,7 +22,7 @@ const Sidebar = () => {
                 isOpen ? "w-[280px]" : "w-16"
             } absolute left-0 top-[68px] h-[calc(100vh-68px)] shadow-lg bg-white transition-all pl-2 ${
                 isOpen ? "pr-10" : ""
-            } flex flex-col justify-between`}
+            } flex flex-col justify-between z-10`}
             onMouseLeave={() => {
                 setIsOpen(false);
             }}

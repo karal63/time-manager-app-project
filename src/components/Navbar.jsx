@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import SwitchMode from "./switchMode";
 
 const Navbar = () => {
+    const url = useLocation();
+    console.log(url);
+    console.log(url.pathname === "/planner");
+
     return (
         <section className="border-b-[1px] relative z-20">
             <div className="bg-white py-5 px-10">
@@ -15,7 +20,12 @@ const Navbar = () => {
                 </div>
 
                 {/* nav right side */}
-                <div></div>
+                {url.pathname === "/planner" ||
+                url.pathname === "/planner/observe" ? (
+                    <SwitchMode />
+                ) : (
+                    ""
+                )}
             </div>
         </section>
     );

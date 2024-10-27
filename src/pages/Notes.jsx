@@ -1,5 +1,9 @@
 const Notes = () => {
-  return <div className="bg-hero-pattern h-[90.7vh] bg-contain ">Notes</div>;
+    return (
+        <div className="bg-hero-pattern h-[calc(100vh-68px)] bg-contain">
+            Notes
+        </div>
+    );
 };
 
 export default Notes;

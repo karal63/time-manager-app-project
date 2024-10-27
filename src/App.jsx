@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import Notes from "./pages/Notes";
 import Planner from "./pages/Planner";
 import PageNotFound from "./pages/PageNotFound";
+import ObservePlan from "./pages/ObservePlan";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Navigate to="/planner" />} />
                 <Route path="/planner" element={<Planner />} />
+                <Route path="/planner/observe" element={<ObservePlan />} />
                 <Route path="/notes" element={<Notes />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>

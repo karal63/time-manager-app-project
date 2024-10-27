@@ -1,4 +1,4 @@
-# Time Manager App
+# ProductIVE
 
 ## ⚙ Do czego służy aplikacja?
 
@@ -46,3 +46,9 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 ### **[ver. 0.16 Beta] - 2024-10-26**
 
 -   Usunięcie poprzedniego bocznego bloku nawigacyjnego i utworzenie nowego.
+
+### **[ver. 0.17 Beta] - 2024-10-26**
+
+-   utworzenie podstrony /planner/observe
+-   utworzenie przełącznika trybu u podstron /planner i /planner/observe
+-   utworzenie podstrony, która ma się wyświetlać w przypadku gdy został źle podany url np. planner1
