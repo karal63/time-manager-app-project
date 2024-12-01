@@ -52,3 +52,10 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   utworzenie podstrony /planner/observe
 -   utworzenie przełącznika trybu u podstron /planner i /planner/observe
 -   utworzenie podstrony, która ma się wyświetlać w przypadku gdy został źle podany url np. planner1
+
+### **[ver. 0.20 Beta] - 2024-12-01**
+
+-   stworzenie store.js;
+-   stworzenie komponentu AddTimeRangePanel, czyli panelu który odpowiada za interakcję z użytkownikiem pod względem utworzenia nowego zakresu czasu;
+-   stworzenie wyprowadającego okienka, który ma się pojawiać kiedy użytkownik utworzył nowy zakres czasu, w przyszłości będzie rozwijane;
+-   stworzenie strony Planner, na której narazie można zobaczyćstrukturę dnia

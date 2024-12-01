@@ -3,8 +3,6 @@ import SwitchMode from "./switchMode";
 
 const Navbar = () => {
     const url = useLocation();
-    console.log(url);
-    console.log(url.pathname === "/planner");
 
     return (
         <section className="border-b-[1px] relative z-20">
