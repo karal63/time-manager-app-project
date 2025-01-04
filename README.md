@@ -59,3 +59,13 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   stworzenie komponentu AddTimeRangePanel, czyli panelu który odpowiada za interakcję z użytkownikiem pod względem utworzenia nowego zakresu czasu;
 -   stworzenie wyprowadającego okienka, który ma się pojawiać kiedy użytkownik utworzył nowy zakres czasu, w przyszłości będzie rozwijane;
 -   stworzenie strony Planner, na której narazie można zobaczyćstrukturę dnia
+
+### **[ver. 0.30 Beta] - 2025-01-04**
+
+-   Stworzenie strefy skrolowania w podstronie "planner"
+-   Stworzenie pojedynczych kresek "SingleTimeMark" na linii dnia
+-   Stworzenie pojedynczego bloku okresu czasu "SingleBlock"
+-   Stworzenie funkcji "setRnagePosition" w "store.js"
+-   Stworzenie funkcji "addTimeRange" w "store", która dodaje nowy okres czasu
+-   Stworzenie funkcji "setNewZoomLevel" w "store", która ustawia poziom przybliżenia
+-   Dodanie zasady, która wyłącza sprawdzenie poprawności parametrów przekazywanych do nowego komponentu w pliku"eslint.config.js"
