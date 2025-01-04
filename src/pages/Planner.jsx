@@ -1,14 +1,12 @@
 import { GoPlus } from "react-icons/go";
-import AddTimeRangePanel from "../components/addTimeRangePanel";
-import SingleTimeMark from "../components/SingleTimeMark.jsx";
+import AddTimeRangePanel from "../components/AddTimeRangePanel.jsx";
 
 import { useEffect, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store.js";
-import DayStructure from "../components/DayStructure.jsx";
 import ZoomZone from "../components/ZoomZone.jsx";
 
 const Planner = () => {
-    const { dayStructure, setPlannerZoneRef } = useTimeRangeStore();
+    const { setPlannerZoneRef } = useTimeRangeStore();
     const [isAddingPanelOpen, setIsAddingPanelOpen] = useState(false);
     const plannerZoneRef = useRef(null);
 

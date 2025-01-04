@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTimeRangeStore } from "../store";
 
 const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
@@ -19,7 +19,7 @@ const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
     const { name, timeStart, timeEnd, desc } = timeRange;
 
     // getting from useTimeRangeStore
-    const { togglePopup, timeRanges, addTimeRange } = useTimeRangeStore();
+    const { togglePopup, addTimeRange } = useTimeRangeStore();
 
     // textarea ref
     let textareaRef = useRef();

@@ -7,11 +7,11 @@ const SingleBlock = ({ range }) => {
     const [height, setHeight] = useState();
     const block = useRef(null);
 
-    const currentMark = dayStructure.find((s) => s.time === range.timeStart);
-    const endTimeMark = dayStructure.find((s) => s.time === range.timeEnd);
+    const currentMark = dayStructure.find((s) => s.time === timeStart);
+    const endTimeMark = dayStructure.find((s) => s.time === timeEnd);
     const width = endTimeMark.positionX - currentMark.positionX + 2;
 
-    // not accomplished yet
+    // not accomplished yet, add more heights
     useEffect(() => {
         console.log(width);
         if (width <= 60) {

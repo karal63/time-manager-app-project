@@ -69,3 +69,7 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie funkcji "addTimeRange" w "store", która dodaje nowy okres czasu
 -   Stworzenie funkcji "setNewZoomLevel" w "store", która ustawia poziom przybliżenia
 -   Dodanie zasady, która wyłącza sprawdzenie poprawności parametrów przekazywanych do nowego komponentu w pliku"eslint.config.js"
+
+### **[ver. 0.31 Beta] - 2025-01-04**
+
+-   Usunięcie nieużywanych rzeczy

@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store";
 import SingleBlock from "./SingleBlock";
 
