@@ -73,3 +73,10 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 ### **[ver. 0.31 Beta] - 2025-01-04**
 
 -   Usunięcie nieużywanych rzeczy
+
+### **[ver. 0.32 Beta] - 2025-01-07**
+
+-   Stworzenie otwierającego się okienka przy naciśnięciu na blok (okres czasu)
+-   Aktualizacja okna informacyjnego (od tej wersji jest dynamiczne)
+-   Stworzenie funkcji odpowiedzialnych za manipulację nad listą istniejących bloków (okresach czasu) (dodawanie, usuwanie oraz modyfikowanie)
+-   Stworzenie animacji dla każdego bloku przy występowaniu określonego zdarzenia

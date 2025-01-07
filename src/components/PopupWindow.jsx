@@ -6,12 +6,13 @@ import { useTimeRangeStore } from "../store";
 // make popup dynamic, the text depends of the popup type passed through the params
 
 const PopupWindow = () => {
-    const { isPopupOpen, togglePopup } = useTimeRangeStore();
+    const { popup, togglePopup } = useTimeRangeStore();
+    const { isOpen, message } = popup;
     const [timeLeft, setTimeLeft] = useState(5);
     const popupWindowRef = useRef();
 
     useEffect(() => {
-        if (isPopupOpen === true) {
+        if (isOpen === true) {
             const intervalId = setInterval(() => {
                 setTimeLeft((timeLeft) => (timeLeft -= 1));
             }, 1000);
@@ -22,15 +23,15 @@ const PopupWindow = () => {
                 setTimeLeft(5);
             }, 5000);
         }
-    }, [isPopupOpen]);
+    }, [isOpen]);
     return (
         <div
             ref={popupWindowRef}
             className={`absolute bottom-8 ${
-                isPopupOpen ? "left-8" : "-left-[400px]"
-            }    z-10 w-[350px] bg-gray-200 p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
+                isOpen ? "left-8" : "-left-[400px]"
+            }    z-20 w-[350px] bg-gray-200 p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
         >
-            <h1>Time Range was created successfully</h1>
+            <h1>{message}</h1>
             <div className="mt-4 flex justify-between items-center gap-4">
                 <div className="w-[35px] h-[35px] rounded-full flex-center relative">
                     <PiArrowClockwiseThin className="text-4xl" />

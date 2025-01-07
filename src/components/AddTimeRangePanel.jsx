@@ -1,30 +1,47 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store";
 
-const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
+const AddTimeRangePanel = () => {
+    // Getting states from useTimeRangeStore
+    const {
+        addTimeRange,
+        setPopup,
+        timeRangePanel,
+        setTimeRangePanel,
+        editTimeRange,
+    } = useTimeRangeStore();
+
     // example of time range
     const [timeRange, setTimeRange] = useState({
+        id: "",
         name: "",
         desc: "",
         timeStart: "",
         timeEnd: "",
-        duration: "",
     });
+
+    useEffect(() => {
+        setTimeRange({
+            id: timeRangePanel.id,
+            name: timeRangePanel.name,
+            desc: timeRangePanel.description,
+            timeStart: timeRangePanel.timeStart,
+            timeEnd: timeRangePanel.timeEnd,
+        });
+    }, [timeRangePanel]);
+
+    // Destructuring time range
+    const { name, timeStart, timeEnd, desc } = timeRange;
+
     const [errorMessage, setErrorMessage] = useState({
         type: "",
         message: "",
     });
 
-    // destructuring time range
-    const { name, timeStart, timeEnd, desc } = timeRange;
-
-    // getting from useTimeRangeStore
-    const { togglePopup, addTimeRange } = useTimeRangeStore();
-
-    // textarea ref
+    // Textarea ref
     let textareaRef = useRef();
 
-    // making textarea dynamic
+    // Making textarea dynamic
     const handleInput = (e) => {
         const textarea = textareaRef.current;
         if (textarea) {
@@ -47,27 +64,31 @@ const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
         setTimeRange({ ...timeRange, desc: e.target.value });
     };
 
-    // function that response for what will happen when we click add time range button
+    // Function that responses for what will happen when we submit
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // validation inputs
+        // Validating inputs
         if (desc.length > 500) {
-            setErrorMessage({
+            return setErrorMessage({
                 type: "desc",
-                message: "description can be a maximum of 500 letters",
+                message: "Description can be a maximum of 500 letters",
             });
-            return;
         }
 
-        togglePopup(true);
-        setIsAddingPanelOpen(false);
+        setPopup(true, "Time range was created successfully");
+        setTimeRangePanel(false, "");
 
-        // pushing checked range to the array of ranges
-        addTimeRange(timeRange);
-        // timeRanges.push(timeRange);
-        console.log(timeRange);
+        // Adding range to the array of ranges
+        switch (timeRangePanel.type) {
+            case "Create":
+                addTimeRange(timeRange);
+                break;
+            case "Edit":
+                editTimeRange(timeRange);
+        }
 
+        // Clears inputs
         setTimeRange({
             name: "",
             desc: "",
@@ -83,7 +104,7 @@ const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
                  transition-all duration-75 z-20`} // changed to 20 to be on top of the scroll zone
         >
             <h1 className="text-xl flex-center text-pink-400 font-medium text-nowrap mb-5">
-                Create Time Range
+                {timeRangePanel.type} Time Range
             </h1>
 
             <form
@@ -170,13 +191,13 @@ const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
                     </label>
                 </div>
 
-                {/* Submit button */}
                 <div className="flex flex-col">
-                    {/* error message */}
+                    {/* Error message */}
                     <p className="text-sm text-red-600 mb-2">
                         {errorMessage.message}
                     </p>
 
+                    {/* Submit button */}
                     <button
                         type="submit"
                         className="bg-darkPink text-white py-1 rounded-lg text-xl hover:shadow-main hover:bg-pink-700 transition-all disabled:bg-gray-100 disabled:text-gray-300 disabled:shadow-none"
@@ -190,7 +211,7 @@ const AddTimeRangePanel = ({ setIsAddingPanelOpen }) => {
                                 : false
                         }
                     >
-                        Create
+                        {timeRangePanel.type}
                     </button>
                 </div>
             </form>

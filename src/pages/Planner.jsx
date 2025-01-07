@@ -1,13 +1,18 @@
 import { GoPlus } from "react-icons/go";
 import AddTimeRangePanel from "../components/AddTimeRangePanel.jsx";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTimeRangeStore } from "../store.js";
 import ZoomZone from "../components/ZoomZone.jsx";
 
 const Planner = () => {
-    const { setPlannerZoneRef } = useTimeRangeStore();
-    const [isAddingPanelOpen, setIsAddingPanelOpen] = useState(false);
+    const {
+        setPlannerZoneRef,
+        timeRangePanel,
+        setTimeRangePanel,
+        updateTimeRangePanel,
+    } = useTimeRangeStore();
+
     const plannerZoneRef = useRef(null);
 
     useEffect(() => {
@@ -15,6 +20,17 @@ const Planner = () => {
             setPlannerZoneRef(plannerZoneRef.current);
         }
     }, [plannerZoneRef.current]);
+
+    const openTimeRangePanel = () => {
+        setTimeRangePanel(!timeRangePanel.isOpen, "Create");
+        updateTimeRangePanel({
+            id: "",
+            name: "",
+            desc: "",
+            timeStart: "",
+            timeEnd: "",
+        });
+    };
 
     return (
         <section
@@ -24,15 +40,15 @@ const Planner = () => {
             {/* absolute elements */}
             <div
                 className={`absolute flex items-start gap-5 transition-all ${
-                    isAddingPanelOpen ? "right-0" : "-right-[350px]"
+                    timeRangePanel.isOpen ? "right-0" : "-right-[350px]"
                 } `}
             >
                 {/* button that shows add time range component */}
                 <button
                     className={`relative top-5 bg-gradient-to-tr from-pink-600 to-yellow-300 rounded-full p-[.2rem] transition-all z-30 ${
-                        isAddingPanelOpen ? "rotate-[45deg] left-12" : ""
+                        timeRangePanel.isOpen ? "rotate-[45deg] left-12" : ""
                     }`} // changed to 20 to be on top of the scroll zone
-                    onClick={() => setIsAddingPanelOpen(!isAddingPanelOpen)}
+                    onClick={() => openTimeRangePanel()}
                 >
                     <div className="h-full w-full rounded-full bg-white">
                         <GoPlus className="text-5xl" />
@@ -40,9 +56,7 @@ const Planner = () => {
                 </button>
 
                 {/* AddTimeRangePanel */}
-                <AddTimeRangePanel
-                    setIsAddingPanelOpen={setIsAddingPanelOpen}
-                />
+                <AddTimeRangePanel />
             </div>
 
             <ZoomZone />

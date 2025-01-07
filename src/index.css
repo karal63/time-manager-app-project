@@ -14,3 +14,9 @@ body {
 .flex-center {
     @apply flex items-center justify-center;
 }
+
+.block-transition {
+    transform: translateY(-0.75rem) scale(1.1);
+    background-color: #6366f1;
+    z-index: 10;
+}

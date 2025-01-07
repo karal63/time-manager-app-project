@@ -9,32 +9,6 @@ const ZoomZone = () => {
     const zoomZoneRef = useRef(null);
     const [zoomLevel, setZoomLevel] = useState(1);
 
-    // useEffect(() => {
-    //     const zoomZone = (e) => {
-    //         e.preventDefault();
-    //         if (e.deltaY < 0) {
-    //             setZoomLevel((_) => (_ *= 1.1));
-    //             console.log(true);
-    //         } else if (e.deltaY > 0) {
-    //             setZoomLevel((_) => (_ *= 0.9));
-    //         }
-
-    //         if (zoomZoneRef.current) {
-    //             zoomZoneRef.current.style.transform = `scale(${zoomLevel})`;
-    //             console.log(1);
-    //         }
-    //     };
-
-    //     window.addEventListener("wheel", zoomZone, { passive: false });
-
-    //     return () => {
-    //         window.removeEventListener("wheel", zoomZone);
-    //     };
-    // });
-
-    // what is wrong
-    // it cant scroll when my mouse is hovering sidebar either navbar
-
     useEffect(() => {
         const zoom = (e) => {
             if (
@@ -56,13 +30,13 @@ const ZoomZone = () => {
 
                     if (newZoomLevel === prevZoomLevel) return prevZoomLevel;
 
-                    // Calculate cursor position as percentages
+                    // Calculating cursor position as percentages |
                     const cursorX =
                         ((e.clientX - rect.left) / rect.width) * 100;
                     const cursorY =
                         ((e.clientY - rect.top) / rect.height) * 100;
 
-                    // Apply zoom and set transform origin
+                    // Applying zoom and setting transform origin | enebles side scrolling
                     zoomZoneRef.current.style.transformOrigin = `${cursorX}% ${cursorY}%`;
                     zoomZoneRef.current.style.transform = `scale(${newZoomLevel})`;
 

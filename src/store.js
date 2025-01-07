@@ -1,9 +1,22 @@
 import { create } from "zustand";
 
 export const useTimeRangeStore = create((set) => ({
+    popup: {
+        isOpen: false,
+        message: "",
+    },
+    setPopup: (value, message) =>
+        set(() => ({
+            popup: {
+                isOpen: value,
+                message: message,
+            },
+        })),
     isPopupOpen: false,
     togglePopup: (value) =>
-        set((state) => ({ isPopupOpen: (state.isPopupOpen = value) })),
+        set((state) => ({
+            popup: { ...state.popup, isOpen: (state.isPopupOpen = value) },
+        })),
 
     dayStructure: [
         {
@@ -110,7 +123,6 @@ export const useTimeRangeStore = create((set) => ({
 
             const updatedStructure = updatedDayStructure.map((day) => {
                 if (day.id === mark.id) {
-                    // Update the position values with the new ones
                     return {
                         ...day,
                         positionX: mark.positionX,
@@ -132,15 +144,89 @@ export const useTimeRangeStore = create((set) => ({
             timeEnd: "14:00",
             duration: "",
         },
+        {
+            id: 2,
+            name: "123",
+            desc: "1233213123123123213",
+            timeStart: "09:00",
+            timeEnd: "10:00",
+            duration: "",
+        },
     ],
 
     addTimeRange: (timeRange) =>
-        set((state) => ({ timeRanges: [...state.timeRanges, timeRange] })),
+        set((state) => {
+            const newTimeRange = {
+                ...timeRange,
+                id: state.timeRanges.length + 1,
+            };
+
+            return { timeRanges: [...state.timeRanges, newTimeRange] };
+        }),
+
+    deleteTimeRange: (range) =>
+        set((state) => ({
+            timeRanges: state.timeRanges.filter(
+                (timeRange) => timeRange !== range
+            ),
+        })),
+
+    editTimeRange: (range) =>
+        set((state) => {
+            const { id, name, desc, timeStart, timeEnd } = range;
+
+            return {
+                timeRanges: state.timeRanges.map((el) => {
+                    if (el.id === id) {
+                        return {
+                            ...el,
+                            name,
+                            desc,
+                            timeStart,
+                            timeEnd,
+                        };
+                    }
+                    return el;
+                }),
+            };
+        }),
 
     plannerZoneRef: null,
-
     setPlannerZoneRef: (newRef) => set({ plannerZoneRef: newRef }),
 
     zoomLevel: null,
     setNewZoomLevel: (newZoomLevel) => set({ zoomLevel: newZoomLevel }),
+
+    blockMenuRef: null,
+    setBlockMenuRef: (newRef) => set({ blockMenuRef: newRef }),
+
+    timeRangePanel: {
+        isOpen: false,
+        id: "",
+        name: "",
+        description: "",
+        timeStart: "",
+        timeEnd: "",
+        type: "",
+    },
+    setTimeRangePanel: (value, type) =>
+        set((state) => ({
+            timeRangePanel: {
+                ...state.timeRangePanel,
+                isOpen: value,
+                type: type,
+            },
+        })),
+
+    updateTimeRangePanel: (range) =>
+        set((state) => ({
+            timeRangePanel: {
+                ...state.timeRangePanel,
+                id: range.id,
+                name: range.name,
+                description: range.desc,
+                timeStart: range.timeStart,
+                timeEnd: range.timeEnd,
+            },
+        })),
 }));
