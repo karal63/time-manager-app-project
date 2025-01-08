@@ -22,7 +22,7 @@ const SingleTimeMark = ({ mark }) => {
 
     useEffect(() => {
         const handleZoom = (e) => {
-            // update mark position only when resizing whole page
+            // update mark position only when resizing whol`e page
             if (e.ctrlKey && !plannerZoneRef.contains(e.target)) {
                 if (timeoutId.current) {
                     clearTimeout(timeoutId.current);
@@ -30,8 +30,6 @@ const SingleTimeMark = ({ mark }) => {
 
                 setTimeout(() => {
                     const pos = rect.current.getBoundingClientRect();
-                    console.log(pos.y);
-                    console.log(rect.current.offsetTop);
 
                     setRangePosition({
                         ...mark,

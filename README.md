@@ -80,3 +80,7 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Aktualizacja okna informacyjnego (od tej wersji jest dynamiczne)
 -   Stworzenie funkcji odpowiedzialnych za manipulację nad listą istniejących bloków (okresach czasu) (dodawanie, usuwanie oraz modyfikowanie)
 -   Stworzenie animacji dla każdego bloku przy występowaniu określonego zdarzenia
+
+### **[ver. 0.33 Beta] - 2025-01-07**
+
+-   Dodano funkcjonalność umożliwiającą zapis listy okresów czasu na lokalnym urządzeniu użytkownika za pomocą mechanizmu localStorage.

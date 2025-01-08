@@ -21,7 +21,6 @@ const SingleBlock = ({ range }) => {
     // Setting basic height to the block
     // You can add more height if you want
     useEffect(() => {
-        console.log(width);
         if (width <= 60) {
             setHeight((40 * width) / 10);
         }

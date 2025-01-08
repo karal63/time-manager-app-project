@@ -161,33 +161,46 @@ export const useTimeRangeStore = create((set) => ({
                 id: state.timeRanges.length + 1,
             };
 
-            return { timeRanges: [...state.timeRanges, newTimeRange] };
+            const newTimeRanges = [...state.timeRanges, newTimeRange];
+
+            state.saveTimeRangesToLocalStorage(newTimeRanges);
+
+            return { timeRanges: newTimeRanges };
         }),
 
     deleteTimeRange: (range) =>
-        set((state) => ({
-            timeRanges: state.timeRanges.filter(
+        set((state) => {
+            const newTimeRanges = state.timeRanges.filter(
                 (timeRange) => timeRange !== range
-            ),
-        })),
+            );
+            state.saveTimeRangesToLocalStorage(newTimeRanges);
+
+            return {
+                timeRanges: newTimeRanges,
+            };
+        }),
 
     editTimeRange: (range) =>
         set((state) => {
             const { id, name, desc, timeStart, timeEnd } = range;
 
+            const newTimeRanges = state.timeRanges.map((el) => {
+                if (el.id === id) {
+                    return {
+                        ...el,
+                        name,
+                        desc,
+                        timeStart,
+                        timeEnd,
+                    };
+                }
+                return el;
+            });
+
+            state.saveTimeRangesToLocalStorage(newTimeRanges);
+
             return {
-                timeRanges: state.timeRanges.map((el) => {
-                    if (el.id === id) {
-                        return {
-                            ...el,
-                            name,
-                            desc,
-                            timeStart,
-                            timeEnd,
-                        };
-                    }
-                    return el;
-                }),
+                timeRanges: newTimeRanges,
             };
         }),
 
@@ -229,4 +242,20 @@ export const useTimeRangeStore = create((set) => ({
                 timeEnd: range.timeEnd,
             },
         })),
+
+    saveTimeRangesToLocalStorage: (timeRanges) => {
+        localStorage.setItem("timeRanges", JSON.stringify(timeRanges));
+    },
+
+    getTimeRangesFromLocalStorage: () =>
+        set(() => {
+            const newTimeRangesJSON = localStorage.getItem("timeRanges");
+            const newTimeRanges = newTimeRangesJSON
+                ? JSON.parse(newTimeRangesJSON)
+                : null;
+
+            return {
+                timeRanges: newTimeRanges,
+            };
+        }),
 }));
