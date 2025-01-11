@@ -51,9 +51,16 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
     // set static width
 
     return (
-        <li ref={rect} className="flex flex-col items-center">
-            <div className="w-[2px] h-3 bg-black"></div>
-            <span className={`text-gray-400 text-${zoomLevel}`}>{time}</span>
+        <li ref={rect} className="flex flex-col items-center w-[37.98px]">
+            <div className="w-[2px] h-3 bg-gray-500"></div>
+            <span
+                className={`text-gray-400 h-[24px]`}
+                style={{
+                    fontSize: zoomLevel > 1 ? 15 / zoomLevel : 16,
+                }}
+            >
+                {time}
+            </span>
         </li>
     );
 };

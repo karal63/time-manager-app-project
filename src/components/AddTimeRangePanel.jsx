@@ -114,7 +114,7 @@ const AddTimeRangePanel = () => {
                     {/* Activity Name */}
                     <label>
                         <span className="block pl-1 text-md mb-1 font-thin text-nowrap">
-                            How would you name your activity?
+                            What would you name your activity?
                         </span>
 
                         {/* name input */}
@@ -134,7 +134,7 @@ const AddTimeRangePanel = () => {
                     {/* Activity Start & End time */}
                     <label className="mt-5">
                         <span className="block pl-1 text-md mb-1 font-thin text-nowrap ">
-                            Select time
+                            Please select a time.
                         </span>
 
                         <div className="flex gap-5">
@@ -150,12 +150,10 @@ const AddTimeRangePanel = () => {
                                         })
                                     }
                                 />
-                                <p className="flex-center">Start</p>
+                                <p className="flex-center text-sm">
+                                    Start Time
+                                </p>
                             </div>
-
-                            <span className="text-2xl text-gray-400 flex justify-center">
-                                |
-                            </span>
 
                             <div className="flex flex-col w-full">
                                 <input
@@ -169,7 +167,7 @@ const AddTimeRangePanel = () => {
                                         })
                                     }
                                 />
-                                <p className="flex-center">End</p>
+                                <p className="flex-center text-sm">End Time</p>
                             </div>
                         </div>
                     </label>
@@ -177,7 +175,7 @@ const AddTimeRangePanel = () => {
                     {/* Activity Description */}
                     <label className="mt-5">
                         <span className="block pl-1 text-md mb-1 font-thin text-nowrap">
-                            How would you describe your activity?
+                            How would you like to describe your activity?
                         </span>
 
                         <textarea
