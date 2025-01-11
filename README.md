@@ -88,3 +88,7 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 ### **[ver. 0.34 Beta] - 2025-01-11**
 
 -   Umożliwienie użytkownikowi ustawiania godzin z dokładnością do minut.
+
+### **[ver. 0.35 Beta] - 2025-01-11**
+
+-   Umożliwienie cofnięcia usunięcia wybranego okresu czasu.

@@ -158,7 +158,7 @@ export const useTimeRangeStore = create((set) => ({
         set((state) => {
             const newTimeRange = {
                 ...timeRange,
-                id: state.timeRanges.length + 1,
+                id: timeRange.id || state.timeRanges.length + 1,
             };
 
             const newTimeRanges = [...state.timeRanges, newTimeRange];
@@ -168,14 +168,17 @@ export const useTimeRangeStore = create((set) => ({
             return { timeRanges: newTimeRanges };
         }),
 
+    deletedTimeRange: null,
+    setDeletedTimeRange: (range) => set(() => ({ deletedTimeRange: range })),
+
     deleteTimeRange: (range) =>
         set((state) => {
             const newTimeRanges = state.timeRanges.filter(
                 (timeRange) => timeRange !== range
             );
-            state.saveTimeRangesToLocalStorage(newTimeRanges);
 
             return {
+                deletedTimeRange: range,
                 timeRanges: newTimeRanges,
             };
         }),

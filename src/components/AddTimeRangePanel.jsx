@@ -76,7 +76,6 @@ const AddTimeRangePanel = () => {
             });
         }
 
-        setPopup(true, "Time range was created successfully");
         setTimeRangePanel(false, "");
 
         // Adding range to the array of ranges

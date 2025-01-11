@@ -6,10 +6,18 @@ import { useTimeRangeStore } from "../store";
 // make popup dynamic, the text depends of the popup type passed through the params
 
 const PopupWindow = () => {
-    const { popup, togglePopup } = useTimeRangeStore();
+    const { popup, togglePopup, deletedTimeRange, addTimeRange } =
+        useTimeRangeStore();
     const { isOpen, message } = popup;
     const [timeLeft, setTimeLeft] = useState(5);
     const popupWindowRef = useRef();
+
+    const undoDeleting = () => {
+        togglePopup(false);
+        if (deletedTimeRange) {
+            addTimeRange(deletedTimeRange);
+        }
+    };
 
     useEffect(() => {
         if (isOpen === true) {
@@ -24,6 +32,7 @@ const PopupWindow = () => {
             }, 5000);
         }
     }, [isOpen]);
+
     return (
         <div
             ref={popupWindowRef}
@@ -41,7 +50,7 @@ const PopupWindow = () => {
                 </div>
                 <button
                     className="px-3 py-1 border-[1px] border-gray-400 rounded-lg hover:bg-gray-400 transition-all"
-                    onClick={() => togglePopup(false)}
+                    onClick={undoDeleting}
                 >
                     Undo
                 </button>
