@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store";
 import BlockMenu from "./BlockMenu";
 
 const SingleBlock = ({ range }) => {
-    const { dayStructure, blockMenuRef } = useTimeRangeStore();
+    const { dayStructure } = useTimeRangeStore();
     const { timeStart, timeEnd } = range;
     const [height, setHeight] = useState();
     const [blockMenu, setBlockMenu] = useState({
@@ -14,25 +14,68 @@ const SingleBlock = ({ range }) => {
     const blockRef = useRef(null);
     const entireSectionRef = useRef(null);
 
-    const currentMark = dayStructure.find((s) => s.time === timeStart);
-    const endTimeMark = dayStructure.find((s) => s.time === timeEnd);
-    const width = endTimeMark.positionX - currentMark.positionX + 2;
+    // getting minuts from time
+    const getMinuts = (time) => {
+        return time.split(":")[1];
+    };
+
+    // getting minuts from time
+    const getHours = (time) => {
+        return time.split(":")[0];
+    };
+
+    let currentMark = 0;
+    let endTimeMark = 0;
+
+    if (getMinuts(timeStart) === "00" && getMinuts(timeEnd) === "00") {
+        currentMark = dayStructure.find((s) => s.time === timeStart);
+        endTimeMark = dayStructure.find((s) => s.time === timeEnd);
+    }
+
+    if (getMinuts(timeStart) !== "00" || getMinuts(timeEnd) !== "00") {
+        let newTimeStart = `${getHours(timeStart)}:00`;
+        let newTimeEnd = `${getHours(timeEnd)}:00`;
+
+        let timeStartMinuts = Number(getMinuts(timeStart));
+        let timeEndMinuts = Number(getMinuts(timeEnd));
+
+        currentMark = { ...dayStructure.find((s) => s.time === newTimeStart) };
+        endTimeMark = { ...dayStructure.find((s) => s.time === newTimeEnd) };
+
+        // Update immutably
+        currentMark.positionX = currentMark.positionX + timeStartMinuts;
+        endTimeMark.positionX = endTimeMark.positionX + timeEndMinuts;
+    }
+
+    // == exact minuts | Algorithm
+    // detect above things
+    // if not detected check between what time it is ex. 14.37 is between 14 and 15
+    // width between marks is 60px, get the position of 14:00 and add minuts (37)
+    // the same thing with time end but remove minuts
+    // set the position
 
     // Setting basic height to the block
     // You can add more height if you want
+    const width = useMemo(() => {
+        return endTimeMark.positionX - currentMark.positionX + 2;
+    }, [endTimeMark.positionX, currentMark.positionX]);
+
     useEffect(() => {
+        let newHeight;
         if (width <= 60) {
-            setHeight((40 * width) / 10);
+            newHeight = (40 * width) / 10;
+        } else if (width > 60 && width <= 240) {
+            newHeight = (150 * width) / 100;
+        } else if (width > 240 && width <= 360) {
+            newHeight = (240 * width) / 1000;
+        } else if (width > 360) {
+            newHeight = 40;
         }
-        if (width > 60 && width <= 240) {
-            setHeight((150 * width) / 100);
-        }
-        if (width > 240 && width <= 360) {
-            setHeight((240 * width) / 1000);
-        }
-        if (width > 360) {
-            setHeight(40);
-        }
+
+        // Only update height if it has changed
+        setHeight((prevHeight) =>
+            prevHeight !== newHeight ? newHeight : prevHeight
+        );
     }, [width, range]);
 
     // Open context | function
@@ -41,6 +84,8 @@ const SingleBlock = ({ range }) => {
 
         const x = e.clientX;
         const y = e.clientY;
+
+        // console.log("x: " + x + "y: " + y);
 
         setBlockMenu({
             isOpen: true,

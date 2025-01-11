@@ -248,11 +248,11 @@ export const useTimeRangeStore = create((set) => ({
     },
 
     getTimeRangesFromLocalStorage: () =>
-        set(() => {
+        set((state) => {
             const newTimeRangesJSON = localStorage.getItem("timeRanges");
             const newTimeRanges = newTimeRangesJSON
                 ? JSON.parse(newTimeRangesJSON)
-                : null;
+                : state.timeRanges;
 
             return {
                 timeRanges: newTimeRanges,

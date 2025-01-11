@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useTimeRangeStore } from "../store";
 
-const SingleTimeMark = ({ mark }) => {
+const SingleTimeMark = ({ mark, zoomLevel }) => {
     const { setRangePosition, plannerZoneRef } = useTimeRangeStore();
 
     const { time } = mark;
@@ -47,10 +47,13 @@ const SingleTimeMark = ({ mark }) => {
         };
     }, [plannerZoneRef]);
 
+    // Adjust font size depending of zoomLevel
+    // set static width
+
     return (
         <li ref={rect} className="flex flex-col items-center">
             <div className="w-[2px] h-3 bg-black"></div>
-            <span className="text-gray-400">{time}</span>
+            <span className={`text-gray-400 text-${zoomLevel}`}>{time}</span>
         </li>
     );
 };

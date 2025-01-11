@@ -64,7 +64,11 @@ const ZoomZone = () => {
                 {/* time marks */}
                 <ul className="flex gap-5">
                     {dayStructure.map((mark) => (
-                        <SingleTimeMark key={mark.id} mark={mark} />
+                        <SingleTimeMark
+                            key={mark.id}
+                            mark={mark}
+                            zoomLevel={zoomLevel}
+                        />
                     ))}
                 </ul>
             </div>
