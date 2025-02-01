@@ -92,3 +92,24 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 ### **[ver. 0.35 Beta] - 2025-01-11**
 
 -   Umożliwienie cofnięcia usunięcia wybranego okresu czasu.
+
+### **[ver. 0.40 Beta] - 2025-02-01**
+
+-   Sworzenie klas CSS, które całkowicie zmieniją widok podstawowych przycisków typu "checkbox"
+-   Stworzenie dostępnych kart w "store.js" dla ślezenia informacji o bieżącej czynności
+-   Stworzenie funkcji "selectMark" w "store.js", która ukazuje które karty mają się pojawić
+-   Stowrzenie funkcji wielokrotnego użycia do zapisywania, czy pobieranie danych z localStorage
+-   Stworzenie funkcji "selectAchievements" oraz "deleteSelectedAchievements" do manipulacji nad osiągnięciami
+-   Stworzenie okna podtwierdzającego usunięcie wykonanych zadań
+-   Stworzenie funkcjonalności, która w zależności od adresu url ustawia wypełnioną część przełącznika trybu w odpowieniej stronie
+-   Stworzenie menu rozwijanego przy wybraniu kategorii dla osiągnięcia (niedokończone)
+-   Stworzenie paska dla tworzenia nowych osiągnięć
+-   Stworzenie tablicy osiągnięć
+-   Stworzenie prawej części podstrony "observe"
+-   Stworzenie kart dla bieżącego zadania
+-   Stworzenie menu "CustomizeCards", w którym użytkownik może wybrać jakie karty chce on widzieć na stronie
+-   Stworzenie panelu do manipulacji nad osiągnięciami (usuwanie, edytowanie)
+-   Stworzenie lewej strony podstrony "observe"
+-   Stworzenie pliku "index.js" z stałymi informacjami
+-   Stworzenie całej postrony "ObservePlan"
+-   Małe zmiany w podstronie 404 "PageNotFound"

@@ -85,8 +85,6 @@ const SingleBlock = ({ range }) => {
         const x = e.clientX;
         const y = e.clientY;
 
-        // console.log("x: " + x + "y: " + y);
-
         setBlockMenu({
             isOpen: true,
             x,
@@ -112,8 +110,13 @@ const SingleBlock = ({ range }) => {
         }
     }, [blockMenu]);
 
+    // This function will be called when user hovers a single block for some time,
+    // it will show additonal information about certain block
+    const showInfo = () => {};
+
     return (
         <div ref={entireSectionRef}>
+            {/* Control window */}
             {blockMenu.isOpen && (
                 <BlockMenu
                     closeBlockMenu={closeBlockMenu}
@@ -125,8 +128,8 @@ const SingleBlock = ({ range }) => {
             <div
                 ref={blockRef}
                 className={`absolute bg-opacity-40 shadow-main border-[1px] border-b-0
-                 py-1 px-3 rounded-tr-lg rounded-tl-lg h-0 cursor-pointer text-sm flex justify-center
-                 transition-all ease-in-out delay-50 bg-blue-500 duration-200`}
+                 py-1 px-3 rounded-tr-lg rounded-tl-lg h-0 cursor-pointer text-[.7rem] flex flex-col items-center
+                 transition-all ease-in-out delay-50 bg-blue-500 duration-200 overflow-hidden`}
                 style={{
                     left: `${currentMark.positionX + 18}px`,
                     bottom: `${currentMark.positionY - 35}px`,
@@ -136,6 +139,7 @@ const SingleBlock = ({ range }) => {
                     height: `${height}px`,
                 }}
                 onContextMenu={(e) => openBlockMenu(e)}
+                onMouseOver={() => showInfo()}
             >
                 {range.name}
             </div>

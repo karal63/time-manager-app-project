@@ -35,7 +35,10 @@ const Planner = () => {
     return (
         <section
             ref={plannerZoneRef}
-            className="h-[calc(100vh-68px)] bg-hero-pattern bg-contain relative flex-center flex-col "
+            className="h-[calc(100vh-68px)] bg-contain relative flex-center flex-col"
+            style={{
+                backgroundImage: 'url("src/assets/grid.png")',
+            }}
         >
             {/* absolute elements */}
             <div

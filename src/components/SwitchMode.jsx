@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const SwitchMode = () => {
-    const [action, setAction] = useState("create");
+    const [action, setAction] = useState(
+        location.pathname === "/planner" ? "create" : "observe"
+    );
+
+    useEffect(() => {
+        setAction(location.pathname === "/planner" ? "create" : "observe");
+    }, [location.pathname]);
 
     return (
         <div className="absolute top-3 right-5 flex bg-gray-300 rounded-3xl">

@@ -47,9 +47,6 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
         };
     }, [plannerZoneRef]);
 
-    // Adjust font size depending of zoomLevel
-    // set static width
-
     return (
         <li ref={rect} className="flex flex-col items-center w-[37.98px]">
             <div className="w-[2px] h-3 bg-gray-500"></div>

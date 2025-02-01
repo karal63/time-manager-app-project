@@ -20,3 +20,70 @@ body {
     background-color: #6366f1;
     z-index: 10;
 }
+
+.bg-image {
+    background-image: url("src\assets\graph.png");
+}
+
+/* Target the scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Background of the scrollbar */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+/* Scrollbar handle */
+::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+.card-width {
+    width: calc(100% + 20px);
+}
+
+.fixed-absolute {
+    transform: translateX(calc((100vw - 400px) / 2));
+}
+
+/* Checkbox styles */
+.styled-table input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: #4caf50; /* Modern browsers */
+}
+
+/* Advanced: Custom checkbox appearance */
+.styled-table input[type="checkbox"] {
+    appearance: none; /* Removes default checkbox styling */
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.styled-table input[type="checkbox"]:checked::before {
+    content: "";
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("./assets/check-mark.png");
+    background-size: contain;
+    width: 60%;
+    height: 60%;
+    border-radius: 4px;
+}
+
+.styled-table input[type="checkbox"]:checked {
+    background-color: white;
+}

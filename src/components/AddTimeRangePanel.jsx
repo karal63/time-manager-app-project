@@ -3,13 +3,8 @@ import { useTimeRangeStore } from "../store";
 
 const AddTimeRangePanel = () => {
     // Getting states from useTimeRangeStore
-    const {
-        addTimeRange,
-        setPopup,
-        timeRangePanel,
-        setTimeRangePanel,
-        editTimeRange,
-    } = useTimeRangeStore();
+    const { addTimeRange, timeRangePanel, setTimeRangePanel, editTimeRange } =
+        useTimeRangeStore();
 
     // example of time range
     const [timeRange, setTimeRange] = useState({

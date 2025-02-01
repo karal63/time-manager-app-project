@@ -177,6 +177,8 @@ export const useTimeRangeStore = create((set) => ({
                 (timeRange) => timeRange !== range
             );
 
+            state.saveTimeRangesToLocalStorage(newTimeRanges);
+
             return {
                 deletedTimeRange: range,
                 timeRanges: newTimeRanges,
@@ -261,4 +263,134 @@ export const useTimeRangeStore = create((set) => ({
                 timeRanges: newTimeRanges,
             };
         }),
+
+    taskMarks: [
+        {
+            id: 1,
+            name: "Name",
+            data: "Lunch",
+            selected: true,
+        },
+        {
+            id: 2,
+            name: "Description",
+            data: "Lunch",
+            selected: true,
+        },
+        {
+            id: 3,
+            name: "Time Axis",
+            data: "12:00 - 13:00",
+            selected: false,
+        },
+        {
+            id: 4,
+            name: "Time Left",
+            data: "30min",
+            selected: false,
+        },
+    ],
+
+    prevTaskMarks: {},
+
+    selectMark: (id, value) =>
+        set((state) => {
+            const newTaskMarks = state.taskMarks.map((mark) => {
+                if (mark.id === id) {
+                    return {
+                        ...mark,
+                        selected: value,
+                    };
+                }
+                return mark;
+            });
+
+            return { taskMarks: newTaskMarks };
+        }),
+
+    saveToLocalStorage: (name, data) => {
+        localStorage.setItem(name, JSON.stringify(data));
+    },
+
+    getFromLocalStorage: (key, localStorageKey) =>
+        set((state) => {
+            const response = localStorage.getItem(localStorageKey);
+            const data = response ? JSON.parse(response) : state[key];
+
+            return {
+                [key]: data,
+            };
+        }),
+
+    setPrevTaskMarks: () =>
+        set((state) => ({ prevTaskMarks: state.taskMarks })),
+
+    cancelMarks: () => set((state) => ({ taskMarks: state.prevTaskMarks })),
+
+    achievements: [
+        {
+            id: 1,
+            name: "HG hello world",
+            category: "Testing",
+            time: "01:00:00",
+        },
+        {
+            id: 2,
+            name: "HG creating some new feature",
+            category: "Creating",
+            time: "30:00",
+        },
+    ],
+
+    selectedAchievements: [],
+
+    selectAchievement: (isSelected, achieve) =>
+        set((state) => {
+            let newSelectedAchievements = [];
+
+            switch (isSelected) {
+                case false:
+                    newSelectedAchievements = state.selectedAchievements.filter(
+                        (el) => el !== achieve
+                    );
+                    break;
+                case true:
+                    newSelectedAchievements = [
+                        ...state.selectedAchievements,
+                        achieve,
+                    ];
+                    break;
+            }
+
+            return {
+                selectedAchievements: newSelectedAchievements,
+            };
+        }),
+
+    deleteSelectedAchievements: () =>
+        set((state) => {
+            const newAchievements = state.achievements.filter(
+                (achieve) =>
+                    !state.selectedAchievements.some(
+                        (selected) => selected.id === achieve.id
+                    )
+            );
+
+            return {
+                achievements: newAchievements,
+            };
+        }),
+
+    warningWindow: {
+        isOpen: false,
+        records: [],
+    },
+
+    setWarningWindow: (value) =>
+        set((state) => ({
+            warningWindow: {
+                isOpen: value,
+                records: state.selectAchievement,
+            },
+        })),
 }));
