@@ -120,3 +120,10 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stwowrzenie automatycznego przełączenia do drugiego pola do wprowazenia czasum gdy pierwsze jest uzupełnione
 -   Stworzenie odzielnej podstrony dla trybu "observe"
 -   Całkowicie zmieniony przełącznik trybu
+
+### **[ver. 0.42 Beta] - 2025-02-02**
+
+-   Adding more awailable categories for achievement
+-   Napisana funkcjonalność, aby okno ostrzegawcze zamykało się przy kliknięniu zewnątrz okna
+-   Stworzone na nowo menu rozwijanego z kategoriami
+-   Dodana funkcjonalność, dodawająca nowe doświadczenie do tablicy

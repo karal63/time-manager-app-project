@@ -36,4 +36,48 @@ export const categories = [
         id: 4,
         name: "Done",
     },
+    {
+        id: 5,
+        name: "Researching",
+    },
+    {
+        id: 6,
+        name: "Drafting",
+    },
+    {
+        id: 7,
+        name: "Reviewing",
+    },
+    {
+        id: 8,
+        name: "Polishing",
+    },
+    {
+        id: 9,
+        name: "Fixing",
+    },
+    {
+        id: 10,
+        name: "Organizing",
+    },
+    {
+        id: 11,
+        name: "Brainstorming",
+    },
+    {
+        id: 12,
+        name: "Optimizing",
+    },
+    {
+        id: 13,
+        name: "Finalizing",
+    },
+    {
+        id: 14,
+        name: "Archiving",
+    },
+    {
+        id: 15,
+        name: "Paused",
+    },
 ];

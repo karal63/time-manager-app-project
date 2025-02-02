@@ -349,6 +349,17 @@ export const useTimeRangeStore = create((set) => ({
         },
     ],
 
+    addAchievement: (achieve) =>
+        set((state) => ({
+            achievements: [
+                ...state.achievements,
+                {
+                    ...achieve,
+                    id: state.achievements.length + 1,
+                },
+            ],
+        })),
+
     selectedAchievements: [],
 
     selectAchievement: (isSelected, achieve) =>

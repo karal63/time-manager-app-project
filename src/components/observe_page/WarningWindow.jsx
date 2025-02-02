@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import { useTimeRangeStore } from "../../store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const WarningWindow = () => {
     const {
@@ -9,20 +9,34 @@ const WarningWindow = () => {
         selectedAchievements,
         deleteSelectedAchievements,
     } = useTimeRangeStore();
-
-    useEffect(() => {
-        console.log(selectedAchievements);
-    }, [selectedAchievements]);
+    const modalRef = useRef(null);
 
     const deleteRecords = () => {
         deleteSelectedAchievements();
         setWarningWindow(false);
     };
 
+    useEffect(() => {
+        const handleClick = (e) => {
+            if (e.target === modalRef.current) {
+                setWarningWindow(false);
+            }
+        };
+
+        document.addEventListener("click", handleClick);
+
+        return () => {
+            document.removeEventListener("click", handleClick);
+        };
+    }, []);
+
     return (
         warningWindow.isOpen &&
         ReactDOM.createPortal(
-            <div className="absolute top-0 z-20 w-full h-full bg-modal flex-center">
+            <div
+                ref={modalRef}
+                className="absolute top-0 z-30 w-full h-full bg-modal flex-center"
+            >
                 <div className="bg-white py-5 px-6 rounded-lg">
                     <h1 className="mx-4 text-lg font-semibold ">
                         Are you sure you want to delete selected achievements?
