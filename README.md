@@ -113,3 +113,10 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie pliku "index.js" z stałymi informacjami
 -   Stworzenie całej postrony "ObservePlan"
 -   Małe zmiany w podstronie 404 "PageNotFound"
+
+### **[ver. 0.41 Beta] - 2025-02-02**
+
+-   Dodanie funkcjonalności dla zmiany bieżącego trybu "currentMode" w store.js
+-   Stwowrzenie automatycznego przełączenia do drugiego pola do wprowazenia czasum gdy pierwsze jest uzupełnione
+-   Stworzenie odzielnej podstrony dla trybu "observe"
+-   Całkowicie zmieniony przełącznik trybu

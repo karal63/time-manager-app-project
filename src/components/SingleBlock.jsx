@@ -3,7 +3,7 @@ import { useTimeRangeStore } from "../store";
 import BlockMenu from "./BlockMenu";
 
 const SingleBlock = ({ range }) => {
-    const { dayStructure } = useTimeRangeStore();
+    const { dayStructure, currentMode } = useTimeRangeStore();
     const { timeStart, timeEnd } = range;
     const [height, setHeight] = useState();
     const [blockMenu, setBlockMenu] = useState({
@@ -81,15 +81,16 @@ const SingleBlock = ({ range }) => {
     // Open context | function
     const openBlockMenu = (e) => {
         e.preventDefault();
+        if (currentMode === "Editing") {
+            const x = e.clientX;
+            const y = e.clientY;
 
-        const x = e.clientX;
-        const y = e.clientY;
-
-        setBlockMenu({
-            isOpen: true,
-            x,
-            y,
-        });
+            setBlockMenu({
+                isOpen: true,
+                x,
+                y,
+            });
+        }
     };
 
     // Close context | function

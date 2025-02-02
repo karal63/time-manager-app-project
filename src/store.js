@@ -18,6 +18,13 @@ export const useTimeRangeStore = create((set) => ({
             popup: { ...state.popup, isOpen: (state.isPopupOpen = value) },
         })),
 
+    // Mode Switcher
+    currentMode: "Editing",
+    setCurrentMode: (value) =>
+        set(() => ({
+            currentMode: value,
+        })),
+
     dayStructure: [
         {
             id: 0,

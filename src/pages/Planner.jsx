@@ -11,6 +11,7 @@ const Planner = () => {
         timeRangePanel,
         setTimeRangePanel,
         updateTimeRangePanel,
+        currentMode,
     } = useTimeRangeStore();
 
     const plannerZoneRef = useRef(null);
@@ -41,26 +42,31 @@ const Planner = () => {
             }}
         >
             {/* absolute elements */}
-            <div
-                className={`absolute flex items-start gap-5 transition-all ${
-                    timeRangePanel.isOpen ? "right-0" : "-right-[350px]"
-                } `}
-            >
-                {/* button that shows add time range component */}
-                <button
-                    className={`relative top-5 bg-gradient-to-tr from-pink-600 to-yellow-300 rounded-full p-[.2rem] transition-all z-30 ${
-                        timeRangePanel.isOpen ? "rotate-[45deg] left-12" : ""
-                    }`} // changed to 20 to be on top of the scroll zone
-                    onClick={() => openTimeRangePanel()}
+            {currentMode === "Editing" && (
+                <div
+                    className={`fixed flex items-start gap-5 transition-all z-20 ${
+                        timeRangePanel.isOpen ? "right-0" : "-right-[350px]"
+                    } `}
                 >
-                    <div className="h-full w-full rounded-full bg-white">
-                        <GoPlus className="text-5xl" />
-                    </div>
-                </button>
+                    {/* button that shows add time range component */}
 
-                {/* AddTimeRangePanel */}
-                <AddTimeRangePanel />
-            </div>
+                    <button
+                        className={`relative top-5 bg-gradient-to-tr from-pink-600 to-yellow-300 rounded-full p-[.2rem] transition-all z-30 ${
+                            timeRangePanel.isOpen
+                                ? "rotate-[45deg] left-12"
+                                : ""
+                        }`} // changed to 20 to be on top of the scroll zone
+                        onClick={() => openTimeRangePanel()}
+                    >
+                        <div className="h-full w-full rounded-full bg-white">
+                            <GoPlus className="text-5xl" />
+                        </div>
+                    </button>
+
+                    {/* AddTimeRangePanel */}
+                    <AddTimeRangePanel />
+                </div>
+            )}
 
             <ZoomZone />
         </section>

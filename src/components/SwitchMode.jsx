@@ -1,41 +1,90 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { GoPencil } from "react-icons/go";
+import { GoEye } from "react-icons/go";
+import { IoCheckmarkOutline } from "react-icons/io5";
+import { useTimeRangeStore } from "../store";
 
 const SwitchMode = () => {
-    const [action, setAction] = useState(
-        location.pathname === "/planner" ? "create" : "observe"
-    );
+    const { setCurrentMode } = useTimeRangeStore();
+    const [isDropDown, setIsDropDown] = useState(false);
+    const [selectedMode, setSelectedMode] = useState("Editing");
+
+    const setMode = (value) => {
+        setSelectedMode(value);
+        setIsDropDown(false);
+    };
 
     useEffect(() => {
-        setAction(location.pathname === "/planner" ? "create" : "observe");
-    }, [location.pathname]);
+        setCurrentMode(selectedMode);
+    }, [selectedMode]);
+
+    useEffect(() => {}, [location.pathname]);
 
     return (
-        <div className="absolute top-3 right-5 flex bg-gray-300 rounded-3xl">
-            <Link
-                to="/planner"
-                className={`z-20 pl-4 pr-8 py-2 text-lg relative rounded-3xl ${
-                    action === "create" ? "text-white" : ""
-                }`}
-                onClick={() => setAction("create")}
+        <div className="relative ">
+            <button
+                className="flex items-center border-[1px] border-pink-300 rounded-md px-3 py-1"
+                onClick={() => setIsDropDown(!isDropDown)}
             >
-                Create
-            </Link>
-            <Link
-                to="/planner/observe"
-                className={`z-10 py-2 pr-3 text-lg relative rounded-3xl rounded-tl-0 rounded-bl-0 ${
-                    action === "observe" ? "text-white" : ""
-                }`}
-                onClick={() => setAction("observe")}
-            >
-                Observe
-            </Link>
+                <span className="text-2xl mr-3">
+                    {selectedMode === "Editing" ? <GoPencil /> : <GoPencil />}
+                </span>
+                <p className="text-lg">{selectedMode}</p>
+                <span className="text-2xl ml-1">
+                    <MdKeyboardArrowDown />
+                </span>
+            </button>
 
-            <div
-                className={`absolute h-full w-1/2 bg-darkPink rounded-3xl transition-all duration-300 ease-in-out ${
-                    action === "create" ? "translate-x-0" : "translate-x-full"
-                }`}
-            ></div>
+            {isDropDown && (
+                <div className="absolute top-[3.2rem] right-0 z-20 w-[300px] rounded-lg bg-white shadow-main">
+                    <ul>
+                        <li className=" hover:bg-gray-100 cursor-pointer text-[1.1rem] transition-all">
+                            <button
+                                className="px-4 py-2 flex items-center justify-between w-full"
+                                onClick={() => setMode("Editing")}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <span className="text-2xl text-darkPink">
+                                        <GoPencil />
+                                    </span>
+                                    Editing
+                                </div>
+
+                                <div>
+                                    {selectedMode === "Editing" ? (
+                                        <IoCheckmarkOutline />
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                            </button>
+                        </li>
+
+                        <li className=" hover:bg-gray-100 cursor-pointer text-[1.1rem] transition-all">
+                            <button
+                                className="px-4 py-2 flex items-center justify-between w-full"
+                                onClick={() => setMode("Viewing")}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <span className="text-2xl text-darkPink">
+                                        <GoEye />
+                                    </span>
+                                    Viewing
+                                </div>
+
+                                <div>
+                                    {selectedMode === "Viewing" ? (
+                                        <IoCheckmarkOutline />
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };

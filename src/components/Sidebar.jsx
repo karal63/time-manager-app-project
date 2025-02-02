@@ -1,6 +1,7 @@
 import { PiNotePencil } from "react-icons/pi";
 import { CiCalendar } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
+import { CiViewBoard } from "react-icons/ci";
 
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -56,7 +57,7 @@ const Sidebar = () => {
                     </p>
 
                     <ul className="mt-2 max-w-max">
-                        <li className="">
+                        <li>
                             <Link
                                 to="/planner"
                                 className="flex items-center gap-3 "
@@ -66,6 +67,22 @@ const Sidebar = () => {
 
                                 {isOpen ? (
                                     <span className="text-xl">Planner</span>
+                                ) : (
+                                    ""
+                                )}
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link
+                                to="/planner/observe"
+                                className="flex items-center gap-3 "
+                                onMouseOver={() => setIsOpen(true)}
+                            >
+                                <CiViewBoard className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+
+                                {isOpen ? (
+                                    <span className="text-xl">View</span>
                                 ) : (
                                     ""
                                 )}
