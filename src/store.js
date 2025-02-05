@@ -396,6 +396,7 @@ export const useTimeRangeStore = create((set) => ({
 
             return {
                 achievements: newAchievements,
+                selectedAchievements: [],
             };
         }),
 
@@ -411,4 +412,18 @@ export const useTimeRangeStore = create((set) => ({
                 records: state.selectAchievement,
             },
         })),
+
+    currentTimeRanges: [],
+
+    setCurrentTimeRanges: (timeRange) =>
+        set((state) => {
+            // Filter out any existing instance of timeRange.id
+            const filteredRanges = state.currentTimeRanges.filter(
+                (el) => el.id !== timeRange.id
+            );
+
+            return {
+                currentTimeRanges: [...filteredRanges, timeRange], // Create new array, avoiding mutation
+            };
+        }),
 }));

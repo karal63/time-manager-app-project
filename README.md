@@ -127,3 +127,11 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Napisana funkcjonalność, aby okno ostrzegawcze zamykało się przy kliknięniu zewnątrz okna
 -   Stworzone na nowo menu rozwijanego z kategoriami
 -   Dodana funkcjonalność, dodawająca nowe doświadczenie do tablicy
+
+### **[ver. 0.43 Beta] - 2025-02-05**
+
+-   Stworzenie tablicy z każdą godziną dnia oraz jej pozycji pionowo na osi.
+-   Stworzenie okresu czasu "TimeAxis".
+-   Stworzenie pojedynczego bloku na osi czasu.
+-   Stworzenie funkcjonalności dla bieżącego okresu czasu w "store.js".
+-   Aktualizacja wersji.

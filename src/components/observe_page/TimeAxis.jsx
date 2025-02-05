@@ -1,10 +1,31 @@
 import { useTimeRangeStore } from "../../store";
 import gridImage from "../../assets/graph2.png";
+import { useEffect, useRef, useState } from "react";
+import SingleVertBlock from "./SingleVertBlock";
+import { timeRangesVert } from "../../constants/index";
+import { IoMdArrowDropleft } from "react-icons/io";
 
 const TimeAxis = ({ isTimeAxisOpen }) => {
-    const { dayStructure } = useTimeRangeStore();
+    const { dayStructure, timeRanges, getTimeRangesFromLocalStorage } =
+        useTimeRangeStore();
+    const [distance, setDistance] = useState(0);
 
-    // make bottom side scrollable, replace position fixed
+    const fullArea = useRef(null);
+
+    useEffect(() => {
+        getTimeRangesFromLocalStorage();
+
+        setInterval(() => {
+            const currentTime = new Date();
+            const hours = String(currentTime.getHours()).padStart(2, "0");
+            const minutes = currentTime.getMinutes();
+
+            const newTimeStart = timeRangesVert.find(
+                (el) => el.time === `${hours}:00`
+            );
+            setDistance(newTimeStart.positionY + minutes * 1.13);
+        }, 1000);
+    }, []);
 
     return (
         <div
@@ -15,14 +36,18 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
                 clipPath: "inset(0 0 0 0)",
             }}
         >
+            {/* Gradient */}
             <div className="sticky top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-20"></div>
+            {/* Top Gradient */}
+
             <div
-                className="bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent z-20"
+                className="bottom-0  transform -translate-x-1/2 w-[80%] h-32 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none"
                 style={{
                     position: "fixed",
                 }}
             ></div>
 
+            {/* Container */}
             <div
                 className="absolute w-full flex justify-end top-0 right-0 pr-4 bg-contain bg-"
                 style={{
@@ -38,6 +63,28 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
                     ))}
                 </ul>
                 <div className="w-[2px] bg-[#1e1e1e] z-10"></div>
+                {/* Current time */}
+                <div
+                    className="w-full absolute z-20 transition-all"
+                    style={{
+                        top: distance + "px",
+                    }}
+                >
+                    <div className="h-[2px] bg-red-500"></div>
+                    <span className="absolute -right-[18px] -top-[14px] text-red-500 text-3xl">
+                        <IoMdArrowDropleft />
+                    </span>
+                </div>
+
+                <div ref={fullArea} className="absolute w-full h-full">
+                    {timeRanges.map((timeRange) => (
+                        <SingleVertBlock
+                            key={timeRange.id}
+                            timeRange={timeRange}
+                            distance={distance}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

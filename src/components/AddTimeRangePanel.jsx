@@ -36,8 +36,6 @@ const AddTimeRangePanel = () => {
     // Textarea ref
     let textareaRef = useRef();
 
-    const secondInputRef = useRef(null);
-
     // Making textarea dynamic
     const handleInput = (e) => {
         const textarea = textareaRef.current;
@@ -94,12 +92,6 @@ const AddTimeRangePanel = () => {
         });
     };
 
-    const handleFirstInput = (e) => {
-        if (e.target.value.length === 5) {
-            secondInputRef.current.focus();
-        }
-    };
-
     return (
         <section
             className={`h-[calc(100vh-68px)] w-[350px] rounded-md shadow-main bg-white overflow-hidden px-5 pt-7 pb-10 flex flex-col 
@@ -151,7 +143,6 @@ const AddTimeRangePanel = () => {
                                             ...timeRange,
                                             timeStart: e.target.value,
                                         });
-                                        handleFirstInput(e);
                                     }}
                                 />
                                 <p className="flex-center text-sm">
@@ -161,7 +152,6 @@ const AddTimeRangePanel = () => {
 
                             <div className="flex flex-col w-full">
                                 <input
-                                    ref={secondInputRef}
                                     type="time"
                                     className="input border-[1px] py-2 px-2 rounded-lg outline-gray-200"
                                     value={timeEnd}
