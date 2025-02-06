@@ -2,16 +2,49 @@ import { useEffect, useState } from "react";
 import CustomizeCards from "./CustomizeCards";
 import { useTimeRangeStore } from "../../store";
 
-import { TiPinOutline } from "react-icons/ti";
-
 const CurrentTaskCards = () => {
-    const { taskMarks, getFromLocalStorage, setPrevTaskMarks } =
-        useTimeRangeStore();
+    const {
+        taskMarks,
+        getFromLocalStorage,
+        setPrevTaskMarks,
+        currentTimeRanges,
+    } = useTimeRangeStore();
     const [isCardPanelOpen, setIsCardPanelOpen] = useState(false);
+
+    const [cardSettings, setCardSetting] = useState({
+        name: taskMarks.find((el) => el.name === "Name").selected,
+        desc: taskMarks.find((el) => el.name === "Description").selected,
+        duration: taskMarks.find((el) => el.name === "Duration").selected,
+    });
 
     useEffect(() => {
         getFromLocalStorage("taskMarks", "taskMarks");
     }, []);
+
+    useEffect(() => {
+        setCardSetting({
+            name: taskMarks.find((el) => el.name === "Name").selected,
+            desc: taskMarks.find((el) => el.name === "Description").selected,
+            duration: taskMarks.find((el) => el.name === "Duration").selected,
+        });
+    }, [taskMarks]);
+
+    const getDuration = (timeRange) => {
+        const { timeStart, timeEnd } = timeRange;
+
+        const [hoursStart, minutesStart] = timeStart.split(":").map(Number);
+        const [hoursEnd, minutesEnd] = timeEnd.split(":").map(Number);
+
+        let durationHours = hoursEnd - hoursStart;
+        let durationMinutes = minutesEnd - minutesStart;
+
+        if (durationMinutes < 0) {
+            durationHours -= 1;
+            durationMinutes += 60;
+        }
+
+        return `${durationHours}h ${durationMinutes}m`;
+    };
 
     return (
         <>
@@ -19,28 +52,42 @@ const CurrentTaskCards = () => {
                 <CustomizeCards
                     isCardPanelOpen={isCardPanelOpen}
                     setIsCardPanelOpen={setIsCardPanelOpen}
+                    setCardSetting={setCardSetting}
                 />
             ) : (
                 <div className="flex flex-col gap-3 w-[250px] min-w-[250px] relative">
-                    {taskMarks.map((mark) => {
-                        if (mark.selected) {
-                            return (
-                                <div
-                                    key={mark.id}
-                                    className="bg-[#FCE4EC] border-[1px] border-[#DADADA] rounded-lg w-full px-3 py-5 shadow-main relative overflow-hidden"
-                                >
-                                    <p className="text-[#333333] mb-1 text-base">
-                                        {mark.name}:
-                                    </p>
-                                    <p className="text-[#333333] font-bold text-2xl">
-                                        {mark.data}
-                                    </p>
+                    {cardSettings.name ||
+                    cardSettings.desc ||
+                    cardSettings.duration
+                        ? currentTimeRanges.map((timeRange) => (
+                              <div
+                                  key={timeRange.id}
+                                  className="bg-darkPink px-3 pt-6 pb-4 rounded-md shadow-main relative"
+                              >
+                                  <h1 className="text-white font-semibold text-xl pb-1">
+                                      {cardSettings.name ? timeRange.name : ""}
+                                  </h1>
+                                  <div className="h-[1px] w-full bg-white mb-2"></div>
+                                  <p className="text-gray-300 w-[70%]">
+                                      {cardSettings.desc && timeRange.desc}
+                                  </p>
 
-                                    <TiPinOutline className="absolute -top-6 -right-6 z-10 text-8xl text-black text-opacity-10" />
-                                </div>
-                            );
-                        }
-                    })}
+                                  {cardSettings.duration && (
+                                      <span className="absolute bottom-0 right-0 text-sm bg-white px-2 py-1 rounded-br-md rounded-tl-md">
+                                          {getDuration(timeRange)}
+                                      </span>
+                                  )}
+                              </div>
+                          ))
+                        : ""}
+
+                    {currentTimeRanges.length === 0 ? (
+                        <div className="text-center text-gray-400">
+                            Waiting for tasks...
+                        </div>
+                    ) : (
+                        ""
+                    )}
 
                     <button
                         className="border-2 border-dashed border-gray-300 py-2 rounded-lg text-gray-300"

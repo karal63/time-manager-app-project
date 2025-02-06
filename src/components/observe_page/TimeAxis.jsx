@@ -27,8 +27,18 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
         }, 1000);
     }, []);
 
+    useEffect(() => {
+        if (fullArea.current) {
+            fullArea.current.scrollTo({
+                top: distance - 300,
+                behavior: "smooth",
+            });
+        }
+    }, [distance]);
+
     return (
         <div
+            ref={fullArea}
             className={`${
                 isTimeAxisOpen ? "w-[400px] min-w-[400px]" : "w-0"
             } h-full relative overflow-x-hidden overflow-y-auto`}
@@ -76,7 +86,7 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
                     </span>
                 </div>
 
-                <div ref={fullArea} className="absolute w-full h-full">
+                <div className="absolute w-full h-full">
                     {timeRanges.map((timeRange) => (
                         <SingleVertBlock
                             key={timeRange.id}

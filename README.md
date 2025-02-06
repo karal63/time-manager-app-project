@@ -135,3 +135,12 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie pojedynczego bloku na osi czasu.
 -   Stworzenie funkcjonalności dla bieżącego okresu czasu w "store.js".
 -   Aktualizacja wersji.
+
+### **[ver. 0.50 Beta] - 2025-02-06**
+
+-   Stworzenie funkcji, która zwraca następny indeks tablicy w przypadku dodania nowego elementu
+-   Stworzenie funkcjonalności, która umożliwi użytkownikowi na edytowanie osiągnięć
+-   Stworzenie funkcjonalności, która zapisuje oraz zwraca osiągnięcia z localStorage
+-   Stworzenie na nowo wyświetlanych kart bieżących zadań, teraz każda karta reprezentuje oddzielny okres czasu oraz informację o tym
+-   Stworzenie linii na okresie czasu w podstronie "observe", która wskazuje bieżący czas
+-   Stworzenie funkcjonalności, która po każdym odświerzeniu, czy uruchamieniu podstrony "observe" ustawia pozycję paska bocznego na miejsce czerwonej kreski (bieżącego czasu)

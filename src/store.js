@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useTimeRangeStore = create((set) => ({
+export const useTimeRangeStore = create((set, get) => ({
     popup: {
         isOpen: false,
         message: "",
@@ -161,17 +161,21 @@ export const useTimeRangeStore = create((set) => ({
         },
     ],
 
+    getNextId: (items) => {
+        return items.length > 0
+            ? Math.max(...items.map((item) => item.id)) + 1
+            : 1;
+    },
+
     addTimeRange: (timeRange) =>
         set((state) => {
             const newTimeRange = {
                 ...timeRange,
-                id: timeRange.id || state.timeRanges.length + 1,
+                id: get().getNextId(state.timeRanges),
             };
 
             const newTimeRanges = [...state.timeRanges, newTimeRange];
-
             state.saveTimeRangesToLocalStorage(newTimeRanges);
-
             return { timeRanges: newTimeRanges };
         }),
 
@@ -275,25 +279,16 @@ export const useTimeRangeStore = create((set) => ({
         {
             id: 1,
             name: "Name",
-            data: "Lunch",
             selected: true,
         },
         {
             id: 2,
             name: "Description",
-            data: "Lunch",
             selected: true,
         },
         {
             id: 3,
-            name: "Time Axis",
-            data: "12:00 - 13:00",
-            selected: false,
-        },
-        {
-            id: 4,
-            name: "Time Left",
-            data: "30min",
+            name: "Duration",
             selected: false,
         },
     ],
@@ -334,51 +329,60 @@ export const useTimeRangeStore = create((set) => ({
 
     cancelMarks: () => set((state) => ({ taskMarks: state.prevTaskMarks })),
 
-    achievements: [
-        {
-            id: 1,
-            name: "HG hello world",
-            category: "Testing",
-            time: "01:00:00",
-        },
-        {
-            id: 2,
-            name: "HG creating some new feature",
-            category: "Creating",
-            time: "30:00",
-        },
-    ],
+    returnFromLocalStorage: (key) => {
+        const response = localStorage.getItem(key);
+        return response ? JSON.parse(response) : null;
+    },
+
+    achievements: [],
+
+    initializeAchievements: () => {
+        const localData = get().returnFromLocalStorage("achievements");
+
+        set({
+            achievements: localData || [
+                {
+                    id: 1,
+                    name: "HG hello world",
+                    category: "Testing",
+                    time: "01:00:00",
+                },
+                {
+                    id: 2,
+                    name: "HG creating some new feature",
+                    category: "Creating",
+                    time: "30:00",
+                },
+            ],
+        });
+    },
 
     addAchievement: (achieve) =>
-        set((state) => ({
-            achievements: [
+        set((state) => {
+            const newAchievements = [
                 ...state.achievements,
                 {
                     ...achieve,
-                    id: state.achievements.length + 1,
+                    id: get().getNextId(state.achievements),
                 },
-            ],
-        })),
+            ];
+
+            state.saveToLocalStorage("achievements", newAchievements);
+
+            return {
+                achievements: newAchievements,
+            };
+        }),
 
     selectedAchievements: [],
 
     selectAchievement: (isSelected, achieve) =>
         set((state) => {
-            let newSelectedAchievements = [];
-
-            switch (isSelected) {
-                case false:
-                    newSelectedAchievements = state.selectedAchievements.filter(
-                        (el) => el !== achieve
-                    );
-                    break;
-                case true:
-                    newSelectedAchievements = [
-                        ...state.selectedAchievements,
-                        achieve,
-                    ];
-                    break;
-            }
+            const newSelectedAchievements = isSelected
+                ? [...state.selectedAchievements, achieve]
+                : state.selectedAchievements.filter(
+                      (el) => el.id !== achieve.id
+                  );
 
             return {
                 selectedAchievements: newSelectedAchievements,
@@ -394,9 +398,45 @@ export const useTimeRangeStore = create((set) => ({
                     )
             );
 
+            state.saveToLocalStorage("achievements", newAchievements);
+
             return {
                 achievements: newAchievements,
                 selectedAchievements: [],
+            };
+        }),
+
+    isEditingAchievements: false,
+    enableEditing: () => set(() => ({ isEditingAchievements: true })),
+    disableEditing: () => set(() => ({ isEditingAchievements: false })),
+    isSavedAchievements: false,
+    setIsSavedAchievements: (value) =>
+        set(() => ({ isSavedAchievements: value })),
+
+    editAchievement: (id, { name, category, time }) =>
+        set((state) => {
+            const newAchievements = state.achievements.map((achieve) => {
+                if (achieve.id === id) {
+                    return {
+                        ...achieve,
+                        name,
+                        category,
+                        time,
+                    };
+                }
+                return achieve;
+            });
+
+            // Make that when you edit achieve it doesnt in some magic way create additional selected achieve
+            // const newSelectedAchievements = state.selectedAchievements.filter(
+            //     (el) => el.id !== id
+            // );
+
+            state.saveToLocalStorage("achievements", newAchievements);
+
+            return {
+                achievements: newAchievements,
+                selectedAchievements: state.selectedAchievements,
             };
         }),
 
@@ -409,7 +449,7 @@ export const useTimeRangeStore = create((set) => ({
         set((state) => ({
             warningWindow: {
                 isOpen: value,
-                records: state.selectAchievement,
+                records: state.selectedAchievements,
             },
         })),
 
@@ -424,6 +464,17 @@ export const useTimeRangeStore = create((set) => ({
 
             return {
                 currentTimeRanges: [...filteredRanges, timeRange], // Create new array, avoiding mutation
+            };
+        }),
+
+    removeCurrentTimeRanges: (timeRange) =>
+        set((state) => {
+            const newCurrentTimeRanges = state.currentTimeRanges.filter(
+                (el) => el.id !== timeRange.id
+            );
+
+            return {
+                currentTimeRanges: newCurrentTimeRanges,
             };
         }),
 }));

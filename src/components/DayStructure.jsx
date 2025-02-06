@@ -11,8 +11,8 @@ const DayStructure = () => {
 
     return (
         <>
-            {timeRanges.map((range) => (
-                <SingleBlock key={range.id} range={range} />
+            {timeRanges.map((range, i) => (
+                <SingleBlock key={i} range={range} />
             ))}
         </>
     );

@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useTimeRangeStore } from "../../store";
 
-const CustomizeCards = ({ isCardPanelOpen, setIsCardPanelOpen }) => {
+const CustomizeCards = ({
+    isCardPanelOpen,
+    setIsCardPanelOpen,
+    setCardSetting,
+}) => {
     const {
         taskMarks,
         selectMark,
@@ -25,7 +29,7 @@ const CustomizeCards = ({ isCardPanelOpen, setIsCardPanelOpen }) => {
             }`}
         >
             <h1 className="font-semibold text-center text-xl pt-2">
-                Customize Your Cards
+                Customize Your Card
             </h1>
 
             <ul className="my-6 flex flex-col gap-1">
@@ -56,7 +60,7 @@ const CustomizeCards = ({ isCardPanelOpen, setIsCardPanelOpen }) => {
                     cancel
                 </button>
                 <button
-                    className="rounded-lg px-3 py-1 border-[1px]"
+                    className="rounded-lg px-4 py-1 border-[1px] hover:border-darkPink hover:text-darkPink transition-all"
                     onClick={() => {
                         closePanel();
                         saveToLocalStorage("taskMarks", taskMarks);

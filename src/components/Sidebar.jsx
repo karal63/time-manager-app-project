@@ -82,7 +82,7 @@ const Sidebar = () => {
                                 <CiViewBoard className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
 
                                 {isOpen ? (
-                                    <span className="text-xl">View</span>
+                                    <span className="text-xl">Dashboard</span>
                                 ) : (
                                     ""
                                 )}

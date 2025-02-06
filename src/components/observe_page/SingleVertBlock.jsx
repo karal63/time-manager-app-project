@@ -3,7 +3,8 @@ import { timeRangesVert } from "../../constants/index";
 import { useTimeRangeStore } from "../../store";
 
 const SingleVertBlock = ({ timeRange, distance }) => {
-    const { setCurrentTimeRanges } = useTimeRangeStore();
+    const { setCurrentTimeRanges, removeCurrentTimeRanges } =
+        useTimeRangeStore();
     const [marks, setMarks] = useState({
         currentMark: "",
         endTimeMark: "",
@@ -102,14 +103,15 @@ const SingleVertBlock = ({ timeRange, distance }) => {
             setCurrentTimeRanges(timeRange);
         } else {
             setIsCurrent(false);
+            removeCurrentTimeRanges(timeRange);
         }
-    }, [distance]); // Dependency array
+    }, [distance]);
 
     return (
         <div
-            className={`absolute left-20 rounded-md border-[1px] border-gray-300 shadow-main flex-center overflow-hidden ${
+            className={`absolute left-20 rounded-md border-[1px] border-gray-300 flex-center overflow-hidden ${
                 isCurrent
-                    ? "bg-blue-400 border-[2px] border-blue-600 z-10"
+                    ? "bg-blue-400 border-[2px] border-blue-600 z-10 shadow-main"
                     : "bg-blue-300 opacity-50"
             }`}
             style={{

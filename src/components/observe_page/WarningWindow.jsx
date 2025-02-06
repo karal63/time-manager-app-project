@@ -79,7 +79,7 @@ const WarningWindow = () => {
                             Cancel
                         </button>
                         <button
-                            className="bg-darkPink text-white px-2 py-1 rounded-lg"
+                            className="px-2 py-1 rounded-lg transition-all border-[1px] hover:border-darkPink hover:text-darkPink"
                             onClick={deleteRecords}
                         >
                             Delete

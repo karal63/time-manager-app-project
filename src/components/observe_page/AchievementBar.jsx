@@ -4,6 +4,8 @@ import { useState } from "react";
 import { categories } from "../../constants";
 import { useTimeRangeStore } from "../../store";
 
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 const DropDownCategoryMenu = ({
     setAchievement,
     achievement,
@@ -39,7 +41,7 @@ const DropDownCategoryMenu = ({
 const AchievementBar = () => {
     const { addAchievement, achievements } = useTimeRangeStore();
     const [seconds, setSeconds] = useState(0);
-    const [minuts, setMinuts] = useState(0);
+    const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [achievement, setAchievement] = useState({
@@ -54,12 +56,12 @@ const AchievementBar = () => {
     useEffect(() => {
         if (isRunning) {
             intervalRef.current = setInterval(() => {
-                if (minuts > 59) {
+                if (minutes > 59) {
                     setHours((prevHours) => prevHours + 1);
-                    setMinuts(0);
+                    setMinutes(0);
                 }
                 if (seconds >= 59) {
-                    setMinuts((prevMinuts) => prevMinuts + 1);
+                    setMinutes((prevMinutes) => prevMinutes + 1);
                     setSeconds(0);
                 } else {
                     setSeconds((prevSeconds) => prevSeconds + 1);
@@ -67,22 +69,22 @@ const AchievementBar = () => {
                 setAchievement({
                     ...achievement,
                     time: `${String(hours).padStart(2, "0")}:${String(
-                        minuts
+                        minutes
                     ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`,
                 });
-            }, 1);
+            }, 1000);
         } else {
             clearInterval(intervalRef.current);
         }
 
         return () => clearInterval(intervalRef.current);
-    }, [isRunning, seconds, minuts, achievement]);
+    }, [isRunning, seconds, minutes, achievement]);
 
     useEffect(() => {
         if (!isRunning) {
             if (achievement.name && achievement.time) {
                 addAchievement(achievement);
-                setMinuts(0);
+                setMinutes(0);
                 setSeconds(0);
             }
         }
@@ -98,7 +100,7 @@ const AchievementBar = () => {
                 <input
                     type="text"
                     className="bg-transparent outline-none w-full"
-                    placeholder="What did you achive?"
+                    placeholder="What are you working on?"
                     onChange={(e) =>
                         setAchievement({
                             ...achievement,
@@ -112,10 +114,11 @@ const AchievementBar = () => {
             {/* Dropdown list */}
             <div className="relative">
                 <button
-                    className="bg-purple-400 bg-opacity-65 border-[1px] border-purple-600 px-6 py-1 rounded-md text-nowrap text-white w-[150px]"
+                    className="bg-blue-400 bg-opacity-65 border-[1px] border-gray-400 px-6 py-1 rounded-md text-nowrap text-white w-[150px] flex justify-center items-center gap-1"
                     onClick={() => setIsDropDownOpen(!isDropDownOpen)}
                 >
-                    {achievement.category}
+                    <span>{achievement.category}</span>
+                    <MdKeyboardArrowDown className="text-2xl" />
                 </button>
 
                 {isDropDownOpen && (
@@ -130,7 +133,7 @@ const AchievementBar = () => {
             {/* Time */}
             <span className="text-2xl ml-5">
                 {String(hours).padStart(2, "0")}:
-                {String(minuts).padStart(2, "0")}:
+                {String(minutes).padStart(2, "0")}:
                 {String(seconds).padStart(2, "0")}
             </span>
 

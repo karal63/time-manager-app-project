@@ -3,8 +3,19 @@ import { useTimeRangeStore } from "../../store";
 
 const SingleAchieveLine = ({ achieve }) => {
     const [isSelected, setIsSelected] = useState(false);
+    const [editedValues, setEditedValues] = useState({
+        name: achieve.name,
+        category: achieve.category,
+        time: achieve.time,
+    });
 
-    const { selectAchievement } = useTimeRangeStore();
+    const {
+        selectAchievement,
+        isEditingAchievements,
+        isSavedAchievements,
+        editAchievement,
+        setIsSavedAchievements,
+    } = useTimeRangeStore();
 
     const selectLine = (e) => {
         setIsSelected(!isSelected);
@@ -17,6 +28,13 @@ const SingleAchieveLine = ({ achieve }) => {
     // 4. override your prev achievements
 
     // Create warning before deleting
+
+    useEffect(() => {
+        if (isSavedAchievements) {
+            editAchievement(achieve.id, editedValues);
+            setIsSavedAchievements(false);
+        }
+    }, [isSavedAchievements]);
 
     return (
         <tr
@@ -35,9 +53,62 @@ const SingleAchieveLine = ({ achieve }) => {
                     />
                 </div>
             </td>
-            <td className="py-2 px-4">{achieve.name}</td>
-            <td className="py-2 px-4">{achieve.category}</td>
-            <td className="py-2 px-4">{achieve.time}</td>
+
+            <td className="py-2 px-4">
+                {isEditingAchievements && isSelected ? (
+                    <input
+                        type="text"
+                        value={editedValues.name}
+                        onChange={(e) =>
+                            setEditedValues({
+                                ...editedValues,
+                                name: e.target.value,
+                            })
+                        }
+                        className="border-[1px] rounded-md px-2 w-full"
+                    />
+                ) : (
+                    <span className="border-[1px] border-transparent">
+                        {achieve.name}
+                    </span>
+                )}
+            </td>
+
+            <td className="py-2 px-4">
+                {isEditingAchievements && isSelected ? (
+                    <input
+                        type="text"
+                        value={editedValues.category}
+                        onChange={(e) =>
+                            setEditedValues({
+                                ...editedValues,
+                                category: e.target.value,
+                            })
+                        }
+                        className="border-[1px] rounded-md px-2 w-full"
+                    />
+                ) : (
+                    achieve.category
+                )}
+            </td>
+
+            <td className="py-2 px-4">
+                {isEditingAchievements && isSelected ? (
+                    <input
+                        type="text"
+                        value={editedValues.time}
+                        onChange={(e) =>
+                            setEditedValues({
+                                ...editedValues,
+                                time: e.target.value,
+                            })
+                        }
+                        className="border-[1px] rounded-sm px-2 w-full"
+                    />
+                ) : (
+                    achieve.time
+                )}
+            </td>
         </tr>
     );
 };

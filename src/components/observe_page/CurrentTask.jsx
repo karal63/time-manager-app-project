@@ -28,26 +28,20 @@ const CurrentTask = ({ isTimeAxisOpen, setIsTimeAxisOpen }) => {
 
     return (
         <section className="w-full h-[550px] pl-10 pr-10">
-            <div className="flex justify-between items-center pt-3 pb-9">
-                <div className="flex items-center gap-6">
-                    <button
-                        className="border-[1px] rounded-lg px-3 py-3"
-                        onClick={() => setIsTimeAxisOpen(!isTimeAxisOpen)}
-                    >
-                        {isTimeAxisOpen ? (
-                            <FaArrowLeftLong />
-                        ) : (
-                            <FaArrowRightLong />
-                        )}
-                    </button>
+            <div className="flex items-center gap-6 pt-3 pb-9">
+                <button
+                    className="border-[1px] rounded-lg px-3 py-3"
+                    onClick={() => setIsTimeAxisOpen(!isTimeAxisOpen)}
+                >
+                    {isTimeAxisOpen ? (
+                        <FaArrowLeftLong />
+                    ) : (
+                        <FaArrowRightLong />
+                    )}
+                </button>
 
-                    <p className="text-darkPink font-medium text-xl">
-                        Current Time Range
-                    </p>
-                </div>
-
-                <p>
-                    Next: <b>Work</b>
+                <p className="text-darkPink font-medium text-xl">
+                    Current Time Range
                 </p>
             </div>
 
