@@ -20,7 +20,6 @@ const AchievementTable = () => {
         if (selectedAchievements.length === 0) {
             disableEditing();
         }
-        console.log(selectedAchievements);
     }, [selectedAchievements]);
 
     return (

@@ -144,3 +144,16 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie na nowo wyświetlanych kart bieżących zadań, teraz każda karta reprezentuje oddzielny okres czasu oraz informację o tym
 -   Stworzenie linii na okresie czasu w podstronie "observe", która wskazuje bieżący czas
 -   Stworzenie funkcjonalności, która po każdym odświerzeniu, czy uruchamieniu podstrony "observe" ustawia pozycję paska bocznego na miejsce czerwonej kreski (bieżącego czasu)
+
+### **[ver. 0.60 Beta] - 2025-02-08**
+
+-   Stworzenie "notesStore.js", w którym przechowują się globalne metody i pola
+-   Wyśrodkowanie logotypu oraz schowanie przełącznika trybu w podstronie "planner" na małych urządzeniach
+-   Schowanie pasku nawigacyjnego bocznego na małych urządzeniach
+-   Stworzenie przycisku, który chowa/wyświetla główny pasek oraz przycisku, który po naciśnięciu wyświetla pasek do filtracji notatek w podstronie "notes"
+-   Stworzenie pasku do filtrowania notatek
+-   Stworzenie pasku do tworzenia oraz edytowania notatek
+-   Stworzenie kontekstu dla każdej notatki
+-   Stworzenie listy, w której wyświetlane są wszystkie notatki zgrupowane po dacie
+-   Stworzenie komponentu dla pojedynczej notatki "SingleNoteLine.jsx"
+-   Stworzenie podstrony "notes"

@@ -22,7 +22,7 @@ const SwitchMode = () => {
     useEffect(() => {}, [location.pathname]);
 
     return (
-        <div className="relative ">
+        <div className="relative max-sm:hidden">
             <button
                 className="flex items-center border-[1px] border-pink-300 rounded-md px-3 py-1"
                 onClick={() => setIsDropDown(!isDropDown)}

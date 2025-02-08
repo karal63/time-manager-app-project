@@ -23,7 +23,7 @@ const Sidebar = () => {
                 isOpen ? "w-[280px]" : "w-16"
             } absolute left-0 top-[68px] h-[calc(100vh-68px)] shadow-lg bg-white transition-all pl-2 ${
                 isOpen ? "pr-10" : ""
-            } flex flex-col justify-between z-20`} // changed to 20 to be on top of the scroll zone
+            } flex flex-col justify-between z-20 max-sm:hidden`} // changed to 20 to be on top of the scroll zone
             onMouseLeave={() => {
                 setIsOpen(false);
             }}
