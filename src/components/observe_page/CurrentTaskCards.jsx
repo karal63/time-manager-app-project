@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomizeCards from "./CustomizeCards";
 import { useTimeRangeStore } from "../../store";
+import { Link } from "react-router-dom";
 
 const CurrentTaskCards = () => {
     const {
@@ -8,6 +9,7 @@ const CurrentTaskCards = () => {
         getFromLocalStorage,
         setPrevTaskMarks,
         currentTimeRanges,
+        setTimeRangePanel,
     } = useTimeRangeStore();
     const [isCardPanelOpen, setIsCardPanelOpen] = useState(false);
 
@@ -89,15 +91,27 @@ const CurrentTaskCards = () => {
                         ""
                     )}
 
-                    <button
-                        className="border-2 border-dashed border-gray-300 py-2 rounded-lg text-gray-300"
-                        onClick={() => {
-                            setIsCardPanelOpen(true);
-                            setPrevTaskMarks();
-                        }}
-                    >
-                        Customize
-                    </button>
+                    {currentTimeRanges.length === 0 ? (
+                        <Link
+                            to={"/planner"}
+                            className="bg-darkPink hover:bg-pink-500 py-2 rounded-lg text-white text-center transition-all"
+                            onClick={() => {
+                                setTimeRangePanel(true, "Create");
+                            }}
+                        >
+                            Create Time Range
+                        </Link>
+                    ) : (
+                        <button
+                            className="border-2 border-dashed border-gray-300 py-2 rounded-lg text-gray-300"
+                            onClick={() => {
+                                setIsCardPanelOpen(true);
+                                setPrevTaskMarks();
+                            }}
+                        >
+                            Customize
+                        </button>
+                    )}
                 </div>
             )}
         </>

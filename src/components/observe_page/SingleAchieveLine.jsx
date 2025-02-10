@@ -15,11 +15,16 @@ const SingleAchieveLine = ({ achieve }) => {
         isSavedAchievements,
         editAchievement,
         setIsSavedAchievements,
+        setDraggedAchievement,
     } = useTimeRangeStore();
 
     const selectLine = (e) => {
         setIsSelected(!isSelected);
         selectAchievement(e.target.checked, achieve);
+    };
+
+    const dragLine = () => {
+        setDraggedAchievement(achieve);
     };
 
     // 1. store selected objects in an array in the store when changing the value above
@@ -35,10 +40,12 @@ const SingleAchieveLine = ({ achieve }) => {
             setIsSavedAchievements(false);
         }
     }, [isSavedAchievements]);
-
+    //
     return (
         <tr
-            className={`border-b border-gray-200 ${
+            draggable={true}
+            onDragStart={dragLine}
+            className={`border-b-[1px] border-gray-200 cursor-grab ${
                 isSelected ? "bg-blue-50" : "bg-white"
             }`}
         >

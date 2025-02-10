@@ -3,18 +3,21 @@ import { CiCalendar } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
 import { CiViewBoard } from "react-icons/ci";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useTimeRangeStore } from "../store";
 
 const Sidebar = () => {
+    const { initializeProjectName, projectName, setProjectName } =
+        useTimeRangeStore();
     const [isOpen, setIsOpen] = useState(false);
-    const [projectName, setProjectName] = useState("project 123");
+    const location = useLocation(); // Get current location
 
     const sidebarRef = useRef();
 
     useEffect(() => {
-        setProjectName(projectName.replace(/ /g, "\u00A0"));
-    }, [projectName]);
+        initializeProjectName();
+    }, []);
 
     return (
         <section
@@ -29,7 +32,7 @@ const Sidebar = () => {
             }}
         >
             <div>
-                {isOpen ? (
+                {isOpen && location.pathname.startsWith("/planner") ? (
                     <div className="mt-6 ml-3">
                         <p className="text-xl">Project&nbsp;name</p>
 

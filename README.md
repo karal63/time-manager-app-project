@@ -157,3 +157,10 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie listy, w której wyświetlane są wszystkie notatki zgrupowane po dacie
 -   Stworzenie komponentu dla pojedynczej notatki "SingleNoteLine.jsx"
 -   Stworzenie podstrony "notes"
+
+### **[ver. 0.70 Beta] - 2025-02-10**
+
+-   Naprawienie wyświetania nazwy projektu w zależności od nazwy location
+-   Stworzenie funkcjonalności, która pozwala na kontynuację już stworzonego osiągnięcia w przypadku przeciągnięcia osiągnięcia do paska do tworzenia nowych osiągnięć
+-   W przypadku braku bieżących okresów czasu, w podstronie "/planner/observe" ma się wyświetlać przycisk do tworzenia nowego okresu czasu
+-   Storzenie przycisku do odwołania edytowania osiągnięcia

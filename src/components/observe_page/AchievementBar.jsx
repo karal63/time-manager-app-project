@@ -39,7 +39,12 @@ const DropDownCategoryMenu = ({
 };
 
 const AchievementBar = () => {
-    const { addAchievement, achievements } = useTimeRangeStore();
+    const {
+        addAchievement,
+        draggableAchievement,
+        editAchievement,
+        setDraggedAchievement,
+    } = useTimeRangeStore();
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
@@ -50,8 +55,15 @@ const AchievementBar = () => {
         time: "",
     });
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+    const [isDraggedAchievement, setIsDraggedAchievement] = useState(false);
 
     let intervalRef = useRef(null);
+
+    const resetTime = () => {
+        setMinutes(0);
+        setSeconds(0);
+        setHours(0);
+    };
 
     useEffect(() => {
         if (isRunning) {
@@ -83,9 +95,14 @@ const AchievementBar = () => {
     useEffect(() => {
         if (!isRunning) {
             if (achievement.name && achievement.time) {
-                addAchievement(achievement);
-                setMinutes(0);
-                setSeconds(0);
+                if (draggableAchievement.id && isDraggedAchievement) {
+                    editAchievement(draggableAchievement.id, achievement);
+                    setDraggedAchievement({});
+                    setIsDraggedAchievement(false);
+                } else {
+                    addAchievement(achievement);
+                }
+                resetTime();
             }
         }
     }, [isRunning, addAchievement]);
@@ -94,12 +111,45 @@ const AchievementBar = () => {
         setIsRunning(!isRunning);
     };
 
+    const applyDraggableAchieve = () => {
+        setIsDraggedAchievement(true);
+        setAchievement({
+            ...achievement,
+            name: draggableAchievement.name,
+            category: draggableAchievement.category,
+            time: draggableAchievement.time,
+        });
+        const time = draggableAchievement.time.split(":").map(Number);
+
+        setMinutes(time[1]);
+        setSeconds(time[2]);
+        setHours(time[0]);
+    };
+
+    const cancelEditing = () => {
+        setIsDraggedAchievement(false);
+        setAchievement({
+            name: "",
+            category: "None",
+            time: "",
+        });
+        resetTime();
+    };
+
     return (
-        <div className="flex w-full items-center bg-gray-50 border-[1px] px-4 py-2">
-            <form className="w-full">
+        <div
+            onDragOver={(e) => {
+                e.preventDefault();
+            }}
+            onDrop={() => {
+                applyDraggableAchieve();
+            }}
+            className="flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative"
+        >
+            <form className="w-full h-full">
                 <input
                     type="text"
-                    className="bg-transparent outline-none w-full"
+                    className="bg-transparent outline-none w-full h-full px-4 block"
                     placeholder="What are you working on?"
                     onChange={(e) =>
                         setAchievement({
@@ -107,6 +157,7 @@ const AchievementBar = () => {
                             name: e.target.value,
                         })
                     }
+                    value={achievement.name}
                 />
             </form>
 
@@ -138,11 +189,21 @@ const AchievementBar = () => {
             </span>
 
             <button
-                className="text-lg min-w-20 bg-darkPink ml-2 rounded-md py-1 text-white"
+                className="text-lg min-w-20 bg-darkPink hover:bg-pink-500 active:bg-darkPink transition-all ml-2 rounded-md py-1 text-white"
                 onClick={runStopper}
             >
                 {isRunning ? "Stop" : "Start"}
             </button>
+
+            {/* Showing info if achievement is dragged */}
+            {isDraggedAchievement && (
+                <button
+                    className="absolute right-0 -top-6 text-sm"
+                    onClick={cancelEditing}
+                >
+                    Click to cancel editing.
+                </button>
+            )}
         </div>
     );
 };

@@ -14,10 +14,6 @@ const NotesList = () => {
         setFilteredNotes(notes);
     }, []);
 
-    // useEffect(() => {
-    //     setDates([...new Set(notes.map((note) => note.date))]);
-    // }, [notes]);
-
     const filterNotes = (date) => {
         const newNotes = notes.filter((el) => el.date === date);
         return newNotes;

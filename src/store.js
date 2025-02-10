@@ -477,4 +477,25 @@ export const useTimeRangeStore = create((set, get) => ({
                 currentTimeRanges: newCurrentTimeRanges,
             };
         }),
+
+    projectName: "",
+    setProjectName: (name) => {
+        get().saveToLocalStorage("projectName", name); // Save correctly
+        set({ projectName: name });
+    },
+
+    initializeProjectName: () => {
+        const name = get().returnFromLocalStorage("projectName");
+
+        set({
+            projectName: name || "Project1",
+        });
+    },
+
+    // Drag and drop
+    draggableAchievement: {},
+    setDraggedAchievement: (achieve) =>
+        set(() => ({
+            draggableAchievement: { ...achieve },
+        })),
 }));
