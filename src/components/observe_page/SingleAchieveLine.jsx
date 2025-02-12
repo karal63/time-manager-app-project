@@ -16,6 +16,7 @@ const SingleAchieveLine = ({ achieve }) => {
         editAchievement,
         setIsSavedAchievements,
         setDraggedAchievement,
+        isTimeAxisOpen,
     } = useTimeRangeStore();
 
     const selectLine = (e) => {
@@ -40,12 +41,12 @@ const SingleAchieveLine = ({ achieve }) => {
             setIsSavedAchievements(false);
         }
     }, [isSavedAchievements]);
-    //
+
     return (
         <tr
-            draggable={true}
+            draggable={!isEditingAchievements}
             onDragStart={dragLine}
-            className={`border-b-[1px] border-gray-200 cursor-grab ${
+            className={`border-b-[1px] border-gray-200 cursor-alias ${
                 isSelected ? "bg-blue-50" : "bg-white"
             }`}
         >
@@ -75,9 +76,17 @@ const SingleAchieveLine = ({ achieve }) => {
                         className="border-[1px] rounded-md px-2 w-full"
                     />
                 ) : (
-                    <span className="border-[1px] border-transparent">
-                        {achieve.name}
-                    </span>
+                    <p className="border-[1px] border-transparent max-w-max overflow-hidden text-left">
+                        {achieve.name.length > 50 ? (
+                            isTimeAxisOpen ? (
+                                <p>{achieve.name.slice(0, 50)}...</p>
+                            ) : (
+                                <p>{achieve.name.slice(0, 90)}</p>
+                            )
+                        ) : (
+                            achieve.name
+                        )}
+                    </p>
                 )}
             </td>
 
@@ -99,23 +108,7 @@ const SingleAchieveLine = ({ achieve }) => {
                 )}
             </td>
 
-            <td className="py-2 px-4">
-                {isEditingAchievements && isSelected ? (
-                    <input
-                        type="text"
-                        value={editedValues.time}
-                        onChange={(e) =>
-                            setEditedValues({
-                                ...editedValues,
-                                time: e.target.value,
-                            })
-                        }
-                        className="border-[1px] rounded-sm px-2 w-full"
-                    />
-                ) : (
-                    achieve.time
-                )}
-            </td>
+            <td className="py-2 px-4">{achieve.time}</td>
         </tr>
     );
 };

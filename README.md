@@ -164,3 +164,13 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Stworzenie funkcjonalności, która pozwala na kontynuację już stworzonego osiągnięcia w przypadku przeciągnięcia osiągnięcia do paska do tworzenia nowych osiągnięć
 -   W przypadku braku bieżących okresów czasu, w podstronie "/planner/observe" ma się wyświetlać przycisk do tworzenia nowego okresu czasu
 -   Storzenie przycisku do odwołania edytowania osiągnięcia
+
+### **[ver. 0.80 Beta] - 2025-02-12**
+
+-   Stworzenie funkcjonalności w pasku osiągnięć do duplikacji wierszy
+-   Naprawienie widoku wyświetkającego się pola tekstowego w "FilterPanel.jsx" na urządzeniach mobilnych
+-   Stworzenie bloków wskazujące jak blisko jest termin konkretnej notatki
+-   Mała zmiana w widoku głównego panelu osiągnięć
+-   Jeżeli nie występuje żadne osiągnięcie, ma się wyświetlać komunikat, wskazujący o tym
+-   Stworzenie funkcjonalności, która skraca nazwę osiągnięcia w przypadku gdy jej długość przekroczy limit 40 liter
+-   Cofnięcie możliwości edytowania czasu w osiągnięciu

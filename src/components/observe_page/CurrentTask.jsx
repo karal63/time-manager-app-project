@@ -1,5 +1,4 @@
 // icons
-import { useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useTimeRangeStore } from "../../store";
@@ -8,23 +7,8 @@ import AchievementBar from "./AchievementBar";
 import AchievementTable from "./AchievementTable";
 import ManipulateAchieveBar from "./ManipulateAchieveBar";
 
-const CurrentTask = ({ isTimeAxisOpen, setIsTimeAxisOpen }) => {
-    const { timeRanges } = useTimeRangeStore();
-    const [currentTime, setCurrentTime] = useState(new Date().getHours());
-
-    // how to get current time range
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTime(new Date().getHours());
-        }, 60000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    // name a panel where the user can highlight what he accomplished during this time and how much time it tool
-    // craate sort of table with numeric achivements
-    // timer in panel
+const CurrentTask = () => {
+    const { isTimeAxisOpen, setIsTimeAxisOpen } = useTimeRangeStore();
 
     return (
         <section className="w-full h-[550px] pl-10 pr-10">

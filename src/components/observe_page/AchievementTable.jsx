@@ -23,34 +23,44 @@ const AchievementTable = () => {
     }, [selectedAchievements]);
 
     return (
-        <section className="mt-4">
+        <section className="mt-2">
             <WarningWindow />
 
-            <table className="w-full table-auto border-collapse styled-table">
-                <thead>
-                    <tr className="text-sm font-semibold border-b border-gray-200">
-                        {/* Extra space */}
-                        <th></th>
-                        {headRow.map((el) => (
-                            <th
-                                key={el.id}
-                                className="py-2 px-4 text-left"
-                                style={{
-                                    width: el.width,
-                                }}
-                            >
-                                {el.value}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {achievements.map((achieve) => (
-                        <SingleAchieveLine key={achieve.id} achieve={achieve} />
-                    ))}
-                </tbody>
-            </table>
+            {achievements.length > 0 ? (
+                <div className="h-[calc(100vh-280px)] overflow-y-auto">
+                    <table className="w-full table-auto border-collapse styled-table">
+                        <thead className="sticky top-0 bg-white z-10">
+                            <tr className="text-sm font-semibold">
+                                <th></th>
+                                {headRow.map((el) => (
+                                    <th
+                                        key={el.id}
+                                        className="py-2 px-4 text-left after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-gray-300"
+                                        style={{
+                                            width: el.width,
+                                            maxWidth: el.width,
+                                        }}
+                                    >
+                                        {el.value}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {achievements.map((achieve) => (
+                                <SingleAchieveLine
+                                    key={achieve.id}
+                                    achieve={achieve}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p className="mt-5 text-center text-gray-400 text-xl">
+                    No achievements...
+                </p>
+            )}
         </section>
     );
 };

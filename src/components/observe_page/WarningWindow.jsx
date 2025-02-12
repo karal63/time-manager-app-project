@@ -38,38 +38,46 @@ const WarningWindow = () => {
                 className="absolute top-0 z-30 w-full h-full bg-modal flex-center"
             >
                 <div className="bg-white py-5 px-6 rounded-lg">
-                    <h1 className="mx-4 text-lg font-semibold ">
+                    <h1 className="mx-4 text-lg font-semibold text-center">
                         Are you sure you want to delete selected achievements?
                     </h1>
                     <h1 className="mx-4 text-sm text-center text-gray-500">
                         You will not be able to restore your achievements.
                     </h1>
 
-                    <table className="mt-7 w-full table-auto border-collapse styled-table">
-                        <thead>
-                            {selectedAchievements.map((el) => (
-                                <tr
-                                    key={el.id}
-                                    className={`${
-                                        el.id % 2 === 1
-                                            ? "bg-gray-100"
-                                            : "bg-white"
-                                    } `}
-                                >
-                                    <td className="text-sm px-4 py-1">
-                                        {el.name}
-                                    </td>
-                                    <td className="text-sm px-4 py-1">
-                                        {el.category}
-                                    </td>
-                                    <td className="text-sm px-4 py-1">
-                                        {el.time}
-                                    </td>
-                                </tr>
-                            ))}
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <div className="mt-7 w-full max-h-[300px] overflow-y-auto border rounded">
+                        <table className="w-full table-auto border-collapse styled-table">
+                            <tbody>
+                                {selectedAchievements.map((el, i) => (
+                                    <tr
+                                        key={el.id}
+                                        className={`${
+                                            i % 2 === 1
+                                                ? "bg-gray-100"
+                                                : "bg-white"
+                                        } `}
+                                    >
+                                        <td className="text-sm px-4 py-1">
+                                            {el.name.length > 40 ? (
+                                                <p>
+                                                    {el.name.slice(0, 50)}
+                                                    ...
+                                                </p>
+                                            ) : (
+                                                el.name
+                                            )}
+                                        </td>
+                                        <td className="text-sm px-4 py-1">
+                                            {el.category}
+                                        </td>
+                                        <td className="text-sm px-4 py-1">
+                                            {el.time}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div className="flex justify-between items-center mt-8">
                         <button

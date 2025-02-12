@@ -275,6 +275,9 @@ export const useTimeRangeStore = create((set, get) => ({
             };
         }),
 
+    isTimeAxisOpen: true,
+    setIsTimeAxisOpen: (value) => set(() => ({ isTimeAxisOpen: value })),
+
     taskMarks: [
         {
             id: 1,
@@ -437,6 +440,32 @@ export const useTimeRangeStore = create((set, get) => ({
             return {
                 achievements: newAchievements,
                 selectedAchievements: state.selectedAchievements,
+            };
+        }),
+
+    duplicateAchievement: () =>
+        set((state) => {
+            const achievementCopy = [...state.achievements];
+            const newSelectedAchievements = state.selectedAchievements.map(
+                (achieve) => {
+                    const newAchieve = {
+                        ...achieve,
+                        id: state.getNextId(achievementCopy),
+                        name: achieve.name + " (copy)",
+                    };
+                    achievementCopy.push(newAchieve);
+                    return newAchieve;
+                }
+            );
+
+            const newAchievements = state.achievements.concat(
+                newSelectedAchievements
+            );
+
+            state.saveToLocalStorage("achievements", newAchievements);
+
+            return {
+                achievements: newAchievements,
             };
         }),
 

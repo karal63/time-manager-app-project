@@ -1,5 +1,6 @@
 import { BsTrash3 } from "react-icons/bs";
 import { GoPencil } from "react-icons/go";
+import { IoDuplicateOutline } from "react-icons/io5";
 import { useTimeRangeStore } from "../../store";
 
 const ManipulateAchieveBar = () => {
@@ -10,6 +11,7 @@ const ManipulateAchieveBar = () => {
         isEditingAchievements,
         setIsSavedAchievements,
         disableEditing,
+        duplicateAchievement,
     } = useTimeRangeStore();
 
     const deleteRecords = () => {
@@ -22,9 +24,12 @@ const ManipulateAchieveBar = () => {
     };
 
     return (
-        <section className="mt-10 flex-center">
-            <div className="border-[1px] rounded-full h-[40px] px-4 flex gap-3">
+        <section className="mt-4 flex-center">
+            <div className="border-[1px] rounded-xl flex py-1 px-1">
                 <button
+                    className={`${
+                        selectedAchievements.length ? "hover:bg-gray-100" : ""
+                    } rounded-xl px-2 py-2`}
                     onClick={deleteRecords}
                     disabled={!selectedAchievements.length}
                 >
@@ -35,6 +40,9 @@ const ManipulateAchieveBar = () => {
                     />
                 </button>
                 <button
+                    className={`${
+                        selectedAchievements.length ? "hover:bg-gray-100" : ""
+                    } rounded-xl px-2 py-2`}
                     disabled={!selectedAchievements.length}
                     onClick={enableEditing}
                 >
@@ -45,8 +53,25 @@ const ManipulateAchieveBar = () => {
                     />
                 </button>
 
+                <button
+                    className={`${
+                        selectedAchievements.length ? "hover:bg-gray-100" : ""
+                    } rounded-xl px-2 py-2`}
+                    disabled={!selectedAchievements.length}
+                    onClick={duplicateAchievement}
+                >
+                    <IoDuplicateOutline
+                        className={`text-xl ${
+                            !selectedAchievements.length && "text-gray-300"
+                        }`}
+                    />
+                </button>
+
                 {isEditingAchievements && (
-                    <button className="ml-5" onClick={saveAchievements}>
+                    <button
+                        className="hover:bg-gray-100 rounded-xl px-2 py-2"
+                        onClick={saveAchievements}
+                    >
                         Save
                     </button>
                 )}

@@ -5,9 +5,13 @@ import SingleVertBlock from "./SingleVertBlock";
 import { timeRangesVert } from "../../constants/index";
 import { IoMdArrowDropleft } from "react-icons/io";
 
-const TimeAxis = ({ isTimeAxisOpen }) => {
-    const { dayStructure, timeRanges, getTimeRangesFromLocalStorage } =
-        useTimeRangeStore();
+const TimeAxis = () => {
+    const {
+        dayStructure,
+        timeRanges,
+        getTimeRangesFromLocalStorage,
+        isTimeAxisOpen,
+    } = useTimeRangeStore();
     const [distance, setDistance] = useState(0);
 
     const fullArea = useRef(null);
@@ -15,7 +19,7 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
     useEffect(() => {
         getTimeRangesFromLocalStorage();
 
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             const currentTime = new Date();
             const hours = String(currentTime.getHours()).padStart(2, "0");
             const minutes = currentTime.getMinutes();
@@ -23,8 +27,13 @@ const TimeAxis = ({ isTimeAxisOpen }) => {
             const newTimeStart = timeRangesVert.find(
                 (el) => el.time === `${hours}:00`
             );
-            setDistance(newTimeStart.positionY + minutes * 1.13);
+
+            if (newTimeStart) {
+                setDistance(newTimeStart.positionY + minutes * 1.13);
+            }
         }, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {

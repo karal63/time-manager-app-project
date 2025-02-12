@@ -59,6 +59,7 @@ const NotesList = () => {
                     monthOptions
                 );
                 const dayNumber = newDate.getDate();
+                const year = newDate.getFullYear();
 
                 // If sort method is equal "Importance" then do not display this block with date, in opposite it will be empty
                 if (
@@ -100,20 +101,66 @@ const NotesList = () => {
                     );
                 });
 
+                const checkDate = () => {
+                    const currentDate = new Date();
+                    const currentMonthName = currentDate.toLocaleDateString(
+                        "en-US",
+                        monthOptions
+                    );
+                    if (
+                        currentMonthName === monthName &&
+                        year === currentDate.getFullYear()
+                    ) {
+                        if (dayNumber - currentDate.getDate() < 0) {
+                            return (
+                                <div className="flex-center ml-5 bg-gray-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Done
+                                </div>
+                            );
+                        } else if (dayNumber - currentDate.getDate() === 0) {
+                            return (
+                                <div className="flex-center ml-5 bg-gray-800 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Today
+                                </div>
+                            );
+                        } else if (dayNumber - currentDate.getDate() === 1) {
+                            return (
+                                <div className="flex-center ml-5 bg-red-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Tommorow
+                                </div>
+                            );
+                        } else if (
+                            // this doesnt work, fix this
+                            dayNumber - currentDate.getDate() <= 7 &&
+                            dayNumber - currentDate.getDate() > 1
+                        ) {
+                            return (
+                                <div className="flex-center ml-5 bg-yellow-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Next week
+                                </div>
+                            );
+                        }
+                    }
+                };
+
                 // Hide if block is empty
                 if (filteredNotes.length === 0) return null;
 
                 return (
                     <div key={i} className="mt-9 mb-12">
-                        <h1 className="text-xl font-semibold ml-10 mb-3">
-                            {date ? (
-                                <>
-                                    {weekDay}, {dayNumber} {monthName}
-                                </>
-                            ) : (
-                                "Notes without date"
-                            )}
-                        </h1>
+                        <div className="flex items-center mx-10 max-sm:mx-5 mb-3 max-sm:justify-between">
+                            <h1 className="text-xl font-semibold">
+                                {date ? (
+                                    <>
+                                        {weekDay}, {dayNumber} {monthName}
+                                    </>
+                                ) : (
+                                    "Notes without date"
+                                )}
+                            </h1>
+
+                            {checkDate()}
+                        </div>
 
                         <div className="border-[1px]">
                             {filteredNotes.map((note) => (

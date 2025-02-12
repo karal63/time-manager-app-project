@@ -20,14 +20,14 @@ const DropDownCategoryMenu = ({
     };
 
     return (
-        <ul className="border-[1px] border-gray-200 absolute top-9 w-full max-h-[300px] overflow-x-hidden overflow-scroll">
+        <ul className="border-[1px] border-gray-200 absolute top-9 w-full max-h-[300px] overflow-x-hidden overflow-scroll z-20">
             {categories.map((category) => (
                 <li
-                    className="w-full text-md border-b-[1px] border-gray-100 bg-white"
+                    className="w-full text-md border-b-[1px] border-gray-100 bg-gray-50"
                     key={category.id}
                 >
                     <button
-                        className="w-full h-full py-2"
+                        className="w-full h-full py-2 text-left pl-3 hover:bg-gray-200"
                         onClick={() => handleClick(category)}
                     >
                         {category.name}
@@ -63,6 +63,14 @@ const AchievementBar = () => {
         setMinutes(0);
         setSeconds(0);
         setHours(0);
+    };
+
+    const clearAchievements = () => {
+        setAchievement({
+            name: "",
+            category: "None",
+            time: "",
+        });
     };
 
     useEffect(() => {
@@ -102,6 +110,7 @@ const AchievementBar = () => {
                 } else {
                     addAchievement(achievement);
                 }
+                clearAchievements();
                 resetTime();
             }
         }
@@ -144,7 +153,7 @@ const AchievementBar = () => {
             onDrop={() => {
                 applyDraggableAchieve();
             }}
-            className="flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative"
+            className="flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative rounded-md"
         >
             <form className="w-full h-full">
                 <input
@@ -163,13 +172,14 @@ const AchievementBar = () => {
 
             {/* Category */}
             {/* Dropdown list */}
-            <div className="relative">
+            <div className="relative flex items-center">
                 <button
-                    className="bg-blue-400 bg-opacity-65 border-[1px] border-gray-400 px-6 py-1 rounded-md text-nowrap text-white w-[150px] flex justify-center items-center gap-1"
+                    className="bg-blue-100 bg-opacity-65 min-w-[115px] px-1 py-1 rounded-md text-nowrap text-gray-700 border-[1px] border-gray-300 hover:border-blue-300 
+                    shadow-sm hover:shadow-none max-w-max flex justify-center items-center gap-1 transition-all"
                     onClick={() => setIsDropDownOpen(!isDropDownOpen)}
                 >
                     <span>{achievement.category}</span>
-                    <MdKeyboardArrowDown className="text-2xl" />
+                    <MdKeyboardArrowDown className="text-xl" />
                 </button>
 
                 {isDropDownOpen && (
@@ -189,7 +199,7 @@ const AchievementBar = () => {
             </span>
 
             <button
-                className="text-lg min-w-20 bg-darkPink hover:bg-pink-500 active:bg-darkPink transition-all ml-2 rounded-md py-1 text-white"
+                className="text-lg bg-darkPink hover:bg-pink-500 active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 text-white shadow-main"
                 onClick={runStopper}
             >
                 {isRunning ? "Stop" : "Start"}
@@ -198,10 +208,10 @@ const AchievementBar = () => {
             {/* Showing info if achievement is dragged */}
             {isDraggedAchievement && (
                 <button
-                    className="absolute right-0 -top-6 text-sm"
+                    className="absolute right-0 -top-6 text-sm text-gray-400"
                     onClick={cancelEditing}
                 >
-                    Click to cancel editing.
+                    Click here to cancel editing.
                 </button>
             )}
         </div>

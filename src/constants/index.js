@@ -3,19 +3,19 @@ export const headRow = [
         id: 1,
         value: "Name",
         type: "name",
-        width: "50%",
+        width: "70%",
     },
     {
         id: 2,
         value: "Category",
         type: "category",
-        width: "30%",
+        width: "20%",
     },
     {
         id: 3,
         value: "Time",
         type: "time",
-        width: "20%",
+        width: "10%",
     },
 ];
 
