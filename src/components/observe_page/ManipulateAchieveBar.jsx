@@ -25,11 +25,11 @@ const ManipulateAchieveBar = () => {
 
     return (
         <section className="mt-4 flex-center">
-            <div className="border-[1px] rounded-xl flex py-1 px-1">
+            <div className="border-[1px] rounded-xl flex py-1 px-1 gap-1 max-h-[45.6px]">
                 <button
                     className={`${
                         selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2`}
+                    } rounded-xl px-2 py-2 transition-all`}
                     onClick={deleteRecords}
                     disabled={!selectedAchievements.length}
                 >
@@ -42,7 +42,7 @@ const ManipulateAchieveBar = () => {
                 <button
                     className={`${
                         selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2`}
+                    } rounded-xl px-2 py-2 transition-all`}
                     disabled={!selectedAchievements.length}
                     onClick={enableEditing}
                 >
@@ -56,7 +56,7 @@ const ManipulateAchieveBar = () => {
                 <button
                     className={`${
                         selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2`}
+                    } rounded-xl px-2 py-2 transition-all`}
                     disabled={!selectedAchievements.length}
                     onClick={duplicateAchievement}
                 >
@@ -69,7 +69,7 @@ const ManipulateAchieveBar = () => {
 
                 {isEditingAchievements && (
                     <button
-                        className="hover:bg-gray-100 rounded-xl px-2 py-2"
+                        className="hover:bg-gray-100 rounded-xl px-2 py-2 text-sm"
                         onClick={saveAchievements}
                     >
                         Save

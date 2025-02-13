@@ -56,6 +56,7 @@ const AchievementBar = () => {
     });
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isDraggedAchievement, setIsDraggedAchievement] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     let intervalRef = useRef(null);
 
@@ -102,16 +103,22 @@ const AchievementBar = () => {
 
     useEffect(() => {
         if (!isRunning) {
-            if (achievement.name && achievement.time) {
-                if (draggableAchievement.id && isDraggedAchievement) {
-                    editAchievement(draggableAchievement.id, achievement);
-                    setDraggedAchievement({});
-                    setIsDraggedAchievement(false);
+            if (achievement.time) {
+                if (!achievement.name) {
+                    return setIsError(true);
                 } else {
-                    addAchievement(achievement);
+                    setIsError(false);
+
+                    if (draggableAchievement.id && isDraggedAchievement) {
+                        editAchievement(draggableAchievement.id, achievement);
+                        setDraggedAchievement({});
+                        setIsDraggedAchievement(false);
+                    } else {
+                        addAchievement(achievement);
+                    }
+                    clearAchievements();
+                    resetTime();
                 }
-                clearAchievements();
-                resetTime();
             }
         }
     }, [isRunning, addAchievement]);
@@ -153,7 +160,9 @@ const AchievementBar = () => {
             onDrop={() => {
                 applyDraggableAchieve();
             }}
-            className="flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative rounded-md"
+            className={`flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative rounded-md ${
+                isError ? "border-red-600" : ""
+            }`}
         >
             <form className="w-full h-full">
                 <input
@@ -213,6 +222,12 @@ const AchievementBar = () => {
                 >
                     Click here to cancel editing.
                 </button>
+            )}
+
+            {isError && (
+                <p className="absolute right-0 -top-6 text-sm text-red-400">
+                    Name is required.
+                </p>
             )}
         </div>
     );

@@ -113,19 +113,19 @@ const NotesList = () => {
                     ) {
                         if (dayNumber - currentDate.getDate() < 0) {
                             return (
-                                <div className="flex-center ml-5 bg-gray-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                <div className="flex-center xl:ml-10 bg-gray-100 bg-opacity-75 text-gray-400 border border-gray-300 px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                     Done
                                 </div>
                             );
                         } else if (dayNumber - currentDate.getDate() === 0) {
                             return (
-                                <div className="flex-center ml-5 bg-gray-800 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                <div className="flex-center xl:ml-10 bg-gray-900 bg-opacity-75 xl:shadow-main text-white px-3 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                     Today
                                 </div>
                             );
                         } else if (dayNumber - currentDate.getDate() === 1) {
                             return (
-                                <div className="flex-center ml-5 bg-red-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                <div className="flex-center xl:ml-10 bg-red-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                     Tommorow
                                 </div>
                             );
@@ -135,8 +135,8 @@ const NotesList = () => {
                             dayNumber - currentDate.getDate() > 1
                         ) {
                             return (
-                                <div className="flex-center ml-5 bg-yellow-500 max-sm:bg-opacity-75 text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
-                                    Next week
+                                <div className="flex-center xl:ml-10 bg-yellow-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    This week
                                 </div>
                             );
                         }
@@ -168,9 +168,6 @@ const NotesList = () => {
                                     key={note.id}
                                     note={note}
                                     sortMethod={sortMethod}
-                                    dayNumber={dayNumber}
-                                    weekDay={weekDay}
-                                    monthName={monthName}
                                 />
                             ))}
                         </div>

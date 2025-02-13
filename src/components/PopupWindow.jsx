@@ -11,25 +11,37 @@ const PopupWindow = () => {
     const { isOpen, message } = popup;
     const [timeLeft, setTimeLeft] = useState(5);
     const popupWindowRef = useRef();
+    const intervalId = useRef(null);
 
     const undoDeleting = () => {
         togglePopup(false);
+        setTimeLeft(5);
         if (deletedTimeRange) {
             addTimeRange(deletedTimeRange);
+        }
+        if (intervalId.current) {
+            clearInterval(intervalId.current);
         }
     };
 
     useEffect(() => {
-        if (isOpen === true) {
-            const intervalId = setInterval(() => {
-                setTimeLeft((timeLeft) => (timeLeft -= 1));
+        if (isOpen) {
+            setTimeLeft(5);
+
+            intervalId.current = setInterval(() => {
+                setTimeLeft((prev) => prev - 1);
             }, 1000);
 
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
                 togglePopup(false);
-                clearInterval(intervalId);
+                clearInterval(intervalId.current);
                 setTimeLeft(5);
             }, 5000);
+
+            return () => {
+                clearInterval(intervalId.current);
+                clearTimeout(timeoutId);
+            };
         }
     }, [isOpen]);
 
@@ -37,8 +49,10 @@ const PopupWindow = () => {
         <div
             ref={popupWindowRef}
             className={`absolute bottom-8 ${
-                isOpen ? "left-8" : "-left-[400px]"
-            }    z-20 w-[350px] bg-gray-200 p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
+                isOpen
+                    ? "left-8 opacity-100 blur-0"
+                    : "-left-[400px] opacity-0 blur-xl"
+            }    z-20 w-[325px] bg-gray-100 p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
         >
             <h1>{message}</h1>
             <div className="mt-4 flex justify-between items-center gap-4">
@@ -49,7 +63,7 @@ const PopupWindow = () => {
                     </span>
                 </div>
                 <button
-                    className="px-3 py-1 border-[1px] border-gray-400 rounded-lg hover:bg-gray-400 transition-all"
+                    className="px-3 py-1 border-[1px] border-gray-400 rounded-lg hover:text-darkPink hover:border-darkPink hover:shadow-main transition-all"
                     onClick={undoDeleting}
                 >
                     Undo

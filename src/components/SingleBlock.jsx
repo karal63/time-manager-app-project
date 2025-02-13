@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store";
 import BlockMenu from "./BlockMenu";
+import BlockInfo from "./BlockInfo";
 
 const SingleBlock = ({ range }) => {
     const { dayStructure, currentMode } = useTimeRangeStore();
@@ -11,6 +12,7 @@ const SingleBlock = ({ range }) => {
         x: "",
         y: "",
     });
+    const [isShowingInfo, setIsShowingInfo] = useState(false);
     const blockRef = useRef(null);
     const entireSectionRef = useRef(null);
 
@@ -42,7 +44,7 @@ const SingleBlock = ({ range }) => {
         currentMark = { ...dayStructure.find((s) => s.time === newTimeStart) };
         endTimeMark = { ...dayStructure.find((s) => s.time === newTimeEnd) };
 
-        // Update immutably
+        // Updating immutably
         currentMark.positionX = currentMark.positionX + timeStartMinuts;
         endTimeMark.positionX = endTimeMark.positionX + timeEndMinuts;
     }
@@ -66,10 +68,13 @@ const SingleBlock = ({ range }) => {
             newHeight = (40 * width) / 10;
         } else if (width > 60 && width <= 240) {
             newHeight = (150 * width) / 100;
+            blockRef.current.style.zIndex = 20;
         } else if (width > 240 && width <= 360) {
             newHeight = (240 * width) / 1000;
+            blockRef.current.style.zIndex = 30;
         } else if (width > 360) {
             newHeight = 40;
+            blockRef.current.style.zIndex = 40;
         }
 
         // Only update height if it has changed
@@ -113,7 +118,13 @@ const SingleBlock = ({ range }) => {
 
     // This function will be called when user hovers a single block for some time,
     // it will show additonal information about certain block
-    const showInfo = () => {};
+    const showInfo = () => {
+        setIsShowingInfo(true);
+    };
+
+    const hideInfo = () => {
+        setIsShowingInfo(false);
+    };
 
     return (
         <div ref={entireSectionRef}>
@@ -129,8 +140,8 @@ const SingleBlock = ({ range }) => {
             <div
                 ref={blockRef}
                 className={`absolute bg-opacity-40 shadow-main border-[1px] border-b-0
-                 py-1 px-3 rounded-tr-lg rounded-tl-lg h-0 cursor-pointer text-[.7rem] flex flex-col items-center
-                 transition-all ease-in-out delay-50 bg-blue-500 duration-200 overflow-hidden`}
+                 py-1 rounded-tr-lg rounded-tl-lg h-0 cursor-pointer text-[.7rem] flex flex-col items-center
+                 transition-all ease-in-out delay-50 bg-blue-500 duration-200`}
                 style={{
                     left: `${currentMark.positionX + 18}px`,
                     bottom: `${currentMark.positionY - 35}px`,
@@ -139,10 +150,17 @@ const SingleBlock = ({ range }) => {
                     }px`,
                     height: `${height}px`,
                 }}
+                onMouseOver={showInfo}
+                onMouseLeave={hideInfo}
                 onContextMenu={(e) => openBlockMenu(e)}
-                onMouseOver={() => showInfo()}
             >
-                {range.name}
+                <span className="px-1">{range.name}</span>
+
+                {isShowingInfo && (
+                    <BlockInfo>
+                        {timeStart} - {timeEnd}
+                    </BlockInfo>
+                )}
             </div>
         </div>
     );

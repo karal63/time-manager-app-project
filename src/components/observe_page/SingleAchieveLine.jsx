@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTimeRangeStore } from "../../store";
 
 const SingleAchieveLine = ({ achieve }) => {
@@ -8,6 +8,7 @@ const SingleAchieveLine = ({ achieve }) => {
         category: achieve.category,
         time: achieve.time,
     });
+    const [isShowingFullName, setIsShowingFullName] = useState(false);
 
     const {
         selectAchievement,
@@ -19,6 +20,8 @@ const SingleAchieveLine = ({ achieve }) => {
         isTimeAxisOpen,
     } = useTimeRangeStore();
 
+    const timeoutId = useRef(null);
+
     const selectLine = (e) => {
         setIsSelected(!isSelected);
         selectAchievement(e.target.checked, achieve);
@@ -26,6 +29,19 @@ const SingleAchieveLine = ({ achieve }) => {
 
     const dragLine = () => {
         setDraggedAchievement(achieve);
+    };
+
+    const displayInfo = () => {
+        timeoutId.current = setTimeout(() => {
+            setIsShowingFullName(true);
+        }, 700);
+    };
+
+    const hideInfo = () => {
+        if (timeoutId.current) {
+            clearInterval(timeoutId.current);
+        }
+        setIsShowingFullName(false);
     };
 
     // 1. store selected objects in an array in the store when changing the value above
@@ -76,17 +92,29 @@ const SingleAchieveLine = ({ achieve }) => {
                         className="border-[1px] rounded-md px-2 w-full"
                     />
                 ) : (
-                    <p className="border-[1px] border-transparent max-w-max overflow-hidden text-left">
+                    <div className="border-[1px] border-transparent max-w-max text-left">
                         {achieve.name.length > 50 ? (
                             isTimeAxisOpen ? (
-                                <p>{achieve.name.slice(0, 50)}...</p>
+                                <div className="relative">
+                                    {isShowingFullName && (
+                                        <div className="absolute left-0 bottom-8 bg-gray-50 shadow-sm w-full border px-2 py-1 text-sm">
+                                            {achieve.name}
+                                        </div>
+                                    )}
+                                    <p
+                                        onMouseOver={displayInfo}
+                                        onMouseLeave={hideInfo}
+                                    >
+                                        {achieve.name.slice(0, 50)}...
+                                    </p>
+                                </div>
                             ) : (
-                                <p>{achieve.name.slice(0, 90)}</p>
+                                <p>{achieve.name}</p>
                             )
                         ) : (
-                            achieve.name
+                            <p>{achieve.name}</p>
                         )}
-                    </p>
+                    </div>
                 )}
             </td>
 

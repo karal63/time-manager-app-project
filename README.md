@@ -174,3 +174,14 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   Jeżeli nie występuje żadne osiągnięcie, ma się wyświetlać komunikat, wskazujący o tym
 -   Stworzenie funkcjonalności, która skraca nazwę osiągnięcia w przypadku gdy jej długość przekroczy limit 40 liter
 -   Cofnięcie możliwości edytowania czasu w osiągnięciu
+
+### **[ver. 0.90 Beta] - 2025-02-13**
+
+-   Zmniejszenie szerokości pasku przewijania w przeglądarce w "index.css"
+-   Stworzenie walidacji wprowadzonego czasu przez użytkownika przy tworzeniu nowego okresu czasu
+-   Stworzenie okienka, wyświetlające informację dotyczącą okresu czasu, najechając na wybrany blok czasu
+-   Dodanie małej animacji, gdy wyświetla się okienko z informacją o usunięciu konkretnego okresu czasu
+-   Mała zmiana w wyglądzie kresek oraz linii głównej w podstronie "/planner"
+-   W przypadku nie podania nazwy w momencie tworzenia osiągnięcia ma wyświetli się komunikat
+-   W przypadku przytrzymania kursora przez jakiś czas na skróconej nazwie osiągnięcia, wyświetli się okienko z pełną nazwą
+-   Niewielka zmiana w wyglądzie przycisku do dodania nowego okresu czasu

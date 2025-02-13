@@ -44,24 +44,26 @@ const Planner = () => {
             {/* absolute elements */}
             {currentMode === "Editing" && (
                 <div
-                    className={`fixed flex items-start gap-5 transition-all z-20 ${
-                        timeRangePanel.isOpen ? "right-0" : "-right-[350px]"
+                    className={`fixed flex items-start  transition-all z-20 ${
+                        timeRangePanel.isOpen
+                            ? "right-0 gap-2"
+                            : "-right-[350px] gap-5"
                     } `}
                 >
                     {/* button that shows add time range component */}
 
-                    <button
-                        className={`relative top-5 bg-gradient-to-tr from-pink-600 to-yellow-300 rounded-full p-[.2rem] transition-all z-30 ${
-                            timeRangePanel.isOpen
-                                ? "rotate-[45deg] left-12"
-                                : ""
-                        }`} // changed to 20 to be on top of the scroll zone
-                        onClick={() => openTimeRangePanel()}
-                    >
-                        <div className="h-full w-full rounded-full bg-white">
-                            <GoPlus className="text-5xl" />
-                        </div>
-                    </button>
+                    <div className="relative top-5 w-[50px] h-[50px] flex-center">
+                        <button
+                            className={`bg-gradient-to-tr bg-darkPink rounded-full shadow-main p-[.1rem] transition-all z-30 ${
+                                timeRangePanel.isOpen ? "rotate-[45deg]" : ""
+                            }`} // changed to 20 to be on top of the scroll zone
+                            onClick={() => openTimeRangePanel()}
+                        >
+                            <div className="h-full w-full rounded-full bg-white">
+                                <GoPlus className="text-5xl text-black" />
+                            </div>
+                        </button>
+                    </div>
 
                     {/* AddTimeRangePanel */}
                     <AddTimeRangePanel />

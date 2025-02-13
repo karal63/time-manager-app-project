@@ -73,13 +73,38 @@ const AddTimeRangePanel = () => {
 
         setTimeRangePanel(false, "");
 
+        // Time start and time end order validation
+
+        const { timeStart, timeEnd } = timeRange;
+        const [hoursStart, minutesStart] = timeStart.split(":").map(Number);
+        const [hoursEnd, minutesEnd] = timeEnd.split(":").map(Number);
+
+        let durationHours = hoursEnd - hoursStart;
+        let durationMinutes = minutesEnd - minutesStart;
+
+        let newTimeRange = { ...timeRange };
+
+        if (durationHours < 0) {
+            newTimeRange = {
+                ...timeRange,
+                timeStart: timeEnd,
+                timeEnd: timeStart,
+            };
+        } else if (hoursStart === hoursEnd && durationMinutes < 0) {
+            newTimeRange = {
+                ...timeRange,
+                timeStart: timeEnd,
+                timeEnd: timeStart,
+            };
+        }
+
         // Adding range to the array of ranges
         switch (timeRangePanel.type) {
             case "Create":
-                addTimeRange(timeRange);
+                addTimeRange(newTimeRange);
                 break;
             case "Edit":
-                editTimeRange(timeRange);
+                editTimeRange(newTimeRange);
         }
 
         // Clears inputs

@@ -109,7 +109,7 @@ const SingleVertBlock = ({ timeRange, distance }) => {
 
     return (
         <div
-            className={`absolute left-20 rounded-md border-[1px] border-gray-300 flex-center overflow-hidden ${
+            className={`absolute left-20 rounded-md border-[1px] border-gray-300 flex-center text-center overflow-hidden ${
                 isCurrent
                     ? "bg-blue-400 border-[2px] border-blue-600 z-10 shadow-main"
                     : "bg-blue-300 opacity-50"

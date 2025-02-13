@@ -6,13 +6,7 @@ import { PiExclamationMarkBold } from "react-icons/pi";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { useNotesStore } from "../../notesStore";
 
-const SingleNoteLine = ({
-    note,
-    sortMethod,
-    dayNumber,
-    weekDay,
-    monthName,
-}) => {
+const SingleNoteLine = ({ note, sortMethod }) => {
     const { setEditingNote, searchQuery } = useNotesStore();
     const [isContextOpen, setIsContextOpen] = useState(false);
 
@@ -38,7 +32,7 @@ const SingleNoteLine = ({
                     : note.priority.currency
                     ? "bg-green-50"
                     : "bg-gray-100"
-            } px-5 border-b-[1px] flex justify-between items-center relative h-[40.8px]`}
+            } px-5 pr-0 border-b-[1px] flex justify-between relative min-h-[40.8px]`}
         >
             <div className="flex items-center">
                 {/* If important */}
@@ -59,11 +53,13 @@ const SingleNoteLine = ({
             </div>
 
             <div
-                className={`flex items-center relative transition-all ${
-                    isContextOpen ? "right-0" : "-right-28"
+                className={`flex items-center relative transition-all max-h-max ${
+                    isContextOpen
+                        ? "right-0"
+                        : "-right-[112px] max-sm:-right-[96px]"
                 }`}
             >
-                <button className="mr-2 max-sm:mr-0" onClick={openContext}>
+                <button className="mr-3 xl:mr-4 p-1" onClick={openContext}>
                     <HiOutlineDotsVertical />
                 </button>
 

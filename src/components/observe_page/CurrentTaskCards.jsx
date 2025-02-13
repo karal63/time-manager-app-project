@@ -57,7 +57,7 @@ const CurrentTaskCards = () => {
                     setCardSetting={setCardSetting}
                 />
             ) : (
-                <div className="flex flex-col gap-3 w-[250px] min-w-[250px] relative">
+                <div className="flex flex-col gap-3 w-[250px] min-w-[250px] relative h-[calc(100vh-160px)] pb-5 pr-[6px] overflow-y-auto">
                     {cardSettings.name ||
                     cardSettings.desc ||
                     cardSettings.duration

@@ -46,10 +46,7 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
     const deleteBlock = () => {
         deleteTimeRange(range);
         togglePopup(true);
-        setPopup(
-            true,
-            "Time range was successfully deleted from your timeline."
-        );
+        setPopup(true, "Time range deleted from your timeline.");
         closeBlockMenu();
     };
 
@@ -62,7 +59,7 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
     return (
         <div
             ref={menuRef}
-            className="absolute bg-white shadow-main rounded-lg z-20 flex flex-col py-2"
+            className="absolute bg-white shadow-main rounded-lg z-50 flex flex-col py-2"
             style={{
                 top: blockMenu.y - 69,
                 left: blockMenu.x,

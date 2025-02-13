@@ -30,7 +30,7 @@ const ZoomZone = () => {
 
                     if (newZoomLevel === prevZoomLevel) return prevZoomLevel;
 
-                    // Calculating cursor position as percentages |
+                    // Calculating cursor position as percentages
                     const cursorX =
                         ((e.clientX - rect.left) / rect.width) * 100;
                     const cursorY =
@@ -59,7 +59,11 @@ const ZoomZone = () => {
                 {<DayStructure />}
 
                 {/* timeline */}
-                <div className="h-[2px] w-[1337px] bg-gray-500"></div>
+                <div className="flex">
+                    <div className="h-[2px] w-[500px] bg-gradient-to-r from-transparent to-gray-500"></div>
+                    <div className="h-[2px] w-[1336px] bg-gray-500"></div>
+                    <div className="h-[2px] w-[500px] bg-gradient-to-l from-transparent to-gray-500"></div>
+                </div>
 
                 {/* time marks */}
                 <ul className="flex gap-5">

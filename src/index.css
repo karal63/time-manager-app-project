@@ -27,7 +27,7 @@ body {
 
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
 }
 
 /* Background of the scrollbar */
@@ -39,6 +39,8 @@ body {
 /* Scrollbar handle */
 ::-webkit-scrollbar-thumb {
     background: #555;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .card-width {

@@ -18,17 +18,16 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
                 positionY: Math.round(pos.y, 1),
             });
         }
-    }, [setRangePosition]);
+    }, []);
 
     useEffect(() => {
         const handleZoom = (e) => {
-            // update mark position only when resizing whol`e page
-            if (e.ctrlKey && !plannerZoneRef.contains(e.target)) {
-                if (timeoutId.current) {
-                    clearTimeout(timeoutId.current);
-                }
-
-                setTimeout(() => {
+            if (
+                e.ctrlKey &&
+                plannerZoneRef &&
+                !plannerZoneRef.contains(e.target)
+            ) {
+                timeoutId.current = setTimeout(() => {
                     const pos = rect.current.getBoundingClientRect();
 
                     setRangePosition({
@@ -36,7 +35,7 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
                         positionX: Math.round(pos.x, 1),
                         positionY: Math.round(pos.y, 1),
                     });
-                }, [10]);
+                }, 10);
             }
         };
 
@@ -44,12 +43,13 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
 
         return () => {
             window.removeEventListener("wheel", handleZoom);
+            clearTimeout(timeoutId.current);
         };
     }, [plannerZoneRef]);
 
     return (
         <li ref={rect} className="flex flex-col items-center w-[37.98px]">
-            <div className="w-[2px] h-3 bg-gray-500"></div>
+            <div className="w-[2px] h-3 bg-gradient-to-t from-transparent to-gray-500"></div>
             <span
                 className={`text-gray-400 h-[24px]`}
                 style={{
