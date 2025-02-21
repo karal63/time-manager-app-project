@@ -62,11 +62,11 @@ const SingleAchieveLine = ({ achieve }) => {
         <tr
             draggable={!isEditingAchievements}
             onDragStart={dragLine}
-            className={`border-b-[1px] border-gray-200 cursor-alias ${
-                isSelected ? "bg-blue-50" : "bg-white"
+            className={`border-b-[1px] border-mainLineColor cursor-alias ${
+                isSelected ? "bg-selectedAchieve" : "bg-mainBackground"
             }`}
         >
-            <td className="h-full pl-2">
+            <td className="h-full pl-2 py-2">
                 <div className="flex items-center">
                     <input
                         type="checkbox"
@@ -78,7 +78,7 @@ const SingleAchieveLine = ({ achieve }) => {
                 </div>
             </td>
 
-            <td className="py-2 px-4">
+            <td className="px-4 py-2">
                 {isEditingAchievements && isSelected ? (
                     <input
                         type="text"
@@ -89,15 +89,15 @@ const SingleAchieveLine = ({ achieve }) => {
                                 name: e.target.value,
                             })
                         }
-                        className="border-[1px] rounded-md px-2 w-full"
+                        className="border-[1px] rounded-md px-2 w-full outline-none py-1"
                     />
                 ) : (
-                    <div className="border-[1px] border-transparent max-w-max text-left">
+                    <div className="border-[1px] border-transparent max-w-max text-left text-mainColor py-1">
                         {achieve.name.length > 50 ? (
                             isTimeAxisOpen ? (
                                 <div className="relative">
                                     {isShowingFullName && (
-                                        <div className="absolute left-0 bottom-8 bg-gray-50 shadow-sm w-full border px-2 py-1 text-sm">
+                                        <div className="absolute left-0 bottom-8 bg-lightGray shadow-sm w-full border border-mainLineColor px-2 text-sm">
                                             {achieve.name}
                                         </div>
                                     )}
@@ -118,7 +118,7 @@ const SingleAchieveLine = ({ achieve }) => {
                 )}
             </td>
 
-            <td className="py-2 px-4">
+            <td className="px-4 py-2">
                 {isEditingAchievements && isSelected ? (
                     <input
                         type="text"
@@ -129,14 +129,14 @@ const SingleAchieveLine = ({ achieve }) => {
                                 category: e.target.value,
                             })
                         }
-                        className="border-[1px] rounded-md px-2 w-full"
+                        className="border-[1px] rounded-md px-2 w-full py-1"
                     />
                 ) : (
-                    achieve.category
+                    <p className="text-mainColor py-1">{achieve.category}</p>
                 )}
             </td>
 
-            <td className="py-2 px-4">{achieve.time}</td>
+            <td className="px-4 text-mainColor py-2">{achieve.time}</td>
         </tr>
     );
 };

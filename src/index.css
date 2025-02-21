@@ -2,9 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --mainColor: black;
+    --mainBackground: white;
+    --mainHoverColor: rgb(243, 244, 246);
+    --mainLineColor: rgb(229, 231, 235);
+
+    --lightGray: rgb(249, 250, 251);
+    --selectedAchieve: rgb(239, 246, 255);
+
+    --redBgNote: rgb(254, 242, 242);
+    --greenBgNote: rgb(240, 253, 244);
+    --bgNote: rgb(243, 244, 246);
+
+    --disabledBtn: rgb(209, 213, 219);
+
+    --timeIndicator: rgb(168, 168, 168);
+    --timeAxis: rgb(218, 218, 218);
+}
+
 body {
     overflow-y: hidden;
     overflow-x: hidden;
+    background-color: var(--mainBackground);
+    color: var(--mainColor);
+}
+
+.darkMode {
+    --mainColor: white;
+    --mainBackground: rgb(21, 21, 21);
+    --mainHoverColor: rgb(43, 43, 43);
+    --mainLineColor: rgb(59, 59, 59);
+
+    --lightGray: rgb(43, 43, 43);
+    --selectedAchieve: rgb(36, 51, 69);
+
+    --redBgNote: rgb(43, 0, 0);
+    --greenBgNote: rgb(0, 46, 13);
+    --bgNote: rgb(25, 25, 25);
+
+    --disabledBtn: rgb(50, 50, 50);
+
+    --timeIndicator: rgb(56, 56, 56);
+    --timeAxis: rgb(30, 30, 30);
 }
 
 .screen-max-width {
@@ -36,11 +76,23 @@ body {
     border-radius: 6px;
 }
 
+.darkMode ::-webkit-scrollbar-track {
+    background: rgb(31, 31, 31);
+    border-radius: 6px;
+}
+
 /* Scrollbar handle */
 ::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 6px;
-    cursor: pointer;
+}
+
+.darkMode input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.darkMode input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .card-width {
@@ -88,4 +140,18 @@ body {
 
 .styled-table input[type="checkbox"]:checked {
     background-color: white;
+}
+
+.buttonStart:hover {
+    /* border-color: #ff04ea; */
+    /* border-color: #a00093; */
+}
+
+.buttonStart:focus,
+.buttonStart:focus-visible {
+    outline: 4px auto #ff04ea;
+}
+
+.bubble {
+    opacity: 0.7;
 }

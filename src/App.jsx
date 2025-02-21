@@ -11,7 +11,23 @@ import Planner from "./pages/Planner";
 import PageNotFound from "./pages/PageNotFound";
 import ObservePlan from "./pages/ObservePlan";
 
+import { useEffect } from "react";
+import { useTimeRangeStore } from "./store";
+
 const App = () => {
+    const { initializeDarkMode, isDarkMode } = useTimeRangeStore();
+
+    // Initializing dark mode
+    useEffect(() => {
+        initializeDarkMode();
+    }, []);
+
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add("darkMode");
+        }
+    }, [isDarkMode]);
+
     return (
         <BrowserRouter>
             <Navbar />

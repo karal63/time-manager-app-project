@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import { useTimeRangeStore } from "../store";
 
 const SingleTimeMark = ({ mark, zoomLevel }) => {
-    const { setRangePosition, plannerZoneRef } = useTimeRangeStore();
+    const { setRangePosition, plannerZoneRef, addTimeRangePanelRef } =
+        useTimeRangeStore();
 
     const { time } = mark;
 
@@ -12,40 +13,34 @@ const SingleTimeMark = ({ mark, zoomLevel }) => {
     useEffect(() => {
         if (rect.current) {
             const pos = rect.current.getBoundingClientRect();
+            const parentPos = rect.current.offsetParent.getBoundingClientRect(); // Get parent position
+
             setRangePosition({
                 ...mark,
-                positionX: Math.round(pos.x, 1),
-                positionY: Math.round(pos.y, 1),
+                positionX: Math.round((pos.x - parentPos.x) / zoomLevel), // Adjust position based on parent
+                positionY: Math.round((pos.y - parentPos.y) / zoomLevel),
             });
         }
-    }, []);
+    }, [zoomLevel]); // Trigger repositioning when zooming
 
     useEffect(() => {
-        const handleZoom = (e) => {
-            if (
-                e.ctrlKey &&
-                plannerZoneRef &&
-                !plannerZoneRef.contains(e.target)
-            ) {
-                timeoutId.current = setTimeout(() => {
-                    const pos = rect.current.getBoundingClientRect();
+        const handleResize = () => {
+            if (rect.current) {
+                const pos = rect.current.getBoundingClientRect();
+                const parentPos =
+                    rect.current.offsetParent.getBoundingClientRect(); // Get parent position
 
-                    setRangePosition({
-                        ...mark,
-                        positionX: Math.round(pos.x, 1),
-                        positionY: Math.round(pos.y, 1),
-                    });
-                }, 10);
+                setRangePosition({
+                    ...mark,
+                    positionX: Math.round((pos.x - parentPos.x) / zoomLevel), // Adjust position based on parent
+                    positionY: Math.round((pos.y - parentPos.y) / zoomLevel),
+                });
             }
         };
 
-        window.addEventListener("wheel", handleZoom, { passive: false });
-
-        return () => {
-            window.removeEventListener("wheel", handleZoom);
-            clearTimeout(timeoutId.current);
-        };
-    }, [plannerZoneRef]);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [zoomLevel]);
 
     return (
         <li ref={rect} className="flex flex-col items-center w-[37.98px]">

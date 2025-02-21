@@ -119,4 +119,23 @@ export const useNotesStore = create((set, get) => ({
 
     searchQuery: "",
     setSearchQuery: (query) => set(() => ({ searchQuery: query })),
+
+    notesRef: null,
+    setNotesRef: (value) => set(() => ({ notesRef: value })),
+
+    note: {
+        name: "",
+        date: "",
+        priority: {
+            currency: false,
+            important: false,
+        },
+    },
+
+    setNote: (newNote) =>
+        set(() => ({
+            note: {
+                ...newNote,
+            },
+        })),
 }));

@@ -3,7 +3,7 @@ import TimeAxis from "../components/observe_page/TimeAxis";
 
 const ObservePlan = () => {
     return (
-        <section className="h-[calc(100vh-68px)] bg-contain relative pl-20 flex bg-white">
+        <section className="h-[calc(100vh-68px)] bg-contain relative pl-16 flex bg-mainBackground">
             <div className="w-full flex">
                 <TimeAxis />
                 <CurrentTask />

@@ -176,6 +176,7 @@ export const useTimeRangeStore = create((set, get) => ({
 
             const newTimeRanges = [...state.timeRanges, newTimeRange];
             state.saveTimeRangesToLocalStorage(newTimeRanges);
+
             return { timeRanges: newTimeRanges };
         }),
 
@@ -185,7 +186,7 @@ export const useTimeRangeStore = create((set, get) => ({
     deleteTimeRange: (range) =>
         set((state) => {
             const newTimeRanges = state.timeRanges.filter(
-                (timeRange) => timeRange !== range
+                (timeRange) => timeRange.id !== range.id
             );
 
             state.saveTimeRangesToLocalStorage(newTimeRanges);
@@ -222,6 +223,9 @@ export const useTimeRangeStore = create((set, get) => ({
 
     plannerZoneRef: null,
     setPlannerZoneRef: (newRef) => set({ plannerZoneRef: newRef }),
+
+    addTimeRangePanelRef: null,
+    setAddTimeRangePanelRef: (newRef) => set({ addTimeRangePanelRef: newRef }),
 
     zoomLevel: null,
     setNewZoomLevel: (newZoomLevel) => set({ zoomLevel: newZoomLevel }),
@@ -527,4 +531,22 @@ export const useTimeRangeStore = create((set, get) => ({
         set(() => ({
             draggableAchievement: { ...achieve },
         })),
+
+    isDarkMode: false,
+    setIsDarkMode: (value) =>
+        set((state) => {
+            state.saveToLocalStorage("isDarkMode", value);
+
+            return {
+                isDarkMode: value,
+            };
+        }),
+
+    initializeDarkMode: () => {
+        const value = get().returnFromLocalStorage("isDarkMode");
+
+        set({
+            isDarkMode: value || false,
+        });
+    },
 }));

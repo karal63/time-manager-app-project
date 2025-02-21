@@ -3,6 +3,24 @@ export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
+            colors: {
+                mainColor: "var(--mainColor)",
+                mainBackground: "var(--mainBackground)",
+                mainHoverColor: "var(--mainHoverColor)",
+                mainLineColor: "var(--mainLineColor)",
+
+                lightGray: "var(--lightGray)",
+                selectedAchieve: "var(--selectedAchieve)",
+
+                redBgNote: "var(--redBgNote)",
+                greenBgNote: "var(--greenBgNote)",
+                bgNote: "var(--bgNote)",
+
+                disabledBtn: "var(--disabledBtn)",
+
+                timeIndicator: "var(--timeIndicator)",
+                timeAxis: "var(--timeAxis)",
+            },
             textColor: {
                 darkPink: "rgb(219, 39, 119)",
             },

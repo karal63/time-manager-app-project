@@ -57,7 +57,7 @@ const CurrentTaskCards = () => {
                     setCardSetting={setCardSetting}
                 />
             ) : (
-                <div className="flex flex-col gap-3 w-[250px] min-w-[250px] relative h-[calc(100vh-160px)] pb-5 pr-[6px] overflow-y-auto">
+                <div className="flex flex-col gap-3 w-[250px] min-w-[250px] relative h-[calc(100vh-187px)] pb-5 pr-[6px] overflow-y-auto">
                     {cardSettings.name ||
                     cardSettings.desc ||
                     cardSettings.duration
@@ -75,7 +75,7 @@ const CurrentTaskCards = () => {
                                   </p>
 
                                   {cardSettings.duration && (
-                                      <span className="absolute bottom-0 right-0 text-sm bg-white px-2 py-1 rounded-br-md rounded-tl-md">
+                                      <span className="absolute bottom-0 right-0 text-sm bg-white px-2 py-1 rounded-br-md rounded-tl-md text-black">
                                           {getDuration(timeRange)}
                                       </span>
                                   )}
@@ -103,7 +103,7 @@ const CurrentTaskCards = () => {
                         </Link>
                     ) : (
                         <button
-                            className="border-2 border-dashed border-gray-300 py-2 rounded-lg text-gray-300"
+                            className="border-2 border-dashed border-mainLineColor py-2 rounded-lg text-gray-300"
                             onClick={() => {
                                 setIsCardPanelOpen(true);
                                 setPrevTaskMarks();

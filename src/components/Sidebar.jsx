@@ -24,9 +24,9 @@ const Sidebar = () => {
             ref={sidebarRef}
             className={`${
                 isOpen ? "w-[280px]" : "w-16"
-            } absolute left-0 top-[68px] h-[calc(100vh-68px)] shadow-lg bg-white transition-all pl-2 ${
+            } absolute left-0 top-[68px] h-[calc(100vh-68px)] shadow-lg bg-mainBackground transition-[width] pl-2 ${
                 isOpen ? "pr-10" : ""
-            } flex flex-col justify-between z-20 max-sm:hidden`} // changed to 20 to be on top of the scroll zone
+            } flex flex-col justify-between z-20 max-sm:hidden border-r border-mainLineColor`} // changed to 20 to be on top of the scroll zone
             onMouseLeave={() => {
                 setIsOpen(false);
             }}
@@ -34,12 +34,14 @@ const Sidebar = () => {
             <div>
                 {isOpen && location.pathname.startsWith("/planner") ? (
                     <div className="mt-6 ml-3">
-                        <p className="text-xl">Project&nbsp;name</p>
+                        <p className="text-xl text-mainColor">
+                            Project&nbsp;name
+                        </p>
 
                         <div className="mt-2">
                             <input
                                 type="text"
-                                className="px-4 py-2 border-[1px] border-transparent rounded-md text-md w-full text-md hover:border-gray-200 outline-gray-300"
+                                className="px-4 py-2 border-[1px] border-transparent rounded-md text-md w-full text-md hover:bg-mainHoverColor outline-gray-300 bg-transparent text-mainColor"
                                 value={projectName}
                                 onChange={(e) => setProjectName(e.target.value)}
                             />
@@ -50,7 +52,11 @@ const Sidebar = () => {
                 )}
 
                 <div className="mt-10">
-                    <hr className={`${isOpen ? "-mr-8" : "-ml-2"}`} />
+                    <hr
+                        className={`border-none h-[1px] bg-mainLineColor ${
+                            isOpen ? "-mr-8" : "-ml-2"
+                        }`}
+                    />
                     <p
                         className={`mt-1 text-center text-gray-400 ${
                             isOpen ? "" : "-ml-2"
@@ -66,10 +72,12 @@ const Sidebar = () => {
                                 className="flex items-center gap-3 "
                                 onMouseOver={() => setIsOpen(true)}
                             >
-                                <CiCalendar className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+                                <CiCalendar className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
 
                                 {isOpen ? (
-                                    <span className="text-xl">Planner</span>
+                                    <span className="text-xl text-mainColor">
+                                        Planner
+                                    </span>
                                 ) : (
                                     ""
                                 )}
@@ -82,10 +90,12 @@ const Sidebar = () => {
                                 className="flex items-center gap-3 "
                                 onMouseOver={() => setIsOpen(true)}
                             >
-                                <CiViewBoard className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+                                <CiViewBoard className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
 
                                 {isOpen ? (
-                                    <span className="text-xl">Dashboard</span>
+                                    <span className="text-xl text-mainColor">
+                                        Dashboard
+                                    </span>
                                 ) : (
                                     ""
                                 )}
@@ -98,9 +108,11 @@ const Sidebar = () => {
                                 className="flex items-center gap-3"
                                 onMouseOver={() => setIsOpen(true)}
                             >
-                                <PiNotePencil className="text-5xl min-w-12 min-h-12 p-2 hover:bg-gray-100 hover:rounded-xl" />
+                                <PiNotePencil className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
                                 {isOpen ? (
-                                    <span className="text-xl">Notes</span>
+                                    <span className="text-xl text-mainColor">
+                                        Notes
+                                    </span>
                                 ) : (
                                     ""
                                 )}
@@ -116,7 +128,7 @@ const Sidebar = () => {
                         <li>
                             <a
                                 href="https://github.com/karal63"
-                                className="text-3xl grayscale-1 hover:grayscale-0"
+                                className="text-3xl grayscale-1 hover:grayscale-0 text-mainColor"
                                 target="_blank"
                             >
                                 <FaGithub />

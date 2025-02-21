@@ -59,14 +59,14 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
     return (
         <div
             ref={menuRef}
-            className="absolute bg-white shadow-main rounded-lg z-50 flex flex-col py-2"
+            className="absolute bg-mainBackground border border-mainLineColor shadow-main rounded-lg z-50 flex flex-col py-2"
             style={{
-                top: blockMenu.y - 69,
-                left: blockMenu.x,
+                top: `${blockMenu.y}px`,
+                left: `${blockMenu.x}px`,
             }}
         >
             <button
-                className="flex gap-2 hover:bg-gray-100 pl-3 pr-5 py-2 w-full transition-all"
+                className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
                 onClick={editBlock}
             >
                 <span className="text-2xl text-darkPink">
@@ -75,7 +75,7 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
                 Edit
             </button>
             <button
-                className="flex gap-2 hover:bg-gray-100 pl-3 pr-5 py-2 w-full transition-all"
+                className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
                 onClick={deleteBlock}
             >
                 <span className="text-2xl text-darkPink">
@@ -83,7 +83,7 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
                 </span>{" "}
                 Delete
             </button>
-            <button></button>
+            {/* Maybe duplcate button */}
         </div>
     );
 };

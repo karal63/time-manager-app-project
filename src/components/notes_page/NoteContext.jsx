@@ -3,12 +3,20 @@ import { BsTrash3 } from "react-icons/bs";
 import { useNotesStore } from "../../notesStore";
 
 const NoteContext = ({ note, setIsContextOpen }) => {
-    const { deleteNote, setEditingNote, setIsHandleBarOpen } = useNotesStore();
+    const { deleteNote, setEditingNote, setIsHandleBarOpen, notesRef } =
+        useNotesStore();
 
     const editNote = () => {
         setIsContextOpen(false);
         setEditingNote(true, note);
         setIsHandleBarOpen(true);
+
+        // Scrolling to the top
+        if (notesRef.current) {
+            notesRef.current.scrollTo({
+                top: 0,
+            });
+        }
     };
 
     return (

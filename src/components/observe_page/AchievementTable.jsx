@@ -27,15 +27,15 @@ const AchievementTable = () => {
             <WarningWindow />
 
             {achievements.length > 0 ? (
-                <div className="h-[calc(100vh-280px)] overflow-y-auto">
+                <div className="h-[calc(100vh-231px)] overflow-y-auto">
                     <table className="w-full table-auto border-collapse styled-table">
-                        <thead className="sticky top-0 bg-white z-10">
+                        <thead className="sticky top-0 bg-mainBackground z-10">
                             <tr className="text-sm font-semibold">
                                 <th></th>
                                 {headRow.map((el) => (
                                     <th
                                         key={el.id}
-                                        className="py-2 px-4 text-left after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-gray-300"
+                                        className="py-2 px-4 text-left after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-gray-300 text-mainColor"
                                         style={{
                                             width: el.width,
                                             maxWidth: el.width,

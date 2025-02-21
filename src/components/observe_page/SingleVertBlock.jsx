@@ -109,15 +109,16 @@ const SingleVertBlock = ({ timeRange, distance }) => {
 
     return (
         <div
-            className={`absolute left-20 rounded-md border-[1px] border-gray-300 flex-center text-center overflow-hidden ${
+            className={`absolute left-20 rounded-md border-[1px] border-gray-300 flex-center text-center overflow-hidden text-black ${
                 isCurrent
-                    ? "bg-blue-400 border-[2px] border-blue-600 z-10 shadow-main"
+                    ? "bg-blue-400 border-[2px] border-blue-600 z-10 shadow-main text-white"
                     : "bg-blue-300 opacity-50"
             }`}
             style={{
                 top: marks.currentMark.positionY + "px",
                 height: height + "px",
                 width: width + "px",
+                filter: isCurrent ? "drop-shadow(0 0 2em #646cffaa)" : "",
             }}
         >
             {timeRange.name}

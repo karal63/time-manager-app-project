@@ -28,6 +28,8 @@ const AddTimeRangePanel = () => {
     // Destructuring time range
     const { name, timeStart, timeEnd, desc } = timeRange;
 
+    // Setting panel ref in storage
+
     const [errorMessage, setErrorMessage] = useState({
         type: "",
         message: "",
@@ -44,9 +46,9 @@ const AddTimeRangePanel = () => {
             textarea.style.height = `${textarea.scrollHeight}px`;
         }
 
-        if (desc.length > 500) {
+        if (desc.length > 400) {
             setErrorMessage({
-                ...errorMessage,
+                message: "Description cannot exceed 500 characters.",
                 type: "desc",
             });
         } else {
@@ -67,7 +69,12 @@ const AddTimeRangePanel = () => {
         if (desc.length > 500) {
             return setErrorMessage({
                 type: "desc",
-                message: "Description can be a maximum of 500 letters",
+                message: "Description cannot exceed 500 characters.",
+            });
+        } else {
+            setErrorMessage({
+                type: "",
+                message: "",
             });
         }
 
@@ -119,7 +126,7 @@ const AddTimeRangePanel = () => {
 
     return (
         <section
-            className={`h-[calc(100vh-68px)] w-[350px] rounded-md shadow-main bg-white overflow-hidden px-5 pt-7 pb-10 flex flex-col 
+            className={`h-[calc(100vh-68px)] w-[350px] rounded-md shadow-main bg-mainBackground overflow-hidden px-5 pt-7 pb-10 flex flex-col 
                  transition-all duration-75 z-20`} // changed to 20 to be on top of the scroll zone
         >
             <h1 className="text-xl flex-center text-pink-400 font-medium text-nowrap mb-5">
@@ -133,7 +140,7 @@ const AddTimeRangePanel = () => {
                 <div className="flex flex-col gap-2">
                     {/* Activity Name */}
                     <label>
-                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap">
+                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap text-mainColor">
                             What would you name your activity?
                         </span>
 
@@ -147,13 +154,13 @@ const AddTimeRangePanel = () => {
                                     name: e.target.value,
                                 })
                             }
-                            className="border-[1px] w-full py-2 px-2 rounded-lg outline-gray-200 hover:outline-1"
+                            className="border-[1px] border-mainLineColor w-full py-2 px-2 rounded-lg outline-gray-200 hover:outline-1 bg-transparent text-mainColor"
                         />
                     </label>
 
                     {/* Activity Start & End time */}
                     <label className="mt-5">
-                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap ">
+                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap text-mainColor">
                             Please select a time.
                         </span>
 
@@ -161,7 +168,7 @@ const AddTimeRangePanel = () => {
                             <div className="flex flex-col w-full">
                                 <input
                                     type="time"
-                                    className="input border-[1px] py-2 px-2 rounded-lg outline-gray-200"
+                                    className="input border-[1px] border-mainLineColor py-2 px-2 rounded-lg outline-gray-200 bg-transparent text-mainColor"
                                     value={timeStart}
                                     onChange={(e) => {
                                         setTimeRange({
@@ -170,7 +177,7 @@ const AddTimeRangePanel = () => {
                                         });
                                     }}
                                 />
-                                <p className="flex-center text-sm">
+                                <p className="flex-center text-sm text-mainColor">
                                     Start Time
                                 </p>
                             </div>
@@ -178,7 +185,7 @@ const AddTimeRangePanel = () => {
                             <div className="flex flex-col w-full">
                                 <input
                                     type="time"
-                                    className="input border-[1px] py-2 px-2 rounded-lg outline-gray-200"
+                                    className="input border-[1px] border-mainLineColor py-2 px-2 rounded-lg outline-gray-200 bg-transparent text-mainColor"
                                     value={timeEnd}
                                     onChange={(e) =>
                                         setTimeRange({
@@ -187,21 +194,23 @@ const AddTimeRangePanel = () => {
                                         })
                                     }
                                 />
-                                <p className="flex-center text-sm">End Time</p>
+                                <p className="flex-center text-sm text-mainColor">
+                                    End Time
+                                </p>
                             </div>
                         </div>
                     </label>
 
                     {/* Activity Description */}
                     <label className="mt-5">
-                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap">
+                        <span className="block pl-1 text-md mb-1 font-thin text-nowrap text-mainColor">
                             How would you like to describe your activity?
                         </span>
 
                         <textarea
                             ref={textareaRef}
-                            className={`resize-none  py-2 px-2 rounded-lg border-[1px] outline-gray-200 w-full
-                     min-h-[50px] max-h-[180px] text-sm`}
+                            className={`resize-none  py-2 px-2 rounded-lg border-[1px] border-mainLineColor outline-gray-200 w-full
+                     min-h-[50px] max-h-[180px] text-sm bg-transparent text-mainColor`}
                             value={desc}
                             onChange={handleInput}
                         ></textarea>
@@ -217,7 +226,7 @@ const AddTimeRangePanel = () => {
                     {/* Submit button */}
                     <button
                         type="submit"
-                        className="bg-darkPink text-white py-1 rounded-lg text-xl hover:shadow-main hover:bg-pink-700 transition-all disabled:bg-gray-100 disabled:text-gray-300 disabled:shadow-none"
+                        className="bg-darkPink text-white py-1 rounded-lg text-xl hover:shadow-main hover:bg-pink-700 transition-all disabled:bg-mainHoverColor disabled:text-disabledBtn disabled:shadow-none"
                         disabled={
                             name === ""
                                 ? true

@@ -185,3 +185,8 @@ Interakcja z użytkownikiem w aplikacji Time Manager polega na intuicyjnym dodaw
 -   W przypadku nie podania nazwy w momencie tworzenia osiągnięcia ma wyświetli się komunikat
 -   W przypadku przytrzymania kursora przez jakiś czas na skróconej nazwie osiągnięcia, wyświetli się okienko z pełną nazwą
 -   Niewielka zmiana w wyglądzie przycisku do dodania nowego okresu czasu
+
+### **[ver. 1.00 Beta] - 2025-02-21**
+
+-   Stworzenie ciemnego trybu aplikacji
+-   Uleprzenie funkcjonalności przybliżenia w podstronie "/planner"

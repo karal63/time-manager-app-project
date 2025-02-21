@@ -12,9 +12,12 @@ const Planner = () => {
         setTimeRangePanel,
         updateTimeRangePanel,
         currentMode,
+        isDarkMode,
+        setAddTimeRangePanelRef,
     } = useTimeRangeStore();
 
     const plannerZoneRef = useRef(null);
+    const addTimeRangePanelRef = useRef(null);
 
     useEffect(() => {
         if (plannerZoneRef.current) {
@@ -33,34 +36,40 @@ const Planner = () => {
         });
     };
 
+    useEffect(() => {
+        if (addTimeRangePanelRef.current) {
+            setAddTimeRangePanelRef(addTimeRangePanelRef);
+        }
+    }, []);
+
     return (
         <section
             ref={plannerZoneRef}
-            className="h-[calc(100vh-68px)] bg-contain relative flex-center flex-col"
+            className="h-[calc(100vh-68px)] bg-contain relative flex-center flex-col pl-9"
             style={{
-                backgroundImage: 'url("src/assets/grid.png")',
+                backgroundImage: isDarkMode
+                    ? 'url("src/assets/darkGrid_copy2.png")'
+                    : 'url("src/assets/grid.png")',
             }}
         >
             {/* absolute elements */}
             {currentMode === "Editing" && (
                 <div
-                    className={`fixed flex items-start  transition-all z-20 ${
-                        timeRangePanel.isOpen
-                            ? "right-0 gap-2"
-                            : "-right-[350px] gap-5"
+                    ref={addTimeRangePanelRef}
+                    className={`absolute flex items-start  transition-all z-20 ${
+                        timeRangePanel.isOpen ? "right-0" : "-right-[350px]"
                     } `}
                 >
                     {/* button that shows add time range component */}
-
-                    <div className="relative top-5 w-[50px] h-[50px] flex-center">
+                    <div className="absolute top-5 -left-[70px] w-[50px] h-[50px] flex-center">
                         <button
                             className={`bg-gradient-to-tr bg-darkPink rounded-full shadow-main p-[.1rem] transition-all z-30 ${
                                 timeRangePanel.isOpen ? "rotate-[45deg]" : ""
                             }`} // changed to 20 to be on top of the scroll zone
                             onClick={() => openTimeRangePanel()}
                         >
-                            <div className="h-full w-full rounded-full bg-white">
-                                <GoPlus className="text-5xl text-black" />
+                            <div className="h-full w-full rounded-full bg-mainBackground text-mainColor">
+                                <GoPlus className="text-5xl" />
                             </div>
                         </button>
                     </div>

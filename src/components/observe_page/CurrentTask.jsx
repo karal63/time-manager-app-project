@@ -11,27 +11,27 @@ const CurrentTask = () => {
     const { isTimeAxisOpen, setIsTimeAxisOpen } = useTimeRangeStore();
 
     return (
-        <section className="w-full h-[550px] pl-10 pr-10">
-            <div className="flex items-center gap-6 pt-3 pb-9">
-                <button
-                    className="border-[1px] rounded-lg px-3 py-3"
-                    onClick={() => setIsTimeAxisOpen(!isTimeAxisOpen)}
-                >
-                    {isTimeAxisOpen ? (
-                        <FaArrowLeftLong />
-                    ) : (
-                        <FaArrowRightLong />
-                    )}
-                </button>
-
-                <p className="text-darkPink font-medium text-xl">
-                    Current Time Range
-                </p>
-            </div>
-
+        <section className="w-full pl-10 pr-10 relative">
             {/* Right Side */}
-            <section className="flex items-start">
-                <CurrentTaskCards />
+            <section className="flex items-start mt-10">
+                <div>
+                    <div className="flex items-center gap-3 pb-9">
+                        <button
+                            className="border-[1px] border-mainLineColor rounded-lg px-3 py-3 text-mainColor"
+                            onClick={() => setIsTimeAxisOpen(!isTimeAxisOpen)}
+                        >
+                            {isTimeAxisOpen ? (
+                                <FaArrowLeftLong />
+                            ) : (
+                                <FaArrowRightLong />
+                            )}
+                        </button>
+                        <p className="text-darkPink font-medium text-xl text-center">
+                            Current Time Ranges
+                        </p>
+                    </div>
+                    <CurrentTaskCards />
+                </div>
 
                 <div className="ml-10 w-full">
                     <AchievementBar />

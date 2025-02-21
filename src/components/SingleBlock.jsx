@@ -3,7 +3,7 @@ import { useTimeRangeStore } from "../store";
 import BlockMenu from "./BlockMenu";
 import BlockInfo from "./BlockInfo";
 
-const SingleBlock = ({ range }) => {
+const SingleBlock = ({ range, zoomLevel }) => {
     const { dayStructure, currentMode } = useTimeRangeStore();
     const { timeStart, timeEnd } = range;
     const [height, setHeight] = useState();
@@ -87,8 +87,36 @@ const SingleBlock = ({ range }) => {
     const openBlockMenu = (e) => {
         e.preventDefault();
         if (currentMode === "Editing") {
-            const x = e.clientX;
-            const y = e.clientY;
+            if (!blockRef.current) return;
+
+            const blockRect = blockRef.current.getBoundingClientRect();
+            const parent = blockRef.current.offsetParent;
+            const parentRect = parent.getBoundingClientRect();
+
+            // Get scale factor from parent (handles zoom)
+            const computedStyle = window.getComputedStyle(parent);
+            const scaleX =
+                parseFloat(
+                    computedStyle.transform.split("(")[1]?.split(",")[0]
+                ) || 1;
+            const scaleY =
+                parseFloat(
+                    computedStyle.transform.split("(")[1]?.split(",")[3]
+                ) || 1;
+
+            // Cursor position inside block (adjusted for zoom)
+            const cursorInBlockX = (e.pageX - blockRect.left) / scaleX;
+            const cursorInBlockY = (e.pageY - blockRect.top) / scaleY;
+
+            // Block position inside parent (adjusted for zoom)
+            const blockPositionInParentX =
+                (blockRect.left - parentRect.left) / scaleX;
+            const blockPositionInParentY =
+                (blockRect.top - parentRect.top) / scaleY;
+
+            // Final positions relative to parent
+            const x = blockPositionInParentX + cursorInBlockX;
+            const y = blockPositionInParentY + cursorInBlockY;
 
             setBlockMenu({
                 isOpen: true,
@@ -139,12 +167,12 @@ const SingleBlock = ({ range }) => {
             )}
             <div
                 ref={blockRef}
-                className={`absolute bg-opacity-40 shadow-main border-[1px] border-b-0
+                className={`absolute bg-opacity-40 shadow-main border-[1px] border-b-0 border-white
                  py-1 rounded-tr-lg rounded-tl-lg h-0 cursor-pointer text-[.7rem] flex flex-col items-center
                  transition-all ease-in-out delay-50 bg-blue-500 duration-200`}
                 style={{
                     left: `${currentMark.positionX + 18}px`,
-                    bottom: `${currentMark.positionY - 35}px`,
+                    bottom: `${currentMark.positionY + 35}px`,
                     width: `${
                         endTimeMark.positionX - currentMark.positionX + 2
                     }px`,
@@ -154,7 +182,14 @@ const SingleBlock = ({ range }) => {
                 onMouseLeave={hideInfo}
                 onContextMenu={(e) => openBlockMenu(e)}
             >
-                <span className="px-1">{range.name}</span>
+                <span
+                    className="px-1 text-mainColor"
+                    style={{
+                        fontSize: zoomLevel > 1 ? 12 / zoomLevel : "0.7rem",
+                    }}
+                >
+                    {range.name}
+                </span>
 
                 {isShowingInfo && (
                     <BlockInfo>

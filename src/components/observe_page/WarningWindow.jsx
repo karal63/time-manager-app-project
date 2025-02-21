@@ -37,15 +37,16 @@ const WarningWindow = () => {
                 ref={modalRef}
                 className="absolute top-0 z-30 w-full h-full bg-modal flex-center"
             >
-                <div className="bg-white py-5 px-6 rounded-lg">
-                    <h1 className="mx-4 text-lg font-semibold text-center">
+                <div className="bg-mainBackground py-5 px-6 rounded-lg border border-mainLineColor">
+                    <h1 className="mx-4 text-lg font-semibold text-center text-mainColor">
                         Are you sure you want to delete selected achievements?
                     </h1>
-                    <h1 className="mx-4 text-sm text-center text-gray-500">
-                        You will not be able to restore your achievements.
+                    <h1 className="mx-4 text-sm text-center text-gray-500 text-mainColor">
+                        This action cannot be undone. Once deleted, your
+                        achievements cannot be restored.
                     </h1>
 
-                    <div className="mt-7 w-full max-h-[300px] overflow-y-auto border rounded">
+                    <div className="mt-7 w-full max-h-[300px] overflow-y-auto border border-mainLineColor rounded-md">
                         <table className="w-full table-auto border-collapse styled-table">
                             <tbody>
                                 {selectedAchievements.map((el, i) => (
@@ -53,11 +54,11 @@ const WarningWindow = () => {
                                         key={el.id}
                                         className={`${
                                             i % 2 === 1
-                                                ? "bg-gray-100"
-                                                : "bg-white"
+                                                ? "bg-mainHoverColor"
+                                                : "bg-mainBackground"
                                         } `}
                                     >
-                                        <td className="text-sm px-4 py-1">
+                                        <td className="text-sm px-4 py-1 text-mainColor">
                                             {el.name.length > 40 ? (
                                                 <p>
                                                     {el.name.slice(0, 50)}
@@ -67,10 +68,10 @@ const WarningWindow = () => {
                                                 el.name
                                             )}
                                         </td>
-                                        <td className="text-sm px-4 py-1">
+                                        <td className="text-sm px-4 py-1 text-mainColor">
                                             {el.category}
                                         </td>
-                                        <td className="text-sm px-4 py-1">
+                                        <td className="text-sm px-4 py-1 text-mainColor">
                                             {el.time}
                                         </td>
                                     </tr>
@@ -81,13 +82,13 @@ const WarningWindow = () => {
 
                     <div className="flex justify-between items-center mt-8">
                         <button
-                            className="text-sm"
+                            className="text-sm text-mainColor"
                             onClick={() => setWarningWindow(false)}
                         >
                             Cancel
                         </button>
                         <button
-                            className="px-2 py-1 rounded-lg transition-all border-[1px] hover:border-darkPink hover:text-darkPink"
+                            className="px-2 py-1 rounded-lg transition-all border-[1px] border-mainLineColor text-mainColor hover:border-darkPink hover:text-darkPink"
                             onClick={deleteRecords}
                         >
                             Delete

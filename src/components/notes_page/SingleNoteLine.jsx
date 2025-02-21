@@ -7,7 +7,7 @@ import { TbCurrencyDollar } from "react-icons/tb";
 import { useNotesStore } from "../../notesStore";
 
 const SingleNoteLine = ({ note, sortMethod }) => {
-    const { setEditingNote, searchQuery } = useNotesStore();
+    const { setEditingNote } = useNotesStore();
     const [isContextOpen, setIsContextOpen] = useState(false);
 
     const openContext = () => {
@@ -28,11 +28,11 @@ const SingleNoteLine = ({ note, sortMethod }) => {
             key={note.id}
             className={`${
                 note.priority.important
-                    ? "bg-red-50"
+                    ? "bg-redBgNote"
                     : note.priority.currency
-                    ? "bg-green-50"
-                    : "bg-gray-100"
-            } px-5 pr-0 border-b-[1px] flex justify-between relative min-h-[40.8px]`}
+                    ? "bg-greenBgNote"
+                    : "bg-bgNote"
+            } px-5 pr-0 border-b-[1px] border-mainLineColor flex justify-between relative min-h-[40.8px]`}
         >
             <div className="flex items-center">
                 {/* If important */}
@@ -49,17 +49,22 @@ const SingleNoteLine = ({ note, sortMethod }) => {
                     </span>
                 )}
 
-                <h2 className="flex items-center w-full">{note.name}</h2>
+                <h2 className="flex items-center w-full text-mainColor">
+                    {note.name}
+                </h2>
             </div>
 
             <div
-                className={`flex items-center relative transition-all max-h-max ${
+                className={`flex items-center relative transition-all max-h-max  ${
                     isContextOpen
                         ? "right-0"
                         : "-right-[112px] max-sm:-right-[96px]"
                 }`}
             >
-                <button className="mr-3 xl:mr-4 p-1" onClick={openContext}>
+                <button
+                    className="mr-3 xl:mr-4 p-1 text-mainColor"
+                    onClick={openContext}
+                >
                     <HiOutlineDotsVertical />
                 </button>
 

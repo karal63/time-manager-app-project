@@ -20,14 +20,14 @@ const DropDownCategoryMenu = ({
     };
 
     return (
-        <ul className="border-[1px] border-gray-200 absolute top-9 w-full max-h-[300px] overflow-x-hidden overflow-scroll z-20">
+        <ul className="border-[1px] border-mainLineColor absolute top-9 w-full max-h-[300px] overflow-x-hidden overflow-scroll z-20 bg-mainBackground">
             {categories.map((category) => (
                 <li
-                    className="w-full text-md border-b-[1px] border-gray-100 bg-gray-50"
+                    className="w-full text-md border-b-[1px] border-gray-100 border-mainLineColor bg-lightGray text-mainColor"
                     key={category.id}
                 >
                     <button
-                        className="w-full h-full py-2 text-left pl-3 hover:bg-gray-200"
+                        className="w-full h-full py-2 text-left pl-3 bg-transparent hover:bg-mainLineColor"
                         onClick={() => handleClick(category)}
                     >
                         {category.name}
@@ -160,14 +160,14 @@ const AchievementBar = () => {
             onDrop={() => {
                 applyDraggableAchieve();
             }}
-            className={`flex w-full items-center bg-gray-50 border-[1px] pr-4 h-[53px] relative rounded-md ${
+            className={`flex w-full items-center bg-lightGray border-[1px] border-mainLineColor pr-4 h-[53px] relative rounded-md ${
                 isError ? "border-red-600" : ""
             }`}
         >
             <form className="w-full h-full">
                 <input
                     type="text"
-                    className="bg-transparent outline-none w-full h-full px-4 block"
+                    className="bg-transparent text-mainColor outline-none w-full h-full px-4 block text-lg"
                     placeholder="What are you working on?"
                     onChange={(e) =>
                         setAchievement({
@@ -183,8 +183,8 @@ const AchievementBar = () => {
             {/* Dropdown list */}
             <div className="relative flex items-center">
                 <button
-                    className="bg-blue-100 bg-opacity-65 min-w-[115px] px-1 py-1 rounded-md text-nowrap text-gray-700 border-[1px] border-gray-300 hover:border-blue-300 
-                    shadow-sm hover:shadow-none max-w-max flex justify-center items-center gap-1 transition-all"
+                    className="bg-mainLineColor bg-opacity-65 min-w-[115px] px-1 py-1 rounded-md text-nowrap text-mainColor border-[1px] border-mainLineColor hover:border-blue-300 
+                    shadow-sm hover:shadow-none max-w-max flex justify-center items-center gap-1 transition-[border]"
                     onClick={() => setIsDropDownOpen(!isDropDownOpen)}
                 >
                     <span>{achievement.category}</span>
@@ -201,14 +201,15 @@ const AchievementBar = () => {
             </div>
 
             {/* Time */}
-            <span className="text-2xl ml-5">
+            <span className="text-xl ml-5 text-mainColor">
                 {String(hours).padStart(2, "0")}:
                 {String(minutes).padStart(2, "0")}:
                 {String(seconds).padStart(2, "0")}
             </span>
 
             <button
-                className="text-lg bg-darkPink hover:bg-pink-500 active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 text-white shadow-main"
+                className="w-[115px] text-lg bg-darkPink active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 
+                border-2 border-transparent buttonStart text-white "
                 onClick={runStopper}
             >
                 {isRunning ? "Stop" : "Start"}

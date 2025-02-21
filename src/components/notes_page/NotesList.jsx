@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FilterPanel from "./FilterPanel";
 import { useNotesStore } from "../../notesStore";
 import SingleNoteLine from "./SingleNoteLine";
@@ -42,7 +42,7 @@ const NotesList = () => {
     }, [sortMethod, notes]);
 
     return (
-        <div>
+        <div className="mb-[80px]">
             <FilterPanel />
 
             {/* single note */}
@@ -113,7 +113,7 @@ const NotesList = () => {
                     ) {
                         if (dayNumber - currentDate.getDate() < 0) {
                             return (
-                                <div className="flex-center xl:ml-10 bg-gray-100 bg-opacity-75 text-gray-400 border border-gray-300 px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                <div className="flex-center xl:ml-10 bg-bgNote bg-opacity-75 text-gray-400 border border-mainLineColor px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                     Done
                                 </div>
                             );
@@ -135,7 +135,7 @@ const NotesList = () => {
                             dayNumber - currentDate.getDate() > 1
                         ) {
                             return (
-                                <div className="flex-center xl:ml-10 bg-yellow-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                <div className="flex-center ml-10 max-sm:ml-0 bg-yellow-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                     This week
                                 </div>
                             );
@@ -149,7 +149,7 @@ const NotesList = () => {
                 return (
                     <div key={i} className="mt-9 mb-12">
                         <div className="flex items-center mx-10 max-sm:mx-5 mb-3 max-sm:justify-between">
-                            <h1 className="text-xl font-semibold">
+                            <h1 className="text-xl font-semibold text-mainColor">
                                 {date ? (
                                     <>
                                         {weekDay}, {dayNumber} {monthName}
@@ -162,7 +162,7 @@ const NotesList = () => {
                             {checkDate()}
                         </div>
 
-                        <div className="border-[1px]">
+                        <div className="border-t-[1px] border-mainLineColor">
                             {filteredNotes.map((note) => (
                                 <SingleNoteLine
                                     key={note.id}

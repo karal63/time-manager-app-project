@@ -24,11 +24,11 @@ const CustomizeCards = ({
 
     return (
         <div
-            className={`w-[250px] min-w-[250px] bg-white transition-all flex-col border-[1px] border-gray-200 rounded-xl px-6 pb-4 ${
+            className={`w-[250px] min-w-[250px] bg-mainBackground flex-col border-[1px] border-mainLineColor rounded-xl px-6 pb-4 ${
                 isCardPanelOpen ? "flex" : "hidden"
             }`}
         >
-            <h1 className="font-semibold text-center text-xl pt-2">
+            <h1 className="font-semibold text-center text-xl pt-4 text-mainColor">
                 Customize Your Card
             </h1>
 
@@ -44,7 +44,9 @@ const CustomizeCards = ({
                             onChange={() => selectMark(mark.id, !mark.selected)}
                             checked={mark.selected}
                         />
-                        <label htmlFor="checkbox">{mark.name}</label>
+                        <label htmlFor="checkbox" className="text-mainColor">
+                            {mark.name}
+                        </label>
                     </li>
                 ))}
             </ul>
@@ -60,7 +62,7 @@ const CustomizeCards = ({
                     cancel
                 </button>
                 <button
-                    className="rounded-lg px-4 py-1 border-[1px] hover:border-darkPink hover:text-darkPink transition-all"
+                    className="rounded-lg px-4 py-1 border-[1px] text-mainColor hover:border-darkPink hover:text-darkPink transition-all"
                     onClick={() => {
                         closePanel();
                         saveToLocalStorage("taskMarks", taskMarks);

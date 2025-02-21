@@ -1,5 +1,6 @@
 import { useTimeRangeStore } from "../../store";
 import gridImage from "../../assets/graph2.png";
+import darkGridImage from "../../assets/darkGraph.png";
 import { useEffect, useRef, useState } from "react";
 import SingleVertBlock from "./SingleVertBlock";
 import { timeRangesVert } from "../../constants/index";
@@ -11,6 +12,7 @@ const TimeAxis = () => {
         timeRanges,
         getTimeRangesFromLocalStorage,
         isTimeAxisOpen,
+        isDarkMode,
     } = useTimeRangeStore();
     const [distance, setDistance] = useState(0);
 
@@ -56,11 +58,11 @@ const TimeAxis = () => {
             }}
         >
             {/* Gradient */}
-            <div className="sticky top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-20"></div>
+            <div className="sticky top-0 left-0 w-full h-32 bg-gradient-to-b from-mainBackground to-transparent z-20"></div>
             {/* Top Gradient */}
 
             <div
-                className="bottom-0  transform -translate-x-1/2 w-[80%] h-32 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none"
+                className="bottom-0  transform -translate-x-1/2 w-[80%] h-32 bg-gradient-to-t from-mainBackground to-transparent z-30 pointer-events-none"
                 style={{
                     position: "fixed",
                 }}
@@ -70,18 +72,22 @@ const TimeAxis = () => {
             <div
                 className="absolute w-full flex justify-end top-0 right-0 pr-4 bg-contain bg-"
                 style={{
-                    backgroundImage: `url(${gridImage})`,
+                    backgroundImage: `url(${
+                        isDarkMode ? darkGridImage : gridImage
+                    })`,
                 }}
             >
                 <ul className="flex flex-col gap-10 my-10">
                     {dayStructure.map((mark) => (
                         <li key={mark.id} className="flex items-center">
-                            <span className="text-lg">{mark.time}</span>
-                            <div className="w-4 h-[2px] bg-black ml-2"></div>
+                            <span className="text-lg text-mainColor">
+                                {mark.time}
+                            </span>
+                            <div className="w-4 h-[2px] bg-timeIndicator ml-2"></div>
                         </li>
                     ))}
                 </ul>
-                <div className="w-[2px] bg-[#1e1e1e] z-10"></div>
+                <div className="w-[2px] bg-timeAxis z-10"></div>
                 {/* Current time */}
                 <div
                     className="w-full absolute z-20 transition-all"

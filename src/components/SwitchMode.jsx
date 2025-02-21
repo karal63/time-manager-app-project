@@ -27,31 +27,31 @@ const SwitchMode = () => {
                 className="flex items-center border-[1px] border-pink-300 rounded-md px-3 py-1"
                 onClick={() => setIsDropDown(!isDropDown)}
             >
-                <span className="text-2xl mr-3">
+                <span className="text-2xl mr-3 text-mainColor">
                     {selectedMode === "Editing" ? <GoPencil /> : <GoPencil />}
                 </span>
-                <p className="text-lg">{selectedMode}</p>
-                <span className="text-2xl ml-1">
+                <p className="text-lg text-mainColor">{selectedMode}</p>
+                <span className="text-2xl ml-1 text-mainColor">
                     <MdKeyboardArrowDown />
                 </span>
             </button>
 
             {isDropDown && (
-                <div className="absolute top-[3.2rem] right-0 z-20 w-[300px] rounded-lg bg-white shadow-main">
+                <div className="absolute top-[3.2rem] right-0 z-20 w-[300px] rounded-lg bg-mainBackground shadow-main border border-mainLineColor">
                     <ul>
-                        <li className=" hover:bg-gray-100 cursor-pointer text-[1.1rem] transition-all">
+                        <li className="hover:bg-mainHoverColor cursor-pointer text-[1.1rem] transition-all rounded-tr-lg rounded-tl-lg">
                             <button
                                 className="px-4 py-2 flex items-center justify-between w-full"
                                 onClick={() => setMode("Editing")}
                             >
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 text-mainColor">
                                     <span className="text-2xl text-darkPink">
                                         <GoPencil />
                                     </span>
                                     Editing
                                 </div>
 
-                                <div>
+                                <div className="text-mainColor">
                                     {selectedMode === "Editing" ? (
                                         <IoCheckmarkOutline />
                                     ) : (
@@ -61,19 +61,19 @@ const SwitchMode = () => {
                             </button>
                         </li>
 
-                        <li className=" hover:bg-gray-100 cursor-pointer text-[1.1rem] transition-all">
+                        <li className="hover:bg-mainHoverColor cursor-pointer text-[1.1rem] transition-all rounded-br-lg rounded-bl-lg">
                             <button
                                 className="px-4 py-2 flex items-center justify-between w-full"
                                 onClick={() => setMode("Viewing")}
                             >
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 text-mainColor">
                                     <span className="text-2xl text-darkPink">
                                         <GoEye />
                                     </span>
                                     Viewing
                                 </div>
 
-                                <div>
+                                <div className="text-mainColor">
                                     {selectedMode === "Viewing" ? (
                                         <IoCheckmarkOutline />
                                     ) : (

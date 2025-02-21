@@ -11,26 +11,20 @@ const HandleMainBar = () => {
         setEditingNote,
         editNote,
         setIsHandleBarOpen,
+        note,
+        setNote,
     } = useNotesStore();
 
-    const [note, setNote] = useState({
-        name: "",
-        date: "",
-        priority: {
-            currency: false,
-            important: false,
-        },
-    });
-
-    const [validationFailed, setValidationFailed] = useState(false);
+    const [done, setDone] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const handleAddButton = () => {
-        // Validation
         if (!note.name) {
-            setValidationFailed(true);
+            setIsError(true);
+            setTimeout(() => setIsError(false), 1000);
             return;
         } else {
-            setValidationFailed(false);
+            setIsError(false);
         }
 
         addNote(note);
@@ -42,15 +36,16 @@ const HandleMainBar = () => {
                 important: false,
             },
         });
+        setDone(true);
+        setTimeout(() => setDone(false), 1000);
     };
 
     const handleEditButton = () => {
-        // Validation
         if (!note.name) {
-            setValidationFailed(true);
+            setIsError(true);
             return;
         } else {
-            setValidationFailed(false);
+            setIsError(false);
         }
 
         editNote(note);
@@ -63,7 +58,8 @@ const HandleMainBar = () => {
                 important: false,
             },
         });
-        setIsHandleBarOpen(false);
+        setDone(true);
+        setTimeout(() => setDone(false), 1000);
     };
 
     useEffect(() => {
@@ -74,26 +70,27 @@ const HandleMainBar = () => {
         }
     }, [editingNote.isEditing, editingNote.note]);
 
-    useEffect(() => {
-        if (!note.name) {
-            setValidationFailed(true);
-        } else {
-            setValidationFailed(false);
-        }
-    }, [note]);
-
     if (!isHandleBarOpen) {
         return;
     }
 
     return (
-        <div className="border-b-[1px] h-[58px] max-sm:h-[110px] flex max-sm:flex-col max-sm:items-start items-center justify-between max-sm:px-2 max-md:px-5 px-10 max-sm:py-3">
+        <div
+            className={`border-b-[1px] border-mainLineColor h-[58px] max-sm:h-[110px] flex max-sm:flex-col max-sm:items-start
+                items-center justify-between max-sm:px-2 max-md:px-5 px-10 max-sm:py-3 transition-all ${
+                    done
+                        ? "border-b-green-400 border-opacity-100"
+                        : isError
+                        ? "border-b-red-500 border-opacity-100"
+                        : "border-opacity-0"
+                }`}
+        >
             <div className="w-full max-sm:mb-4">
-                <form className="bg-gray-200">
+                <form>
                     <input
                         type="text"
                         placeholder="What is your task?"
-                        className="outline-none text-xl w-full max-sm:px-2 pr-10"
+                        className="outline-none text-xl w-full max-sm:px-2 pr-10 bg-transparent text-mainColor"
                         value={note.name}
                         onChange={(e) =>
                             setNote({ ...note, name: e.target.value })
@@ -105,7 +102,7 @@ const HandleMainBar = () => {
             <div className="flex justify-between items-center max-sm:w-full w-[25%]">
                 <div className="flex items-center">
                     <button
-                        className={`text-3xl w-10 h-10 hover:bg-gray-100 rounded-full flex-center ${
+                        className={`text-3xl w-10 h-10 hover:bg-mainHoverColor rounded-full flex-center ${
                             note.priority.currency
                                 ? "text-darkPink"
                                 : "text-gray-400"
@@ -123,7 +120,7 @@ const HandleMainBar = () => {
                         <CiDollar />
                     </button>
                     <button
-                        className={`text-3xl w-10 h-10 hover:bg-gray-100 rounded-full flex-center ${
+                        className={`text-3xl w-10 h-10 hover:bg-mainHoverColor rounded-full flex-center ${
                             note.priority.important
                                 ? "text-darkPink"
                                 : "text-gray-400"
@@ -145,7 +142,7 @@ const HandleMainBar = () => {
                             type="date"
                             name=""
                             id=""
-                            className="outline-none px-4 py-2"
+                            className="outline-none px-4 py-2 bg-transparent text-mainColor"
                             value={note.date}
                             onChange={(e) =>
                                 setNote({ ...note, date: e.target.value })

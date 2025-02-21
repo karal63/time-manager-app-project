@@ -25,51 +25,57 @@ const ManipulateAchieveBar = () => {
 
     return (
         <section className="mt-4 flex-center">
-            <div className="border-[1px] rounded-xl flex py-1 px-1 gap-1 max-h-[45.6px]">
+            <div className="border-[1px] border-mainLineColor rounded-xl flex py-1 px-1 gap-1 max-h-[45.6px]">
                 <button
                     className={`${
-                        selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2 transition-all`}
+                        selectedAchievements.length
+                            ? "hover:bg-mainHoverColor"
+                            : ""
+                    } rounded-xl px-2 py-2 transition-all text-mainColor`}
                     onClick={deleteRecords}
                     disabled={!selectedAchievements.length}
                 >
                     <BsTrash3
                         className={`text-xl ${
-                            !selectedAchievements.length && "text-gray-300"
+                            !selectedAchievements.length && "text-disabledBtn"
                         }`}
                     />
                 </button>
                 <button
                     className={`${
-                        selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2 transition-all`}
+                        selectedAchievements.length
+                            ? "hover:bg-mainHoverColor"
+                            : ""
+                    } rounded-xl px-2 py-2 transition-all text-mainColor`}
                     disabled={!selectedAchievements.length}
                     onClick={enableEditing}
                 >
                     <GoPencil
                         className={`text-xl ${
-                            !selectedAchievements.length && "text-gray-300"
+                            !selectedAchievements.length && "text-disabledBtn"
                         }`}
                     />
                 </button>
 
                 <button
                     className={`${
-                        selectedAchievements.length ? "hover:bg-gray-100" : ""
-                    } rounded-xl px-2 py-2 transition-all`}
+                        selectedAchievements.length
+                            ? "hover:bg-mainHoverColor"
+                            : ""
+                    } rounded-xl px-2 py-2 transition-all text-mainColor`}
                     disabled={!selectedAchievements.length}
                     onClick={duplicateAchievement}
                 >
                     <IoDuplicateOutline
                         className={`text-xl ${
-                            !selectedAchievements.length && "text-gray-300"
+                            !selectedAchievements.length && "text-disabledBtn"
                         }`}
                     />
                 </button>
 
                 {isEditingAchievements && (
                     <button
-                        className="hover:bg-gray-100 rounded-xl px-2 py-2 text-sm"
+                        className="hover:bg-mainHoverColor rounded-xl px-2 py-2 text-sm text-mainColor"
                         onClick={saveAchievements}
                     >
                         Save

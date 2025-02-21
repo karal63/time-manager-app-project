@@ -52,18 +52,18 @@ const PopupWindow = () => {
                 isOpen
                     ? "left-8 opacity-100 blur-0"
                     : "-left-[400px] opacity-0 blur-xl"
-            }    z-20 w-[325px] bg-gray-100 p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
+            }    z-20 w-[325px] bg-mainHoverColor p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
         >
-            <h1>{message}</h1>
+            <h1 className="text-mainColor">{message}</h1>
             <div className="mt-4 flex justify-between items-center gap-4">
                 <div className="w-[35px] h-[35px] rounded-full flex-center relative">
-                    <PiArrowClockwiseThin className="text-4xl" />
-                    <span className="absolute right-1/2 top-1/2 translate-x-[50%] translate-y-[-50%]">
+                    <PiArrowClockwiseThin className="text-4xl text-mainColor" />
+                    <span className="absolute right-1/2 top-1/2 translate-x-[50%] translate-y-[-50%] text-mainColor">
                         {timeLeft}
                     </span>
                 </div>
                 <button
-                    className="px-3 py-1 border-[1px] border-gray-400 rounded-lg hover:text-darkPink hover:border-darkPink hover:shadow-main transition-all"
+                    className="px-3 py-1 border-[1px] border-gray-400 rounded-lg text-mainColor hover:text-darkPink hover:border-darkPink hover:shadow-main transition-all"
                     onClick={undoDeleting}
                 >
                     Undo

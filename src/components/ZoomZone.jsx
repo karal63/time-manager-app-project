@@ -19,25 +19,29 @@ const ZoomZone = () => {
             ) {
                 e.preventDefault();
 
-                const rect = zoomZoneRef.current.getBoundingClientRect();
-
                 setZoomLevel((prevZoomLevel) => {
                     const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-                    const newZoomLevel = Math.min(
-                        Math.max(prevZoomLevel * zoomFactor, 0.58),
-                        2.1
-                    );
+                    let newZoomLevel = prevZoomLevel * zoomFactor;
 
+                    newZoomLevel = Math.max(0.58, Math.min(2.1, newZoomLevel));
                     if (newZoomLevel === prevZoomLevel) return prevZoomLevel;
 
-                    // Calculating cursor position as percentages
-                    const cursorX =
-                        ((e.clientX - rect.left) / rect.width) * 100;
-                    const cursorY =
-                        ((e.clientY - rect.top) / rect.height) * 100;
+                    const rect = zoomZoneRef.current.getBoundingClientRect();
+                    const cursorX = (e.clientX - rect.left) / rect.width;
+                    const cursorY = (e.clientY - rect.top) / rect.height;
 
-                    // Applying zoom and setting transform origin | enebles side scrolling
-                    zoomZoneRef.current.style.transformOrigin = `${cursorX}% ${cursorY}%`;
+                    let newTransformOrigin;
+
+                    if (newZoomLevel > 1) {
+                        newTransformOrigin = `${cursorX * 100}% ${
+                            cursorY * 100
+                        }%`;
+                    } else {
+                        newTransformOrigin = "50%";
+                    }
+
+                    zoomZoneRef.current.style.transformOrigin =
+                        newTransformOrigin;
                     zoomZoneRef.current.style.transform = `scale(${newZoomLevel})`;
 
                     return newZoomLevel;
@@ -53,10 +57,14 @@ const ZoomZone = () => {
         <div ref={globalBlockRef} className="w-full h-full relative">
             <div
                 ref={zoomZoneRef}
-                className="flex-center flex-col absolute h-full w-full z-10"
+                className="flex-center flex-col h-[100vh] w-[100vw] z-10 relative"
+                style={{
+                    // transform: `scale(${zoomLevel})`,
+                    transformOrigin: "center",
+                }}
             >
                 {/* day structure */}
-                {<DayStructure />}
+                {<DayStructure zoomLevel={zoomLevel} />}
 
                 {/* timeline */}
                 <div className="flex">
