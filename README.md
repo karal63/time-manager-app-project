@@ -1,6 +1,6 @@
 # ProductIVE
 
-## ⚙ Do czego służy aplikacja?
+## ♦ Do czego służy aplikacja?
 
 Aplikacja "ProducIVE" umożliwia efektywne zarządzanie czasem, ułatwiając planowanie codziennych zadań i organizację obowiązków. Dzięki intuicyjnemu interfejsowi, użytkownicy mogą łatwo tworzyć harmonogramy.
 
@@ -8,7 +8,7 @@ Aplikacja "ProducIVE" umożliwia efektywne zarządzanie czasem, ułatwiając pla
 
 Aplikacja "ProducIVE" działa poprzez tworzenie list zadań oraz harmonogramów. Użytkownik wprowadza swoje zadania, ustala priorytety i terminy, a aplikacja monitoruje postęp, pomagając utrzymać porządek w codziennych obowiązkach.
 
-## ♦ Na czym polega interakcja z użytkownikiem?
+## 💎 Na czym polega interakcja z użytkownikiem?
 
 Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawaniu, edytowaniu i usuwaniu zadań oraz planowaniu czasu za pomocą prostego interfejsu. Aplikacja dostosowuje się do preferencji użytkownika, ułatwiając organizację codziennych obowiązków.
 
@@ -189,4 +189,4 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 ### **[ver. 1.00 Beta] - 2025-02-21**
 
 -   Stworzenie ciemnego trybu aplikacji
--   Uleprzenie funkcjonalności przybliżenia w podstronie "/planner"
+-   Ulepszenie funkcjonalności przybliżenia w podstronie "/planner"
