@@ -47,16 +47,23 @@ export const useNotesStore = create((set, get) => ({
             notes: localData || [
                 {
                     id: 1,
-                    name: "Sprawdzian z matematyki",
+                    name: "Job meeting",
                     date: "2025-02-21",
                     priority: { currency: false, important: true },
                 },
 
                 {
                     id: 2,
-                    name: "Kartkówka z biznesu",
+                    name: "New project",
                     date: "2025-02-23",
-                    priority: { currency: false, important: true },
+                    priority: { currency: true },
+                },
+
+                {
+                    id: 2,
+                    name: "Projop project deadline",
+                    date: "2025-04-26",
+                    priority: { currency: true },
                 },
             ],
         });
