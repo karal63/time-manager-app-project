@@ -1,10 +1,11 @@
 import { useTimeRangeStore } from "../../store";
-import gridImage from "../../assets/graph2.png";
-import darkGridImage from "../../assets/darkGraph.png";
 import { useEffect, useRef, useState } from "react";
 import SingleVertBlock from "./SingleVertBlock";
 import { timeRangesVert } from "../../constants/index";
 import { IoMdArrowDropleft } from "react-icons/io";
+
+import gridImage from "../../assets/graph2.png";
+import darkGridImage from "../../assets/darkGraph.png";
 
 const TimeAxis = () => {
     const {

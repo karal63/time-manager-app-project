@@ -5,6 +5,9 @@ import { useEffect, useRef } from "react";
 import { useTimeRangeStore } from "../store.js";
 import ZoomZone from "../components/ZoomZone.jsx";
 
+import darkGridImage from "../assets/darkGrid_copy2.png";
+import gridImage from "../assets/grid.png";
+
 const Planner = () => {
     const {
         setPlannerZoneRef,
@@ -47,9 +50,9 @@ const Planner = () => {
             ref={plannerZoneRef}
             className="h-[calc(100vh-68px)] bg-contain relative flex-center flex-col pl-9"
             style={{
-                backgroundImage: isDarkMode
-                    ? 'url("src/assets/darkGrid_copy2.png")'
-                    : 'url("src/assets/grid.png")',
+                backgroundImage: `url(${
+                    isDarkMode ? darkGridImage : gridImage
+                })`,
             }}
         >
             {/* absolute elements */}

@@ -3,7 +3,6 @@ import SwitchMode from "./SwitchMode";
 
 import { MdNightsStay } from "react-icons/md";
 import { LuSun } from "react-icons/lu";
-import logo from "../assets/logotype_main.png";
 
 import { useTimeRangeStore } from "../store";
 

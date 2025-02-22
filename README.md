@@ -190,3 +190,8 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 
 -   Stworzenie ciemnego trybu aplikacji
 -   Ulepszenie funkcjonalności przybliżenia w podstronie "/planner"
+
+### **[ver. 1.01 Beta] - 2025-02-21**
+
+-   Usunięcie niepotrzebnych orazków
+-   Rozwiązanie niektórych problemów związanych z wyświetlaniem tła w podstronie "/planner"
