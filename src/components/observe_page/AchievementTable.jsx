@@ -47,12 +47,15 @@ const AchievementTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {achievements.map((achieve) => (
-                                <SingleAchieveLine
-                                    key={achieve.id}
-                                    achieve={achieve}
-                                />
-                            ))}
+                            {achievements
+                                .slice()
+                                .reverse()
+                                .map((achieve) => (
+                                    <SingleAchieveLine
+                                        key={achieve.id}
+                                        achieve={achieve}
+                                    />
+                                ))}
                         </tbody>
                     </table>
                 </div>
