@@ -74,11 +74,12 @@ const SingleAchieveLine = ({ achieve }) => {
                         id=""
                         checked={isSelected}
                         onChange={selectLine}
+                        className="border border-mainLineColor"
                     />
                 </div>
             </td>
 
-            <td className="px-4 py-2">
+            <td className="px-4 py-2 text-mainColor">
                 {isEditingAchievements && isSelected ? (
                     <input
                         type="text"
@@ -89,7 +90,7 @@ const SingleAchieveLine = ({ achieve }) => {
                                 name: e.target.value,
                             })
                         }
-                        className="border-[1px] rounded-md px-2 w-full outline-none py-1"
+                        className="border-[1px] border-mainLineColor rounded-md px-2 w-full outline-none py-1 text-mainColor bg-mainBackground"
                     />
                 ) : (
                     <div className="border-[1px] border-transparent max-w-max text-left text-mainColor py-1">
@@ -129,7 +130,7 @@ const SingleAchieveLine = ({ achieve }) => {
                                 category: e.target.value,
                             })
                         }
-                        className="border-[1px] rounded-md px-2 w-full py-1"
+                        className="border-[1px] border-mainLineColor rounded-md px-2 w-full py-1 text-mainColor bg-mainBackground"
                     />
                 ) : (
                     <p className="text-mainColor py-1">{achieve.category}</p>

@@ -162,7 +162,7 @@ const NotesList = () => {
                             {checkDate()}
                         </div>
 
-                        <div className="border-t-[1px] border-mainLineColor">
+                        <div className="border-y-[1px] border-mainLineColor divide-y-[1px] divide-notesDivide">
                             {filteredNotes.map((note) => (
                                 <SingleNoteLine
                                     key={note.id}

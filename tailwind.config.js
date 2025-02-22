@@ -15,6 +15,7 @@ export default {
                 redBgNote: "var(--redBgNote)",
                 greenBgNote: "var(--greenBgNote)",
                 bgNote: "var(--bgNote)",
+                notesDivide: "var(--notesDivide)",
 
                 disabledBtn: "var(--disabledBtn)",
 

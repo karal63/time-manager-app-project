@@ -32,7 +32,7 @@ const SingleNoteLine = ({ note, sortMethod }) => {
                     : note.priority.currency
                     ? "bg-greenBgNote"
                     : "bg-bgNote"
-            } px-5 pr-0 border-b-[1px] border-mainLineColor flex justify-between relative min-h-[40.8px]`}
+            } px-5 pr-0 flex justify-between relative min-h-[40.8px]`}
         >
             <div className="flex items-center">
                 {/* If important */}
