@@ -60,7 +60,7 @@ export const useNotesStore = create((set, get) => ({
                 },
 
                 {
-                    id: 2,
+                    id: 3,
                     name: "Projop project deadline",
                     date: "2025-04-26",
                     priority: { currency: true },

@@ -8,6 +8,7 @@ export default {
                 mainBackground: "var(--mainBackground)",
                 mainHoverColor: "var(--mainHoverColor)",
                 mainLineColor: "var(--mainLineColor)",
+                mainDullColor: "var(--mainDullColor)",
 
                 lightGray: "var(--lightGray)",
                 selectedAchieve: "var(--selectedAchieve)",
