@@ -18,6 +18,7 @@ export default {
                 bgNote: "var(--bgNote)",
                 notesDivide: "var(--notesDivide)",
                 todayNoteColor: "var(--todayNoteColor)",
+                dateFieldColor: "var(--dateFieldColor)",
 
                 disabledBtn: "var(--disabledBtn)",
 

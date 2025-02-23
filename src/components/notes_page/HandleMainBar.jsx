@@ -70,16 +70,6 @@ const HandleMainBar = () => {
         }
     }, [editingNote.isEditing, editingNote.note]);
 
-    // Setting current date when page loaded
-    useEffect(() => {
-        const currentDate = new Date().toISOString().split("T")[0];
-
-        setNote({
-            ...note,
-            date: currentDate,
-        });
-    }, []);
-
     if (!isHandleBarOpen) {
         return;
     }
@@ -152,7 +142,7 @@ const HandleMainBar = () => {
                             type="date"
                             name=""
                             id=""
-                            className="outline-none px-4 py-2 bg-transparent max-sm:bg-gray-700 max-sm:ml-2 text-mainColor"
+                            className="outline-none px-4 py-2 bg-transparent max-sm:bg-dateFieldColor max-sm:ml-2 text-mainColor"
                             value={note.date}
                             onChange={(e) =>
                                 setNote({ ...note, date: e.target.value })

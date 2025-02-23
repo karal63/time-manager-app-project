@@ -17,6 +17,7 @@
     --bgNote: rgb(243, 244, 246);
     --notesDivide: rgb(229, 231, 235);
     --todayNoteColor: rgb(36, 49, 79);
+    --dateFieldColor: rgb(235, 235, 235);
 
     --disabledBtn: rgb(209, 213, 219);
 
@@ -46,6 +47,7 @@ body {
     --bgNote: rgb(25, 25, 25);
     --notesDivide: rgb(37, 37, 37);
     --todayNoteColor: rgb(64, 73, 95);
+    --dateFieldColor: rgb(55, 65, 81);
 
     --disabledBtn: rgb(50, 50, 50);
 

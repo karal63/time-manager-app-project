@@ -42,7 +42,7 @@ const NotesList = () => {
     }, [sortMethod, notes]);
 
     return (
-        <div className="mb-[80px]">
+        <div className="mb-[80px] max-sm:mb-[160px]">
             <FilterPanel />
 
             {/* single note */}
