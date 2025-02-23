@@ -123,7 +123,7 @@ const NotesList = () => {
                                 0
                             ) {
                                 return (
-                                    <div className="flex-center sm:ml-10 bg-gray-900 bg-opacity-75 xl:shadow-main text-white px-3 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    <div className="flex-center sm:ml-10 bg-gray-900 border border-mainLineColor bg-opacity-75 xl:shadow-main text-white px-3 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
                                         Today
                                     </div>
                                 );
