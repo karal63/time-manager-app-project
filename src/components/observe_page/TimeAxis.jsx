@@ -63,7 +63,7 @@ const TimeAxis = () => {
             {/* Top Gradient */}
 
             <div
-                className="bottom-0  transform -translate-x-1/2 w-[80%] h-32 bg-gradient-to-t from-mainBackground to-transparent z-30 pointer-events-none"
+                className="bottom-0 right-0 transform -translate-x-1/2 max-sm:-translate-x-1/3 w-[80%] h-32 bg-gradient-to-t from-mainBackground to-transparent z-30 pointer-events-none"
                 style={{
                     position: "fixed",
                 }}

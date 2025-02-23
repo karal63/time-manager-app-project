@@ -3,12 +3,14 @@ import SwitchMode from "./SwitchMode";
 
 import { MdNightsStay } from "react-icons/md";
 import { LuSun } from "react-icons/lu";
+import { IoMenu } from "react-icons/io5";
 
 import { useTimeRangeStore } from "../store";
 
 const Navbar = () => {
     const url = useLocation();
-    const { isDarkMode, setIsDarkMode } = useTimeRangeStore();
+    const { isDarkMode, setIsDarkMode, isSidebarOpen, setIsSidebarOpen } =
+        useTimeRangeStore();
 
     const toggleMode = () => {
         document.body.classList.toggle("darkMode");
@@ -18,6 +20,14 @@ const Navbar = () => {
     return (
         <section className="border-b-[1px] border-mainLineColor relative z-30 h-[68px] max-h-[68px] flex items-center bg-mainBackground">
             <div className="px-10 flex items-center justify-between max-sm:justify-center w-full relative">
+                {/* Device only sidebar button */}
+                <button
+                    className="hidden max-sm:flex justify-center items-center absolute left-3 w-10 h-10 text-2xl text-darkPink"
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                >
+                    <IoMenu />
+                </button>
+
                 {/* nav left side */}
                 <Link to="/planner" className="text-xl font-medium">
                     <div className="relative py-1">

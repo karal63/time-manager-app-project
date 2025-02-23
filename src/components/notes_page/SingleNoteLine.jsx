@@ -55,7 +55,7 @@ const SingleNoteLine = ({ note, sortMethod }) => {
             </div>
 
             <div
-                className={`flex items-center relative transition-all max-h-max  ${
+                className={`flex items-center relative transition-all min-h-full  ${
                     isContextOpen
                         ? "right-0"
                         : "-right-[112px] max-sm:-right-[96px]"

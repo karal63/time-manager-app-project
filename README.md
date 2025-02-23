@@ -195,3 +195,10 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 
 -   Usunięcie niepotrzebnych orazków
 -   Rozwiązanie niektórych problemów związanych z wyświetlaniem tła w podstronie "/planner"
+
+### **[ver. 1.05 Beta] - 2025-02-23**
+
+-   Naprawiona wysokość kontekstu notatki tak, aby zajmowała całą wysokość notatki
+-   Przemieszczenie do "store.js" metody "setIsSidebarOpen" oraz wartości "isSidebarOpen"
+-   Aktywacja pasku bocznego na urządzeniach mobilnych
+-   Naprawiony błąd z cieniem bloku na urządzeniach mobilnych w "TimeAxis"

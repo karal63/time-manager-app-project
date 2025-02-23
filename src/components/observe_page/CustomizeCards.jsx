@@ -43,6 +43,7 @@ const CustomizeCards = ({
                             id="checkbox"
                             onChange={() => selectMark(mark.id, !mark.selected)}
                             checked={mark.selected}
+                            className="border border-mainLineColor"
                         />
                         <label htmlFor="checkbox" className="text-mainColor">
                             {mark.name}

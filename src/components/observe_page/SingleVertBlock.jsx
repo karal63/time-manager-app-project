@@ -119,6 +119,7 @@ const SingleVertBlock = ({ timeRange, distance }) => {
                 height: height + "px",
                 width: width + "px",
                 filter: isCurrent ? "drop-shadow(0 0 2em #646cffaa)" : "",
+                willChange: isCurrent ? "filter" : "",
             }}
         >
             {timeRange.name}

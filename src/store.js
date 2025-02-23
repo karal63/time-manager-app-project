@@ -590,4 +590,7 @@ export const useTimeRangeStore = create((set, get) => ({
             isDarkMode: value || false,
         });
     },
+
+    isSidebarOpen: false,
+    setIsSidebarOpen: (value) => set(() => ({ isSidebarOpen: value })),
 }));
