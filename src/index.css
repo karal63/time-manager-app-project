@@ -16,6 +16,7 @@
     --greenBgNote: rgb(240, 253, 244);
     --bgNote: rgb(243, 244, 246);
     --notesDivide: rgb(229, 231, 235);
+    --todayNoteColor: rgb(36, 49, 79);
 
     --disabledBtn: rgb(209, 213, 219);
 
@@ -44,6 +45,7 @@ body {
     --greenBgNote: rgb(0, 46, 13);
     --bgNote: rgb(25, 25, 25);
     --notesDivide: rgb(37, 37, 37);
+    --todayNoteColor: rgb(64, 73, 95);
 
     --disabledBtn: rgb(50, 50, 50);
 
