@@ -164,7 +164,10 @@ const AchievementBar = () => {
                 isError ? "border-red-600" : ""
             }`}
         >
-            <form className="w-full h-full">
+            <form
+                className="w-full h-full"
+                onSubmit={(e) => e.preventDefault()}
+            >
                 <input
                     type="text"
                     className="bg-transparent text-mainColor outline-none w-full h-full px-4 block text-lg"

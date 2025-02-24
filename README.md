@@ -202,3 +202,7 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 -   Przemieszczenie do "store.js" metody "setIsSidebarOpen" oraz wartości "isSidebarOpen"
 -   Aktywacja pasku bocznego na urządzeniach mobilnych
 -   Naprawiony błąd z cieniem bloku na urządzeniach mobilnych w "TimeAxis"
+
+### **[ver. 1.06 Beta] - 2025-02-24**
+
+-   Usuwa możliwość auto-odświerzania przeglądarki gdy wciskamy klawisz "Enter" w polu tekstowym tworzenia nowej notatki oraz w polu tekstowym tworzenia nowego osiągnięcia.

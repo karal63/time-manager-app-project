@@ -86,7 +86,7 @@ const HandleMainBar = () => {
                 }`}
         >
             <div className="w-full max-sm:mb-4">
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <input
                         type="text"
                         placeholder="What is your task?"
