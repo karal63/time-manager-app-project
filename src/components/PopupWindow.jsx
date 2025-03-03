@@ -52,7 +52,7 @@ const PopupWindow = () => {
                 isOpen
                     ? "left-8 opacity-100 blur-0"
                     : "-left-[400px] opacity-0 blur-xl"
-            }    z-20 w-[325px] bg-mainHoverColor p-3 rounded-md shadow-main border-[1px] border-gray-300 transition-all`}
+            }    z-30 w-[325px] bg-mainHoverColor p-3 rounded-md shadow-main border-[1px] border-mainLineColor transition-all`}
         >
             <h1 className="text-mainColor">{message}</h1>
             <div className="mt-4 flex justify-between items-center gap-4">
