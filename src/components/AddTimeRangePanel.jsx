@@ -46,7 +46,9 @@ const AddTimeRangePanel = () => {
             textarea.style.height = `${textarea.scrollHeight}px`;
         }
 
-        if (desc.length > 400) {
+        const newDesc = e.target.value;
+
+        if (newDesc.length > 400) {
             setErrorMessage({
                 message: "Description cannot exceed 500 characters.",
                 type: "desc",
@@ -58,7 +60,7 @@ const AddTimeRangePanel = () => {
             });
         }
 
-        setTimeRange({ ...timeRange, desc: e.target.value });
+        setTimeRange({ ...timeRange, desc: newDesc });
     };
 
     // Function that responses for what will happen when we submit
@@ -129,7 +131,10 @@ const AddTimeRangePanel = () => {
             className={`h-[calc(100vh-68px)] w-[350px] rounded-md shadow-main bg-mainBackground overflow-hidden px-5 pt-7 pb-10 flex flex-col 
                  transition-all duration-75 z-20`} // changed to 20 to be on top of the scroll zone
         >
-            <h1 className="text-xl flex-center text-pink-400 font-medium text-nowrap mb-5">
+            <h1
+                data-testid="add-time-range-panel-title"
+                className="text-xl flex-center text-pink-400 font-medium text-nowrap mb-5"
+            >
                 {timeRangePanel.type} Time Range
             </h1>
 
@@ -147,6 +152,7 @@ const AddTimeRangePanel = () => {
                         {/* name input */}
                         <input
                             type="text"
+                            data-testid="name-input"
                             value={name}
                             onChange={(e) =>
                                 setTimeRange({
@@ -211,6 +217,7 @@ const AddTimeRangePanel = () => {
                             ref={textareaRef}
                             className={`resize-none  py-2 px-2 rounded-lg border-[1px] border-mainLineColor outline-gray-200 w-full
                      min-h-[50px] max-h-[180px] text-sm bg-transparent text-mainColor`}
+                            data-testid="desc-textarea"
                             value={desc}
                             onChange={handleInput}
                         ></textarea>
@@ -226,6 +233,7 @@ const AddTimeRangePanel = () => {
                     {/* Submit button */}
                     <button
                         type="submit"
+                        data-testid="submit-btn"
                         className="bg-darkPink text-white py-1 rounded-lg text-xl hover:shadow-main hover:bg-pink-700 transition-all disabled:bg-mainHoverColor disabled:text-disabledBtn disabled:shadow-none"
                         disabled={
                             name === ""
