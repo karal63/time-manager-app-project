@@ -41,6 +41,8 @@ const NotesList = () => {
         }
     }, [sortMethod, notes]);
 
+    console.log(123);
+
     return (
         <div className="mb-[80px] max-sm:mb-[160px]">
             <FilterPanel />
