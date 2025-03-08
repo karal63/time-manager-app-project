@@ -58,12 +58,10 @@ describe("AddTimeRangePanel component", () => {
         render(<AddTimeRangePanel />);
         const submitButton = screen.getByTestId("submit-btn");
         const nameInput = screen.getByTestId("name-input");
-        const timeStartInput = screen.getByTestId("time-start-input"); // Add test id for timeStart
-        const timeEndInput = screen.getByTestId("time-end-input"); // Add test id for timeEnd
+        const timeStartInput = screen.getByTestId("time-start-input");
+        const timeEndInput = screen.getByTestId("time-end-input");
 
         fireEvent.change(nameInput, { target: { value: "" } });
-
-        // Also set the other fields to empty, so the button should be disabled
         fireEvent.change(timeStartInput, { target: { value: "" } });
         fireEvent.change(timeEndInput, { target: { value: "" } });
 
