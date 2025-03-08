@@ -67,18 +67,15 @@ const AddTimeRangePanel = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Validating inputs
-        if (desc.length > 500) {
+        if ((desc ?? "").length > 400) {
             return setErrorMessage({
                 type: "desc",
-                message: "Description cannot exceed 500 characters.",
-            });
-        } else {
-            setErrorMessage({
-                type: "",
-                message: "",
+                message: "Description cannot exceed 400 characters.",
             });
         }
+
+        // Clear error message if valid
+        setErrorMessage({ type: "", message: "" });
 
         setTimeRangePanel(false, "");
 
@@ -140,6 +137,7 @@ const AddTimeRangePanel = () => {
 
             <form
                 className="mt-9 h-full flex flex-col justify-between"
+                data-testid="form"
                 onSubmit={handleSubmit}
             >
                 <div className="flex flex-col gap-2">
@@ -152,7 +150,6 @@ const AddTimeRangePanel = () => {
                         {/* name input */}
                         <input
                             type="text"
-                            data-testid="name-input"
                             value={name}
                             onChange={(e) =>
                                 setTimeRange({
@@ -160,6 +157,7 @@ const AddTimeRangePanel = () => {
                                     name: e.target.value,
                                 })
                             }
+                            data-testid="name-input"
                             className="border-[1px] border-mainLineColor w-full py-2 px-2 rounded-lg outline-gray-200 hover:outline-1 bg-transparent text-mainColor"
                         />
                     </label>
@@ -174,6 +172,7 @@ const AddTimeRangePanel = () => {
                             <div className="flex flex-col w-full">
                                 <input
                                     type="time"
+                                    data-testid="time-start-input"
                                     className="input border-[1px] border-mainLineColor py-2 px-2 rounded-lg outline-gray-200 bg-transparent text-mainColor"
                                     value={timeStart}
                                     onChange={(e) => {
@@ -191,6 +190,7 @@ const AddTimeRangePanel = () => {
                             <div className="flex flex-col w-full">
                                 <input
                                     type="time"
+                                    data-testid="time-end-input"
                                     className="input border-[1px] border-mainLineColor py-2 px-2 rounded-lg outline-gray-200 bg-transparent text-mainColor"
                                     value={timeEnd}
                                     onChange={(e) =>
@@ -236,13 +236,7 @@ const AddTimeRangePanel = () => {
                         data-testid="submit-btn"
                         className="bg-darkPink text-white py-1 rounded-lg text-xl hover:shadow-main hover:bg-pink-700 transition-all disabled:bg-mainHoverColor disabled:text-disabledBtn disabled:shadow-none"
                         disabled={
-                            name === ""
-                                ? true
-                                : timeStart === ""
-                                ? true
-                                : timeEnd === ""
-                                ? true
-                                : false
+                            name === "" || timeStart === "" || timeEnd === ""
                         }
                     >
                         {timeRangePanel.type}
