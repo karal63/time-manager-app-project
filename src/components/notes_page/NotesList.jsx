@@ -41,8 +41,6 @@ const NotesList = () => {
         }
     }, [sortMethod, notes]);
 
-    console.log(123);
-
     return (
         <div className="mb-[80px] max-sm:mb-[160px]">
             <FilterPanel />
@@ -110,45 +108,45 @@ const NotesList = () => {
                             "en-US",
                             monthOptions
                         );
-                        if (
-                            currentMonthName === monthName &&
-                            year === currentDate.getFullYear()
-                        ) {
-                            if (dayNumber - currentDate.getDate() < 0) {
-                                return (
-                                    <div className="flex-center sm:ml-10 bg-bgNote bg-opacity-75 text-gray-400 border border-mainLineColor px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
-                                        Done
-                                    </div>
-                                );
-                            } else if (
-                                dayNumber - currentDate.getDate() ===
-                                0
-                            ) {
-                                return (
-                                    <div className="flex-center sm:ml-10 bg-todayNoteColor bg-opacity-75 xl:shadow-main text-white px-3 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
-                                        Today
-                                    </div>
-                                );
-                            } else if (
-                                dayNumber - currentDate.getDate() ===
-                                1
-                            ) {
-                                return (
-                                    <div className="flex-center sm:ml-10 bg-red-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
-                                        Tommorow
-                                    </div>
-                                );
-                            } else if (
-                                // this doesnt work, fix this
-                                dayNumber - currentDate.getDate() <= 7 &&
-                                dayNumber - currentDate.getDate() > 1
-                            ) {
-                                return (
-                                    <div className="flex-center sm:ml-10 max-sm:ml-0 bg-yellow-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
-                                        This week
-                                    </div>
-                                );
-                            }
+                        const startOfYear = new Date(
+                            currentDate.getFullYear(),
+                            0,
+                            1
+                        );
+
+                        const diff = currentDate - startOfYear;
+                        const noteDiff = newDate - startOfYear;
+
+                        const dayOfYear = diff / (1000 * 60 * 60 * 24);
+                        const noteDayOfYear = noteDiff / (1000 * 60 * 60 * 24);
+
+                        const dateDifference =
+                            noteDayOfYear.toFixed() - dayOfYear.toFixed();
+
+                        if (dateDifference < 0) {
+                            return (
+                                <div className="flex-center sm:ml-10 bg-bgNote bg-opacity-75 text-gray-400 border border-mainLineColor px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Done
+                                </div>
+                            );
+                        } else if (dateDifference === 0) {
+                            return (
+                                <div className="flex-center sm:ml-10 bg-todayNoteColor bg-opacity-75 xl:shadow-main text-white px-3 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Today
+                                </div>
+                            );
+                        } else if (dateDifference === 1) {
+                            return (
+                                <div className="flex-center sm:ml-10 bg-red-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    Tommorow
+                                </div>
+                            );
+                        } else if (dateDifference <= 7 && dateDifference > 1) {
+                            return (
+                                <div className="flex-center sm:ml-10 max-sm:ml-0 bg-yellow-500 bg-opacity-75 xl:shadow-main text-white px-2 py-1 rounded-md max-sm:rounded-sm text-sm max-sm:text-[.8rem]">
+                                    This week
+                                </div>
+                            );
                         }
                     };
 
