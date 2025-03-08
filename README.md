@@ -206,3 +206,7 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 ### **[ver. 1.06 Beta] - 2025-02-24**
 
 -   Usuwa możliwość auto-odświerzania przeglądarki gdy wciskamy klawisz "Enter" w polu tekstowym tworzenia nowej notatki oraz w polu tekstowym tworzenia nowego osiągnięcia.
+
+### **[ver. 1.07 Beta] - 2025-03-08**
+
+-   Naprawia wiele błędów wplikacji, szczególnie wadliwą funkcjonalność obliczania jak wkrótce jest notatka
