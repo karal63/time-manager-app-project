@@ -14,7 +14,15 @@ vi.mock("../store", () => ({
 // addTimeRange, timeRangePanel, setTimeRangePanel, editTimeRange
 const mockStore = {
     addTimeRange: vi.fn(),
-    timeRangePanel: vi.fn(),
+    timeRangePanel: {
+        isOpen: true,
+        id: "",
+        name: "",
+        description: "",
+        timeStart: "",
+        timeEnd: "",
+        type: "Create",
+    },
     setTimeRangePanel: vi.fn(),
     editTimeRange: vi.fn(),
 };
@@ -47,32 +55,45 @@ describe("AddTimeRangePanel component", () => {
     });
 
     test("check if submit button is disabled", () => {
-        const { getByTestId } = render(<AddTimeRangePanel />);
-        const submitButton = getByTestId("submit-btn");
-        const nameInput = getByTestId("name-input");
+        render(<AddTimeRangePanel />);
+        const submitButton = screen.getByTestId("submit-btn");
+        const nameInput = screen.getByTestId("name-input");
+        const timeStartInput = screen.getByTestId("time-start-input"); // Add test id for timeStart
+        const timeEndInput = screen.getByTestId("time-end-input"); // Add test id for timeEnd
 
         fireEvent.change(nameInput, { target: { value: "" } });
+
+        // Also set the other fields to empty, so the button should be disabled
+        fireEvent.change(timeStartInput, { target: { value: "" } });
+        fireEvent.change(timeEndInput, { target: { value: "" } });
+
         expect(submitButton).toBeDisabled();
     });
 
-    // test("submits the form correctly", () => {
-    //     render(<AddTimeRangePanel />);
+    test("submits the form correctly", () => {
+        render(<AddTimeRangePanel />);
 
-    //     const submitButton = screen.getByTestId("submit-btn");
+        const submitButton = screen.getByTestId("submit-btn");
+        const form = screen.getByTestId("form");
+        const timeInputs = document.querySelectorAll('input[type="time"]');
+        console.log(timeInputs);
 
-    //     fireEvent.change(screen.getAllByRole("textbox")[0], {
-    //         target: { value: "Name for test" },
-    //     });
-    //     fireEvent.change(screen.getAllByRole("textbox")[1], {
-    //         target: { value: "07:00" },
-    //     });
-    //     fireEvent.change(screen.getAllByRole("textbox")[2], {
-    //         target: { value: "12:00" },
-    //     });
+        fireEvent.change(screen.getAllByRole("textbox")[0], {
+            target: { value: "Name for test" },
+        });
+        fireEvent.change(timeInputs[0], {
+            target: { value: "07:00" },
+        });
+        fireEvent.change(timeInputs[1], {
+            target: { value: "12:00" },
+        });
 
-    //     expect(submitButton).not.toBeDisabled();
+        expect(submitButton).not.toBeDisabled();
 
-    //     fireEvent.click(submitButton);
-    //     expect(mockStore.addTimeRange).toHaveBeenCalled();
-    // });
+        fireEvent.submit(form);
+
+        expect(
+            mockStore.addTimeRange || mockStore.editTimeRange
+        ).toHaveBeenCalled();
+    });
 });

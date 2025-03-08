@@ -275,13 +275,13 @@ export const useTimeRangeStore = create((set, get) => ({
     setBlockMenuRef: (newRef) => set({ blockMenuRef: newRef }),
 
     timeRangePanel: {
-        isOpen: false,
+        isOpen: true,
         id: "",
         name: "",
         description: "",
         timeStart: "",
         timeEnd: "",
-        type: "",
+        type: "Create",
     },
     setTimeRangePanel: (value, type) =>
         set((state) => ({
