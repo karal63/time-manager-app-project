@@ -210,3 +210,7 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 ### **[ver. 1.07 Beta] - 2025-03-08**
 
 -   Naprawia wiele błędów wplikacji, szczególnie wadliwą funkcjonalność obliczania jak wkrótce jest notatka
+
+### **[ver. 1.08 Beta] - 2025-03-08**
+
+-   Dodanie możliwości zablokowania/odblokowania okresu czasu w celu zapobiegania niechcianym zmianom.

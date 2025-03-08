@@ -149,7 +149,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Studies show that the first 30 minutes of your morning can set the tone for the entire day.",
             timeStart: "07:00",
             timeEnd: "08:00",
-            // duration: "",
+            locked: false,
         },
         {
             id: 2,
@@ -157,6 +157,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "A balanced breakfast stabilizes blood sugar levels.",
             timeStart: "08:00",
             timeEnd: "08:30",
+            locked: false,
         },
         {
             id: 3,
@@ -164,6 +165,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Working on projects, collaborating with teammates, realizing ideas.",
             timeStart: "10:00",
             timeEnd: "16:00",
+            locked: false,
         },
         {
             id: 4,
@@ -171,6 +173,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Discussing our goals, promotions and generally current situation.",
             timeStart: "12:00",
             timeEnd: "13:30",
+            locked: false,
         },
         {
             id: 5,
@@ -178,6 +181,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Eating, talking to loved ones",
             timeStart: "16:30",
             timeEnd: "17:30",
+            locked: false,
         },
         {
             id: 6,
@@ -185,6 +189,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Consistency is key for fitness results.",
             timeStart: "18:00",
             timeEnd: "20:00",
+            locked: false,
         },
         {
             id: 7,
@@ -192,6 +197,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "",
             timeStart: "20:00",
             timeEnd: "21:00",
+            locked: false,
         },
         {
             id: 8,
@@ -199,6 +205,7 @@ export const useTimeRangeStore = create((set, get) => ({
             desc: "Consistency is key for fitness results.",
             timeStart: "21:00",
             timeEnd: "22:00",
+            locked: false,
         },
     ],
 
@@ -213,6 +220,7 @@ export const useTimeRangeStore = create((set, get) => ({
             const newTimeRange = {
                 ...timeRange,
                 id: get().getNextId(state.timeRanges),
+                locked: false,
             };
 
             const newTimeRanges = [...state.timeRanges, newTimeRange];
@@ -250,6 +258,25 @@ export const useTimeRangeStore = create((set, get) => ({
                         desc,
                         timeStart,
                         timeEnd,
+                    };
+                }
+                return el;
+            });
+
+            state.saveTimeRangesToLocalStorage(newTimeRanges);
+
+            return {
+                timeRanges: newTimeRanges,
+            };
+        }),
+
+    setIsLockedRange: (range, value) =>
+        set((state) => {
+            const newTimeRanges = state.timeRanges.map((el) => {
+                if (range.id === el.id) {
+                    return {
+                        ...el,
+                        locked: value,
                     };
                 }
                 return el;
