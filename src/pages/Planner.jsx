@@ -1,7 +1,7 @@
 import { GoPlus } from "react-icons/go";
 import AddTimeRangePanel from "../components/AddTimeRangePanel.jsx";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTimeRangeStore } from "../store.js";
 import ZoomZone from "../components/ZoomZone.jsx";
 
@@ -18,6 +18,8 @@ const Planner = () => {
         isDarkMode,
         setAddTimeRangePanelRef,
     } = useTimeRangeStore();
+
+    const [zoomLevel, setZoomLevel] = useState(1);
 
     const plannerZoneRef = useRef(null);
     const addTimeRangePanelRef = useRef(null);
@@ -44,6 +46,10 @@ const Planner = () => {
             setAddTimeRangePanelRef(addTimeRangePanelRef);
         }
     }, []);
+
+    useEffect(() => {
+        console.log(zoomLevel);
+    }, [zoomLevel]);
 
     return (
         <section
@@ -82,7 +88,14 @@ const Planner = () => {
                 </div>
             )}
 
-            <ZoomZone />
+            <ZoomZone zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} />
+
+            {/* Zoom indicator */}
+            {/* 0.58 min */}
+            {/* 2.1 max */}
+            <div className="absolute bottom-5 right-5 bg-mainHoverColor z-10 text-mainColor w-16 py-2 rounded-2xl text-center border border-mainLineColor">
+                {(zoomLevel * 100).toFixed(1)}%
+            </div>
         </section>
     );
 };

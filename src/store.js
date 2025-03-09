@@ -295,8 +295,8 @@ export const useTimeRangeStore = create((set, get) => ({
     addTimeRangePanelRef: null,
     setAddTimeRangePanelRef: (newRef) => set({ addTimeRangePanelRef: newRef }),
 
-    zoomLevel: null,
-    setNewZoomLevel: (newZoomLevel) => set({ zoomLevel: newZoomLevel }),
+    zoomLevel: 1,
+    setZoomLevel: (newZoomLevel) => set({ zoomLevel: newZoomLevel }),
 
     blockMenuRef: null,
     setBlockMenuRef: (newRef) => set({ blockMenuRef: newRef }),

@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTimeRangeStore } from "../store";
 import DayStructure from "./DayStructure";
 import SingleTimeMark from "./SingleTimeMark";
 
-const ZoomZone = () => {
+const ZoomZone = ({ zoomLevel, setZoomLevel }) => {
     const { dayStructure } = useTimeRangeStore();
     const globalBlockRef = useRef(null);
     const zoomZoneRef = useRef(null);
-    const [zoomLevel, setZoomLevel] = useState(1);
 
     useEffect(() => {
         const zoom = (e) => {
@@ -21,7 +20,7 @@ const ZoomZone = () => {
 
                 setZoomLevel((prevZoomLevel) => {
                     const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-                    let newZoomLevel = prevZoomLevel * zoomFactor;
+                    let newZoomLevel = (prevZoomLevel * zoomFactor).toFixed(1);
 
                     newZoomLevel = Math.max(0.58, Math.min(2.1, newZoomLevel));
                     if (newZoomLevel === prevZoomLevel) return prevZoomLevel;
@@ -65,14 +64,12 @@ const ZoomZone = () => {
             >
                 {/* day structure */}
                 {<DayStructure zoomLevel={zoomLevel} />}
-
                 {/* timeline */}
                 <div className="flex">
                     <div className="h-[2px] w-[500px] bg-gradient-to-r from-transparent to-gray-500"></div>
                     <div className="h-[2px] w-[1336px] bg-gray-500"></div>
                     <div className="h-[2px] w-[500px] bg-gradient-to-l from-transparent to-gray-500"></div>
                 </div>
-
                 {/* time marks */}
                 <ul className="flex gap-5">
                     {dayStructure.map((mark) => (
