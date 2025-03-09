@@ -91,6 +91,17 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
                     Edit
                 </button>
             )}
+
+            <button
+                className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
+                onClick={handleLock}
+            >
+                <span className="text-2xl text-darkPink">
+                    {isLocked ? <SlLock /> : <SlLockOpen />}
+                </span>{" "}
+                {isLocked ? "Unlock" : "Lock"}
+            </button>
+
             {!isLocked && (
                 <button
                     className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
@@ -102,15 +113,6 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
                     Delete
                 </button>
             )}
-            <button
-                className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
-                onClick={handleLock}
-            >
-                <span className="text-2xl text-darkPink">
-                    {isLocked ? <SlLock /> : <SlLockOpen />}
-                </span>{" "}
-                {isLocked ? "Unlock" : "Lock"}
-            </button>
             {/* Maybe duplcate button */}
         </div>
     );

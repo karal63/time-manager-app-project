@@ -347,8 +347,53 @@ export const useTimeRangeStore = create((set, get) => ({
             };
         }),
 
+    userPreferences: {
+        isTimeAxisOpen: true,
+        isCurrentRangesOpen: true,
+    },
+
+    isCurrentRangesOpen: true,
+    setIsCurrentRangesOpen: (value) =>
+        set((state) => {
+            const userPreferences = {
+                isCurrentRangesOpen: value,
+                isTimeAxisOpen: state.isTimeAxisOpen,
+            };
+            state.saveToLocalStorage("userPreferences", userPreferences);
+            return {
+                isCurrentRangesOpen: value,
+            };
+        }),
+
     isTimeAxisOpen: true,
-    setIsTimeAxisOpen: (value) => set(() => ({ isTimeAxisOpen: value })),
+    setIsTimeAxisOpen: (value) =>
+        set((state) => {
+            const userPreferences = {
+                isCurrentRangesOpen: state.isCurrentRangesOpen,
+                isTimeAxisOpen: value,
+            };
+            state.saveToLocalStorage("userPreferences", userPreferences);
+
+            return {
+                isTimeAxisOpen: value,
+            };
+        }),
+
+    initializePreferences: () =>
+        set((state) => {
+            const preferences = state.returnFromLocalStorage(
+                "userPreferences"
+            ) || {
+                isTimeAxisOpen: true,
+                isCurrentRangesOpen: true,
+            };
+
+            const { isTimeAxisOpen, isCurrentRangesOpen } = preferences;
+            return {
+                isTimeAxisOpen: isTimeAxisOpen,
+                isCurrentRangesOpen: isCurrentRangesOpen,
+            };
+        }),
 
     taskMarks: [
         {

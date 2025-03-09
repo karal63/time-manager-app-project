@@ -214,3 +214,4 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 ### **[ver. 1.08 Beta] - 2025-03-08**
 
 -   Dodanie możliwości zablokowania/odblokowania okresu czasu w celu zapobiegania niechcianym zmianom.
+-   Przeprowadzienie testów na komponencie "AddTimeRangePanel"
