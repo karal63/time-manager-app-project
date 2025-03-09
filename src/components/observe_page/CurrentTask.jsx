@@ -2,6 +2,7 @@
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { TbTimeDurationOff } from "react-icons/tb";
+import { SiStagetimer } from "react-icons/si";
 import { useTimeRangeStore } from "../../store";
 import CurrentTaskCards from "./CurrentTaskCards";
 import AchievementBar from "./AchievementBar";
@@ -15,7 +16,6 @@ const CurrentTask = () => {
         setIsTimeAxisOpen,
         isCurrentRangesOpen,
         setIsCurrentRangesOpen,
-
         initializePreferences,
     } = useTimeRangeStore();
 
@@ -28,22 +28,22 @@ const CurrentTask = () => {
             {/* Right Side */}
             <section className="flex items-start mt-10">
                 {/* buttons */}
-                <div className="absolute bottom-4 left-4 flex flex-col gap-2 z-10">
+                <div className="absolute bottom-4 left-4 flex flex-col gap-2 z-10 ">
                     <button
-                        className="border-[1px] border-mainLineColor rounded-lg px-3 py-3 text-mainColor"
+                        className="border-[1px] border-mainLineColor rounded-lg px-3 py-3 text-mainColor transtion-all hover:bg-mainHoverColor"
                         onClick={() =>
                             setIsCurrentRangesOpen(!isCurrentRangesOpen)
                         }
                     >
-                        {isTimeAxisOpen ? (
-                            <TbTimeDurationOff />
+                        {isCurrentRangesOpen ? (
+                            <SiStagetimer />
                         ) : (
                             <TbTimeDurationOff />
                         )}
                     </button>
 
                     <button
-                        className="border-[1px] border-mainLineColor rounded-lg px-3 py-3 text-mainColor"
+                        className="border-[1px] border-mainLineColor rounded-lg px-3 py-3 text-mainColor transtion-all hover:bg-mainHoverColor"
                         onClick={() => setIsTimeAxisOpen(!isTimeAxisOpen)}
                     >
                         {isTimeAxisOpen ? (

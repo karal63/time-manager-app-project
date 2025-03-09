@@ -215,3 +215,5 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 
 -   Dodanie możliwości zablokowania/odblokowania okresu czasu w celu zapobiegania niechcianym zmianom.
 -   Przeprowadzienie testów na komponencie "AddTimeRangePanel"
+-   Zmienione położenie przycisku do schowania osi czasu w podstronie /observe oraz dodanie nowego przycisku, umożliwiającego schowanie bieżących okresów czasu
+-   Uzupełniona wersyfikacja oraz poprawione niektóre błędy
