@@ -6,12 +6,10 @@ import SingleNoteLine from "./SingleNoteLine";
 const NotesList = () => {
     const { notes, initializeNotes, sortMethod, searchQuery } = useNotesStore();
     const [dates, setDates] = useState([]);
-    const [filteredNotes, setFilteredNotes] = useState([...notes]);
 
     // Initializing notes
     useEffect(() => {
         initializeNotes();
-        setFilteredNotes(notes);
     }, []);
 
     const filterNotes = (date) => {
@@ -21,8 +19,6 @@ const NotesList = () => {
 
     useEffect(() => {
         let filteredDates = [...new Set(notes.map((note) => note.date))];
-        console.log(notes);
-        console.log(filteredDates);
 
         switch (sortMethod) {
             case "Date (A to Z)":
@@ -49,7 +45,7 @@ const NotesList = () => {
 
             {/* single note */}
             {notes.length > 0 ? (
-                dates.map((date, i) => {
+                dates.map((date) => {
                     const newDate = new Date(date);
                     const weekDayOptions = { weekday: "long" };
                     const monthOptions = { month: "long" };
@@ -62,7 +58,6 @@ const NotesList = () => {
                         monthOptions
                     );
                     const dayNumber = newDate.getDate();
-                    const year = newDate.getFullYear();
 
                     // If sort method is equal "Importance" then do not display this block with date, in opposite it will be empty
                     if (
@@ -106,10 +101,6 @@ const NotesList = () => {
 
                     const checkDate = () => {
                         const currentDate = new Date();
-                        const currentMonthName = currentDate.toLocaleDateString(
-                            "en-US",
-                            monthOptions
-                        );
                         const startOfYear = new Date(
                             currentDate.getFullYear(),
                             0,
