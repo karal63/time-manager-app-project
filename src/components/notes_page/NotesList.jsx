@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import FilterPanel from "./FilterPanel";
 import { useNotesStore } from "../../notesStore";
 import SingleNoteLine from "./SingleNoteLine";
@@ -21,6 +21,8 @@ const NotesList = () => {
 
     useEffect(() => {
         let filteredDates = [...new Set(notes.map((note) => note.date))];
+        console.log(notes);
+        console.log(filteredDates);
 
         switch (sortMethod) {
             case "Date (A to Z)":
@@ -154,10 +156,10 @@ const NotesList = () => {
                     if (filteredNotes.length === 0) return null;
 
                     return (
-                        <div key={i} className="mt-9 mb-12">
+                        <div key={date} className="mt-9 mb-12">
                             <div className="flex items-center mx-10 max-sm:mx-5 mb-3 max-sm:justify-between">
                                 <h1 className="text-xl font-semibold text-mainColor">
-                                    {date ? (
+                                    {date !== "" ? (
                                         <>
                                             {weekDay}, {dayNumber} {monthName}
                                         </>
