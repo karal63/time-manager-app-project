@@ -121,7 +121,7 @@ const NotesList = () => {
                         const noteDayOfYear = noteDiff / (1000 * 60 * 60 * 24);
 
                         const dateDifference =
-                            noteDayOfYear.toFixed() - dayOfYear.toFixed();
+                            Math.floor(noteDayOfYear) - Math.floor(dayOfYear);
 
                         if (dateDifference < 0) {
                             return (
