@@ -477,6 +477,53 @@ export const useTimeRangeStore = create((set, get) => ({
         });
     },
 
+    currentAchievement: {
+        name: "",
+        category: "None",
+        time: "",
+    },
+
+    isRunning: false,
+
+    setIsRunning: (value) =>
+        set(() => ({
+            isRunning: value,
+        })),
+
+    isPaused: false,
+    setIsPaused: (value) =>
+        set(() => ({
+            isPaused: value,
+        })),
+
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
+    setSeconds: (prevSeconds) =>
+        set(() => ({
+            seconds: prevSeconds + 1,
+        })),
+    setMinutes: (prevMinutes) =>
+        set(() => ({
+            minutes: prevMinutes + 1,
+        })),
+    setHours: (prevHours) =>
+        set(() => ({
+            hours: prevHours + 1,
+        })),
+
+    clearTime: () =>
+        set(() => ({
+            seconds: 0,
+            minutes: 0,
+            hours: 0,
+        })),
+
+    setAchievement: (achievement) =>
+        set(() => ({
+            currentAchievement: { ...achievement },
+        })),
+
     addAchievement: (achieve) =>
         set((state) => {
             const newAchievements = [

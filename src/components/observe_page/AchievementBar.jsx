@@ -44,27 +44,22 @@ const AchievementBar = () => {
         draggableAchievement,
         editAchievement,
         setDraggedAchievement,
+        currentAchievement,
+        setAchievement,
+        isRunning,
+        setIsRunning,
+        seconds,
+        minutes,
+        hours,
+        setSeconds,
+        setMinutes,
+        setHours,
+        clearTime,
     } = useTimeRangeStore();
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
-    const [achievement, setAchievement] = useState({
-        name: "",
-        category: "None",
-        time: "",
-    });
+
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isDraggedAchievement, setIsDraggedAchievement] = useState(false);
     const [isError, setIsError] = useState(false);
-
-    let intervalRef = useRef(null);
-
-    const resetTime = () => {
-        setMinutes(0);
-        setSeconds(0);
-        setHours(0);
-    };
 
     const clearAchievements = () => {
         setAchievement({
@@ -75,49 +70,25 @@ const AchievementBar = () => {
     };
 
     useEffect(() => {
-        if (isRunning) {
-            intervalRef.current = setInterval(() => {
-                if (minutes > 59) {
-                    setHours((prevHours) => prevHours + 1);
-                    setMinutes(0);
-                }
-                if (seconds >= 59) {
-                    setMinutes((prevMinutes) => prevMinutes + 1);
-                    setSeconds(0);
-                } else {
-                    setSeconds((prevSeconds) => prevSeconds + 1);
-                }
-                setAchievement({
-                    ...achievement,
-                    time: `${String(hours).padStart(2, "0")}:${String(
-                        minutes
-                    ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`,
-                });
-            }, 1000);
-        } else {
-            clearInterval(intervalRef.current);
-        }
-
-        return () => clearInterval(intervalRef.current);
-    }, [isRunning, seconds, minutes, achievement]);
-
-    useEffect(() => {
         if (!isRunning) {
-            if (achievement.time) {
-                if (!achievement.name) {
+            if (currentAchievement.time) {
+                if (!currentAchievement.name) {
                     return setIsError(true);
                 } else {
                     setIsError(false);
 
                     if (draggableAchievement.id && isDraggedAchievement) {
-                        editAchievement(draggableAchievement.id, achievement);
+                        editAchievement(
+                            draggableAchievement.id,
+                            currentAchievement
+                        );
                         setDraggedAchievement({});
                         setIsDraggedAchievement(false);
                     } else {
-                        addAchievement(achievement);
+                        addAchievement(currentAchievement);
                     }
                     clearAchievements();
-                    resetTime();
+                    clearTime();
                 }
             }
         }
@@ -130,7 +101,6 @@ const AchievementBar = () => {
     const applyDraggableAchieve = () => {
         setIsDraggedAchievement(true);
         setAchievement({
-            ...achievement,
             name: draggableAchievement.name,
             category: draggableAchievement.category,
             time: draggableAchievement.time,
@@ -149,7 +119,7 @@ const AchievementBar = () => {
             category: "None",
             time: "",
         });
-        resetTime();
+        clearTime();
     };
 
     return (
@@ -174,11 +144,11 @@ const AchievementBar = () => {
                     placeholder="What are you working on?"
                     onChange={(e) =>
                         setAchievement({
-                            ...achievement,
+                            ...currentAchievement,
                             name: e.target.value,
                         })
                     }
-                    value={achievement.name}
+                    value={currentAchievement.name}
                 />
             </form>
 
@@ -190,14 +160,14 @@ const AchievementBar = () => {
                     shadow-sm hover:shadow-none max-w-max flex justify-center items-center gap-1 transition-[border]"
                     onClick={() => setIsDropDownOpen(!isDropDownOpen)}
                 >
-                    <span>{achievement.category}</span>
+                    <span>{currentAchievement.category}</span>
                     <MdKeyboardArrowDown className="text-xl" />
                 </button>
 
                 {isDropDownOpen && (
                     <DropDownCategoryMenu
                         setAchievement={setAchievement}
-                        achievement={achievement}
+                        achievement={currentAchievement}
                         setIsDropDownOpen={setIsDropDownOpen}
                     />
                 )}

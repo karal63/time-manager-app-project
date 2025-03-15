@@ -47,10 +47,6 @@ const Planner = () => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(zoomLevel);
-    }, [zoomLevel]);
-
     return (
         <section
             ref={plannerZoneRef}
@@ -93,7 +89,7 @@ const Planner = () => {
             {/* Zoom indicator */}
             {/* 0.58 min */}
             {/* 2.1 max */}
-            <div className="absolute bottom-5 right-5 bg-mainHoverColor z-10 text-mainColor w-16 py-2 rounded-2xl text-center border border-mainLineColor">
+            <div className="absolute bottom-5 right-5 bg-mainHoverColor z-10 text-mainColor w-20 py-2 rounded-md text-center border border-mainLineColor">
                 {(zoomLevel * 100).toFixed(1)}%
             </div>
         </section>
