@@ -12,7 +12,6 @@ const TimePanel = () => {
         hours,
         minutes,
         seconds,
-        isPaused,
         setIsRunning,
     } = useTimeRangeStore();
     const [isHovering, setIsHovering] = useState(false);
@@ -25,15 +24,21 @@ const TimePanel = () => {
         setIsHovering(false);
     };
 
+    console.log(currentAchievement.name);
+
     return (
-        currentAchievement.name &&
+        currentAchievement.time &&
         location.pathname !== "/planner/observe" && (
             <div
                 className={`absolute bottom-0 right-40 bg-pink-400 border border-mainLineColor w-[300px] px-2 py-[.3rem] rounded-tr-xl
             rounded-tl-xl transition-all z-20 cursor-pointer shadow-main
-             before:absolute before:w-2 before:bg-pink-300 before:h-5 before:-left-2 before:bottom-0 before:rounded-tl-full
-             after:absolute after:w-2 after:bg-pink-300 after:h-5 after:-right-2 after:bottom-0 after:rounded-tr-full
-            ${isHovering ? "h-[80px]" : "h-[40px]"}`}
+             before:absolute before:w-2 before:bg-pink-300 before:-left-2 before:bottom-0 before:rounded-tl-full before:transition-all
+             after:absolute after:w-2 after:bg-pink-300 after:-right-2 after:bottom-0 after:rounded-tr-full after:transition-all
+            ${
+                isHovering
+                    ? "h-[80px] after:h-8 before:h-8"
+                    : "h-[40px] after:h-5 before:h-5"
+            }`}
                 onMouseOver={expendTimePanel}
                 onMouseLeave={minimizeTimePanel}
             >

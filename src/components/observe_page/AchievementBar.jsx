@@ -55,6 +55,7 @@ const AchievementBar = () => {
         setMinutes,
         setHours,
         clearTime,
+        initializeCurrentAchievement,
     } = useTimeRangeStore();
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -67,6 +68,10 @@ const AchievementBar = () => {
             category: "None",
             time: "",
         });
+    };
+
+    const clearCurrentAchievement = () => {
+        localStorage.removeItem("currentAchievement");
     };
 
     useEffect(() => {
@@ -89,6 +94,9 @@ const AchievementBar = () => {
                     }
                     clearAchievements();
                     clearTime();
+                    clearCurrentAchievement();
+                    console.log(true);
+                    // unexpectedly working
                 }
             }
         }
@@ -178,6 +186,7 @@ const AchievementBar = () => {
                 {String(hours).padStart(2, "0")}:
                 {String(minutes).padStart(2, "0")}:
                 {String(seconds).padStart(2, "0")}
+                {/* {currentAchievement.time} */}
             </span>
 
             <button

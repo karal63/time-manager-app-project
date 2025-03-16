@@ -520,9 +520,11 @@ export const useTimeRangeStore = create((set, get) => ({
         })),
 
     setAchievement: (achievement) =>
-        set(() => ({
-            currentAchievement: { ...achievement },
-        })),
+        set(() => {
+            return {
+                currentAchievement: { ...achievement },
+            };
+        }),
 
     addAchievement: (achieve) =>
         set((state) => {
@@ -538,6 +540,28 @@ export const useTimeRangeStore = create((set, get) => ({
 
             return {
                 achievements: newAchievements,
+            };
+        }),
+
+    initializeCurrentAchievement: () =>
+        set((state) => {
+            const newCurrentAchievement = state.returnFromLocalStorage(
+                "currentAchievement"
+            ) || {
+                name: "123",
+                category: "None",
+                time: "",
+            };
+
+            // initialize seconds, minuts and hours based on time, if achievemnt exists
+            if (newCurrentAchievement.time) {
+                state.setSeconds(
+                    Number(newCurrentAchievement.time.split(":")[2])
+                );
+            }
+
+            return {
+                currentAchievement: newCurrentAchievement,
             };
         }),
 

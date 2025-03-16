@@ -28,6 +28,8 @@ const App = () => {
         setAchievement,
         currentAchievement,
         hours,
+        saveToLocalStorage,
+        initializeCurrentAchievement,
     } = useTimeRangeStore();
 
     // Initializing dark mode
@@ -57,12 +59,16 @@ const App = () => {
                 } else {
                     setSeconds(seconds);
                 }
-                setAchievement({
+                const newAchievement = {
                     ...currentAchievement,
                     time: `${String(hours).padStart(2, "0")}:${String(
                         minutes
                     ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`,
-                });
+                };
+
+                saveToLocalStorage("currentAchievement", newAchievement);
+                console.log(newAchievement);
+                setAchievement(newAchievement);
             }, 1000);
         } else {
             clearInterval(intervalRef.current);
@@ -70,6 +76,10 @@ const App = () => {
 
         return () => clearInterval(intervalRef.current);
     }, [isRunning, seconds, minutes, hours, currentAchievement]);
+
+    useEffect(() => {
+        initializeCurrentAchievement();
+    }, []);
 
     return (
         <BrowserRouter>
