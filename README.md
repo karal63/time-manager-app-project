@@ -218,3 +218,8 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 -   Zmienione położenie przycisku do schowania osi czasu w podstronie /observe oraz dodanie nowego przycisku, umożliwiającego schowanie bieżących okresów czasu
 -   Uzupełniona wersyfikacja oraz poprawione niektóre błędy
 -   Stworzony wskaźnik (procent) przybliżenia ekranu w podstronie /planner
+
+### **[ver. 1.10 Beta] - 2025-03-27**
+
+-   Tworzy małe menu z bieżącym czasem oraz nazwą osiągnięcia, które będzie wyświetlane w przypadku, gdy urochomimy stopper oraz opuścimy tę stronę
+-   Naprawia niektóre problemy
