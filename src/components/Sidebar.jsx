@@ -56,7 +56,7 @@ const Sidebar = () => {
                         <div className="mt-2">
                             <input
                                 type="text"
-                                className="px-4 py-2 border-[1px] border-transparent rounded-md text-md w-full text-md hover:bg-mainHoverColor outline-gray-300 bg-transparent text-mainColor"
+                                className="px-4 py-2 rounded-md text-md w-full text-md focus:bg-mainHoverColor outline-none bg-transparent text-mainColor"
                                 value={projectName}
                                 onChange={(e) => setProjectName(e.target.value)}
                             />
