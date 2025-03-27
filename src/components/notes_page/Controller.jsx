@@ -17,15 +17,19 @@ const Controller = () => {
     } = useNotesStore();
     const [isHovering, setIsHovering] = useState(false);
 
+    const scrollToTop = () => {
+        if (notesRef.current) {
+            notesRef.current.scrollTo({
+                top: 0,
+            });
+        }
+    };
+
     const handleMainBar = () => {
         setIsHandleBarOpen(!isHandleBarOpen);
 
         if (!isHandleBarOpen) {
-            if (notesRef.current) {
-                notesRef.current.scrollTo({
-                    top: 0,
-                });
-            }
+            scrollToTop();
         } else {
             setEditingNote(false, {});
             setNote({
@@ -37,6 +41,11 @@ const Controller = () => {
                 },
             });
         }
+    };
+
+    const openMainBar = () => {
+        scrollToTop();
+        setIsHandleBarOpen(true);
     };
 
     const handleFilterBar = () => {
@@ -54,6 +63,7 @@ const Controller = () => {
                         ? "scale-110 text-darkPink border-darkPink"
                         : "scale-100"
                 }`}
+                onClick={openMainBar}
             >
                 <SlNote />
             </button>
