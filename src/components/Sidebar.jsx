@@ -63,7 +63,7 @@ const Sidebar = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="mt-6 h-[77.6px]"></div>
+                    <div className="mt-6 h-[76px]"></div>
                 )}
 
                 <div className="mt-10">
