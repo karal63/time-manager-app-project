@@ -24,8 +24,6 @@ const TimePanel = () => {
         setIsHovering(false);
     };
 
-    console.log(currentAchievement.name);
-
     return (
         currentAchievement.time &&
         location.pathname !== "/planner/observe" && (

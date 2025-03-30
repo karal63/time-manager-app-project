@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlNote } from "react-icons/sl";
 import { SlLock } from "react-icons/sl";
 import { VscSettings } from "react-icons/vsc";
@@ -44,13 +44,20 @@ const Controller = () => {
     };
 
     const openMainBar = () => {
-        scrollToTop();
-        setIsHandleBarOpen(true);
+        if (!isMobileDevice()) {
+            scrollToTop();
+            setIsHandleBarOpen(true);
+        }
     };
 
     const handleFilterBar = () => {
         setIsFilterPanelOpen(!isFilterPanelOpen);
     };
+
+    const isMobileDevice = () => {
+        return window.matchMedia("(max-width: 768px)").matches;
+    };
+
     return (
         <div
             className="absolute right-7 max-sm:right-4 bottom-4 flex-center rounded-full"

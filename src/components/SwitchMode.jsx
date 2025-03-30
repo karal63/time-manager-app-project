@@ -19,8 +19,6 @@ const SwitchMode = () => {
         setCurrentMode(selectedMode);
     }, [selectedMode]);
 
-    useEffect(() => {}, [location.pathname]);
-
     return (
         <div className="relative max-sm:hidden">
             <button
