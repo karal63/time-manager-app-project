@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SlNote } from "react-icons/sl";
 import { SlLock } from "react-icons/sl";
 import { VscSettings } from "react-icons/vsc";
