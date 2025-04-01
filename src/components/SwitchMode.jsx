@@ -22,7 +22,7 @@ const SwitchMode = () => {
     return (
         <div className="relative max-sm:hidden">
             <button
-                className="flex items-center border-[1px] border-pink-300 rounded-md px-3 py-1"
+                className="flex items-center border-[1px] border-mainLineColor hover:bg-mainHoverColor rounded-md px-3 py-1 transition-all"
                 onClick={() => setIsDropDown(!isDropDown)}
             >
                 <span className="text-2xl mr-3 text-mainColor">
@@ -35,7 +35,7 @@ const SwitchMode = () => {
             </button>
 
             {isDropDown && (
-                <div className="absolute top-[3.2rem] right-0 z-20 w-[300px] rounded-lg bg-mainBackground shadow-main border border-mainLineColor">
+                <div className="absolute top-[3.2rem] left-0 z-20 w-[300px] rounded-lg bg-mainBackground shadow-main border border-mainLineColor">
                     <ul>
                         <li className="hover:bg-mainHoverColor cursor-pointer text-[1.1rem] transition-all rounded-tr-lg rounded-tl-lg">
                             <button
