@@ -63,7 +63,11 @@ const Navbar = () => {
                 <div className="flex items-center gap-2 max-sm:absolute max-sm:right-3 max-sm:top-0">
                     {url.pathname === "/planner" && (
                         <button
-                            className="text-mainColor text-2xl w-10 h-10 rounded-full hover:bg-mainHoverColor flex-center mr-2"
+                            className={`text-2xl w-10 h-10 rounded-full hover:bg-mainHoverColor flex-center mr-2 ${
+                                isCommentOpen
+                                    ? "text-darkPink"
+                                    : "text-mainColor"
+                            }`}
                             onClick={() => setCommentsOpen(!isCommentOpen)}
                         >
                             <GoComment />
