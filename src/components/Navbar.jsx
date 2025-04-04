@@ -7,8 +7,6 @@ import { IoMenu } from "react-icons/io5";
 import { GoComment } from "react-icons/go";
 
 import { useTimeRangeStore } from "../store";
-import CommentsPanel from "./CommentsPanel";
-import { useState } from "react";
 
 const Navbar = () => {
     const url = useLocation();

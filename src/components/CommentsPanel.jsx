@@ -1,25 +1,38 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommentsList from "./CommentsList";
 import { useTimeRangeStore } from "../store";
 
 const CommentsPanel = () => {
     const { isCommentPanelOpen, addComment } = useTimeRangeStore();
-
     const inputRef = useRef(null);
 
     const [comment, setComment] = useState({
         text: "",
     });
+    const [error, setError] = useState(false);
 
     const handleInput = (e) => {
-        setComment({
-            ...comment,
-            text: e.target.value,
-        });
+        const value = e.target.value;
+
+        setComment({ text: value });
+
+        if (error && value.trim().length > 0) {
+            setError(false);
+        }
+
+        if (inputRef.current) {
+            inputRef.current.style.height = "auto";
+            inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!comment.text) {
+            return setError(true);
+        }
+
         addComment(comment);
         setComment({
             ...comment,
@@ -36,10 +49,17 @@ const CommentsPanel = () => {
             <CommentsList />
 
             <div className="w-full absolute bottom-5 right-0 px-4">
+                {error && (
+                    <div className="px-2 py-1 mb-3 bg-red-500 bg-opacity-30 rounded-sm text-gray-300 border border-red-800">
+                        Name is required.
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
                     <textarea
+                        ref={inputRef}
                         placeholder="Write comment here..."
-                        className="block w-full bg-mainHoverColor text-left px-4 pt-2 pb-14 rounded-md outline-none resize-none"
+                        className="block w-full bg-mainHoverColor text-left px-4 pt-2 rounded-md outline-none resize-none min-h-[100px] pb-10"
                         onChange={(e) => handleInput(e)}
                         value={comment.text}
                     ></textarea>

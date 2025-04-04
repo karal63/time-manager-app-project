@@ -215,7 +215,7 @@ const AddTimeRangePanel = () => {
 
                         <textarea
                             ref={textareaRef}
-                            className={`resize-none  py-2 px-2 rounded-lg border-[1px] border-mainLineColor outline-gray-200 w-full
+                            className={`resize-none py-2 px-2 rounded-lg border-[1px] border-mainLineColor outline-gray-200 w-full
                      min-h-[50px] max-h-[180px] text-sm bg-transparent text-mainColor`}
                             data-testid="desc-textarea"
                             value={desc}

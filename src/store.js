@@ -776,8 +776,6 @@ export const useTimeRangeStore = create((set, get) => ({
         set(() => {
             const loadedComments = get().returnFromLocalStorage("userComments");
 
-            console.log(loadedComments);
-
             return {
                 comments: loadedComments || [
                     {
