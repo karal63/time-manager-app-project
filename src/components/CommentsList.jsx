@@ -1,8 +1,13 @@
 import { IoMdClose } from "react-icons/io";
 import { useTimeRangeStore } from "../store";
+import { useEffect } from "react";
 
 const CommentsList = () => {
-    const { comments, deleteComment } = useTimeRangeStore();
+    const { comments, deleteComment, initializeComments } = useTimeRangeStore();
+
+    useEffect(() => {
+        initializeComments();
+    }, []);
 
     return comments.length > 0 ? (
         <ul className="flex flex-col gap-2 mt-4">

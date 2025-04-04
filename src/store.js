@@ -741,20 +741,7 @@ export const useTimeRangeStore = create((set, get) => ({
     setIsCommentPanelOpen: (value) =>
         set(() => ({ isCommentPanelOpen: value })),
 
-    comments: [
-        {
-            id: 1,
-            text: "Hello world",
-        },
-        {
-            id: 2,
-            text: "world Hello",
-        },
-        {
-            id: 3,
-            text: "Create functionality about counting all comments",
-        },
-    ],
+    comments: [],
 
     addComment: (newComment) =>
         set((state) => {
@@ -763,8 +750,12 @@ export const useTimeRangeStore = create((set, get) => ({
                 id: state.getNextId(state.comments),
             };
 
+            const newComments = [...state.comments, newComment];
+
+            state.saveToLocalStorage("userComments", newComments);
+
             return {
-                comments: [...state.comments, newComment],
+                comments: newComments,
             };
         }),
 
@@ -774,10 +765,34 @@ export const useTimeRangeStore = create((set, get) => ({
                 (comment) => comment.id !== id
             );
 
-            console.log(newComments);
+            state.saveToLocalStorage("userComments", newComments);
 
             return {
                 comments: newComments,
+            };
+        }),
+
+    initializeComments: () =>
+        set(() => {
+            const loadedComments = get().returnFromLocalStorage("userComments");
+
+            console.log(loadedComments);
+
+            return {
+                comments: loadedComments || [
+                    {
+                        id: 1,
+                        text: "Hello world",
+                    },
+                    {
+                        id: 2,
+                        text: "world Hello",
+                    },
+                    {
+                        id: 3,
+                        text: "Create functionality about counting all comments",
+                    },
+                ],
             };
         }),
 }));
