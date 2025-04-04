@@ -7,6 +7,7 @@ import ZoomZone from "../components/ZoomZone.jsx";
 
 import darkGridImage from "../assets/darkGrid_copy2.png";
 import gridImage from "../assets/grid.png";
+import CommentsPanel from "../components/CommentsPanel.jsx";
 
 const Planner = () => {
     const {
@@ -83,6 +84,8 @@ const Planner = () => {
                     <AddTimeRangePanel />
                 </div>
             )}
+
+            <CommentsPanel />
 
             <ZoomZone zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} />
 

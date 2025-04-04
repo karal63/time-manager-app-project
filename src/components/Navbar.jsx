@@ -12,10 +12,14 @@ import { useState } from "react";
 
 const Navbar = () => {
     const url = useLocation();
-    const { isDarkMode, setIsDarkMode, isSidebarOpen, setIsSidebarOpen } =
-        useTimeRangeStore();
-
-    const [isCommentOpen, setCommentsOpen] = useState(false);
+    const {
+        isDarkMode,
+        setIsDarkMode,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        isCommentPanelOpen,
+        setIsCommentPanelOpen,
+    } = useTimeRangeStore();
 
     const toggleMode = () => {
         document.body.classList.toggle("darkMode");
@@ -64,11 +68,13 @@ const Navbar = () => {
                     {url.pathname === "/planner" && (
                         <button
                             className={`text-2xl w-10 h-10 rounded-full hover:bg-mainHoverColor flex-center mr-2 ${
-                                isCommentOpen
+                                isCommentPanelOpen
                                     ? "text-darkPink"
                                     : "text-mainColor"
                             }`}
-                            onClick={() => setCommentsOpen(!isCommentOpen)}
+                            onClick={() =>
+                                setIsCommentPanelOpen(!isCommentPanelOpen)
+                            }
                         >
                             <GoComment />
                         </button>
@@ -82,8 +88,6 @@ const Navbar = () => {
                     </button>
                 </div>
             </div>
-
-            {isCommentOpen && <CommentsPanel />}
         </section>
     );
 };

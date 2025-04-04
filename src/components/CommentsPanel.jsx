@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import CommentsList from "./CommentsList";
+import { useTimeRangeStore } from "../store";
 
 const CommentsPanel = () => {
+    const { isCommentPanelOpen, addComment } = useTimeRangeStore();
+
     const inputRef = useRef(null);
 
     const [comment, setComment] = useState({
@@ -17,10 +20,19 @@ const CommentsPanel = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        addComment(comment);
+        setComment({
+            ...comment,
+            text: "",
+        });
     };
 
     return (
-        <div className="absolute w-[300px] h-[calc(100vh-68px)] right-0 top-full bg-mainBackground border-l border-mainLineColor px-4">
+        <div
+            className={`z-20 absolute w-[300px] h-[calc(100vh-68px)] top-0 bg-mainBackground border-l border-mainLineColor px-4 ${
+                isCommentPanelOpen ? "right-0" : "-right-full"
+            }`}
+        >
             <CommentsList />
 
             <div className="w-full absolute bottom-5 right-0 px-4">

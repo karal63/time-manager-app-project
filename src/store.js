@@ -736,4 +736,48 @@ export const useTimeRangeStore = create((set, get) => ({
 
     isSidebarOpen: false,
     setIsSidebarOpen: (value) => set(() => ({ isSidebarOpen: value })),
+
+    isCommentPanelOpen: true,
+    setIsCommentPanelOpen: (value) =>
+        set(() => ({ isCommentPanelOpen: value })),
+
+    comments: [
+        {
+            id: 1,
+            text: "Hello world",
+        },
+        {
+            id: 2,
+            text: "world Hello",
+        },
+        {
+            id: 3,
+            text: "Create functionality about counting all comments",
+        },
+    ],
+
+    addComment: (newComment) =>
+        set((state) => {
+            newComment = {
+                ...newComment,
+                id: state.getNextId(state.comments),
+            };
+
+            return {
+                comments: [...state.comments, newComment],
+            };
+        }),
+
+    deleteComment: (id) =>
+        set((state) => {
+            const newComments = state.comments.filter(
+                (comment) => comment.id !== id
+            );
+
+            console.log(newComments);
+
+            return {
+                comments: newComments,
+            };
+        }),
 }));
