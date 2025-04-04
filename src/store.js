@@ -737,7 +737,7 @@ export const useTimeRangeStore = create((set, get) => ({
     isSidebarOpen: false,
     setIsSidebarOpen: (value) => set(() => ({ isSidebarOpen: value })),
 
-    isCommentPanelOpen: true,
+    isCommentPanelOpen: false,
     setIsCommentPanelOpen: (value) =>
         set(() => ({ isCommentPanelOpen: value })),
 

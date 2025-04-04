@@ -15,6 +15,9 @@ const CommentsList = () => {
                 <li
                     key={comment.id}
                     className="bg-mainDullColor px-2 mr-5 py-1 flex justify-between rounded-sm"
+                    style={{
+                        backgroundColor: comment.color,
+                    }}
                 >
                     <p className="overflow-hidden">{comment.text}</p>
 
