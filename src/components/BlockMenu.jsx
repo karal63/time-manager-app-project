@@ -4,6 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { SlLockOpen } from "react-icons/sl";
 import { SlLock } from "react-icons/sl";
+import { BsCopy } from "react-icons/bs";
 
 import { useTimeRangeStore } from "../store";
 
@@ -16,6 +17,7 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
         setTimeRangePanel,
         updateTimeRangePanel,
         setIsLockedRange,
+        addTimeRange,
     } = useTimeRangeStore();
     const menuRef = useRef(null);
 
@@ -67,8 +69,37 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
     };
 
     const handleLock = () => {
-        console.log(isLocked);
         setIsLockedRange(range, isLocked ? false : true);
+    };
+
+    const duplicateBlock = () => {
+        const { timeStart, timeEnd } = range;
+
+        const [hoursStart, minutesStart] = timeStart.split(":").map(Number);
+        const [hoursEnd, minutesEnd] = timeEnd.split(":").map(Number);
+
+        let durationHours = hoursEnd - hoursStart;
+        let durationMinutes = minutesEnd - minutesStart;
+
+        if (durationMinutes < 0) {
+            durationHours -= 1;
+            durationMinutes += 60;
+        }
+
+        const newRange = {
+            ...range,
+            timeStart:
+                String(hoursStart + durationHours).padStart(2, "0") +
+                ":" +
+                String(minutesStart + durationMinutes).padStart(2, "0"),
+            timeEnd:
+                String(hoursEnd + durationHours).padStart(2, "0") +
+                ":" +
+                String(minutesEnd + durationMinutes).padStart(2, "0"),
+        };
+
+        addTimeRange(newRange);
+        closeBlockMenu();
     };
 
     return (
@@ -89,6 +120,18 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
                         <MdEdit />
                     </span>{" "}
                     Edit
+                </button>
+            )}
+
+            {!isLocked && (
+                <button
+                    className="flex gap-2 hover:bg-mainHoverColor pl-3 pr-5 py-2 w-full transition-all text-mainColor"
+                    onClick={duplicateBlock}
+                >
+                    <span className="text-2xl text-darkPink">
+                        <BsCopy />
+                    </span>{" "}
+                    Duplicate
                 </button>
             )}
 
