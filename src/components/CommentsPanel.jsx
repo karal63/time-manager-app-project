@@ -9,8 +9,11 @@ const CommentsPanel = () => {
     const [comment, setComment] = useState({
         text: "",
         color: "",
+        date: "",
     });
     const [error, setError] = useState(false);
+
+    const date = new Date();
 
     const handleInput = (e) => {
         const value = e.target.value;
@@ -34,7 +37,7 @@ const CommentsPanel = () => {
             return setError(true);
         }
 
-        addComment(comment);
+        addComment({ ...comment, date: date.toISOString() });
         setComment({
             text: "",
             color: "",
