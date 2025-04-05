@@ -5,13 +5,18 @@ import { IoMdClose } from "react-icons/io";
 import { useTimeRangeStore } from "../store";
 
 const SingleComment = ({ comment }) => {
-    const { deleteComment } = useTimeRangeStore();
+    const {
+        deleteComment,
+        setComments,
+        comments,
+        setDraggbleComment,
+        setReplacingComment,
+        draggbleComment,
+        replacingComment,
+    } = useTimeRangeStore();
     const [isContext, setIsContext] = useState(false);
 
     const commentRef = useRef(null);
-    const date = new Date();
-
-    const openContext = () => {};
 
     useEffect(() => {
         const checkClick = (e) => {
@@ -29,12 +34,40 @@ const SingleComment = ({ comment }) => {
         };
     }, []);
 
+    useEffect(() => {
+        if (draggbleComment && replacingComment) {
+            const newComments = comments.map((el) => {
+                if (el.id === draggbleComment.id) {
+                    return replacingComment;
+                }
+                if (el.id === replacingComment.id) {
+                    return draggbleComment;
+                }
+                return el;
+            });
+
+            setComments(newComments);
+            setDraggbleComment(null);
+            setReplacingComment(null);
+        }
+    }, [draggbleComment, replacingComment]);
+
+    useEffect(() => {
+        console.log(replacingComment);
+    }, [replacingComment]);
+
     return (
         <li
             ref={commentRef}
             draggable
+            onDragStart={() => setDraggbleComment(comment)}
+            onDragOver={(e) => {
+                e.preventDefault();
+            }}
+            onDrop={() => {
+                setReplacingComment(comment);
+            }}
             className="cursor-grab"
-            onClick={openContext}
         >
             {isContext && (
                 <p className="text-[.7rem] text-gray-500 mb-1">

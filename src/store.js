@@ -742,6 +742,7 @@ export const useTimeRangeStore = create((set, get) => ({
         set(() => ({ isCommentPanelOpen: value })),
 
     comments: [],
+    setComments: (newComments) => set(() => ({ comments: newComments })),
 
     addComment: (newComment) =>
         set((state) => {
@@ -793,4 +794,10 @@ export const useTimeRangeStore = create((set, get) => ({
                 ],
             };
         }),
+
+    draggbleComment: null,
+    setDraggbleComment: (comment) => set(() => ({ draggbleComment: comment })),
+    replacingComment: null,
+    setReplacingComment: (comment) =>
+        set(() => ({ replacingComment: comment })),
 }));
