@@ -86,16 +86,33 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
             durationMinutes += 60;
         }
 
+        // calculating time
+        let summedMinutesStart = minutesStart + durationMinutes;
+        let summedHoursStart = hoursStart + durationHours;
+
+        if (summedMinutesStart > 59) {
+            summedHoursStart += 1;
+            summedMinutesStart -= 60;
+        }
+
+        let summedMinutesEnd = minutesEnd + durationMinutes;
+        let summedHoursEnd = hoursEnd + durationHours;
+
+        if (summedMinutesEnd > 59) {
+            summedHoursEnd += 1;
+            summedMinutesEnd -= 60;
+        }
+
         const newRange = {
             ...range,
             timeStart:
-                String(hoursStart + durationHours).padStart(2, "0") +
+                String(summedHoursStart).padStart(2, "0") +
                 ":" +
-                String(minutesStart + durationMinutes).padStart(2, "0"),
+                String(summedMinutesStart).padStart(2, "0"),
             timeEnd:
-                String(hoursEnd + durationHours).padStart(2, "0") +
+                String(summedHoursEnd).padStart(2, "0") +
                 ":" +
-                String(minutesEnd + durationMinutes).padStart(2, "0"),
+                String(summedMinutesEnd).padStart(2, "0"),
         };
 
         addTimeRange(newRange);
