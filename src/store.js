@@ -742,7 +742,13 @@ export const useTimeRangeStore = create((set, get) => ({
         set(() => ({ isCommentPanelOpen: value })),
 
     comments: [],
-    setComments: (newComments) => set(() => ({ comments: newComments })),
+    setComments: (newComments) =>
+        set((state) => {
+            state.saveToLocalStorage("userComments", newComments);
+            return {
+                comments: newComments,
+            };
+        }),
 
     addComment: (newComment) =>
         set((state) => {

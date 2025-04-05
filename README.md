@@ -223,3 +223,7 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 
 -   Tworzy małe menu z bieżącym czasem oraz nazwą osiągnięcia, które będzie wyświetlane w przypadku, gdy urochomimy stopper oraz opuścimy tę stronę
 -   Naprawia niektóre problemy
+
+### **[ver. 1.15 Beta] - 2025-04-05**
+
+-   Tworzy panel z notatkami w podstronie "/planner"

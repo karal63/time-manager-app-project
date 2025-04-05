@@ -52,10 +52,6 @@ const SingleComment = ({ comment }) => {
         }
     }, [draggbleComment, replacingComment]);
 
-    useEffect(() => {
-        console.log(replacingComment);
-    }, [replacingComment]);
-
     return (
         <li
             ref={commentRef}
