@@ -1,4 +1,4 @@
-import { PiNotePencil } from "react-icons/pi";
+import { CiStickyNote } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
 import { CiViewBoard } from "react-icons/ci";
@@ -80,7 +80,14 @@ const Sidebar = () => {
                                 onMouseOver={() => setIsSidebarOpen(true)}
                                 onClick={closeSidebar}
                             >
-                                <CiCalendar className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
+                                <CiCalendar
+                                    className={`text-5xl min-w-12 min-h-12 p-2 rounded-xl 
+                                ${
+                                    location.pathname === "/planner"
+                                        ? "text-darkPink bg-darkPinkTransp/15"
+                                        : "text-mainColor hover:bg-mainHoverColor"
+                                }`}
+                                />
 
                                 {isSidebarOpen ? (
                                     <span className="text-xl text-mainColor">
@@ -95,11 +102,17 @@ const Sidebar = () => {
                         <li>
                             <Link
                                 to="/planner/observe"
-                                className="flex items-center gap-3 "
+                                className="flex items-center gap-3"
                                 onMouseOver={() => setIsSidebarOpen(true)}
                                 onClick={closeSidebar}
                             >
-                                <CiViewBoard className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
+                                <CiViewBoard
+                                    className={`text-5xl min-w-12 min-h-12 p-2 rounded-xl ${
+                                        location.pathname === "/planner/observe"
+                                            ? "text-darkPink bg-darkPinkTransp/15"
+                                            : "text-mainColor hover:bg-mainHoverColor"
+                                    }`}
+                                />
 
                                 {isSidebarOpen ? (
                                     <span className="text-xl text-mainColor">
@@ -111,14 +124,27 @@ const Sidebar = () => {
                             </Link>
                         </li>
 
-                        <li>
+                        {/* think about animation or smth like that */}
+                        <li
+                            className={`relative ${
+                                location.pathname === "/notes"
+                                    ? "before:absolute before:w-2 before:h-2 before:bg-darkPink before:right-[110%] before:top-1/2 before:-translate-y-1/2 before:transform before:rotate-45"
+                                    : ""
+                            }`}
+                        >
                             <Link
                                 to="/notes"
-                                className="flex items-center gap-3"
+                                className={`flex items-center gap-3`}
                                 onMouseOver={() => setIsSidebarOpen(true)}
                                 onClick={closeSidebar}
                             >
-                                <PiNotePencil className="text-5xl text-mainColor min-w-12 min-h-12 p-2 hover:bg-mainHoverColor hover:rounded-xl" />
+                                <CiStickyNote
+                                    className={`text-5xl min-w-12 min-h-12 p-2 rounded-xl ${
+                                        location.pathname === "/notes"
+                                            ? "text-darkPink bg-darkPinkTransp/15"
+                                            : "text-mainColor hover:bg-mainHoverColor"
+                                    }`}
+                                />
                                 {isSidebarOpen ? (
                                     <span className="text-xl text-mainColor">
                                         Notes
