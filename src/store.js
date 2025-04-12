@@ -548,7 +548,7 @@ export const useTimeRangeStore = create((set, get) => ({
             const newCurrentAchievement = state.returnFromLocalStorage(
                 "currentAchievement"
             ) || {
-                name: "123",
+                name: "",
                 category: "None",
                 time: "",
             };
