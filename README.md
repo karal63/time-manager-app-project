@@ -10,7 +10,15 @@ Aplikacja "ProducIVE" działa poprzez tworzenie list zadań oraz harmonogramów.
 
 ## 💎 Na czym polega interakcja z użytkownikiem?
 
-Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawaniu, edytowaniu i usuwaniu zadań oraz planowaniu czasu za pomocą prostego interfejsu. Aplikacja dostosowuje się do preferencji użytkownika, ułatwiając organizację codziennych obowiązków.
+## Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawaniu, edytowaniu i usuwaniu zadań oraz planowaniu czasu za pomocą prostego interfejsu. Aplikacja dostosowuje się do preferencji użytkownika, ułatwiając organizację codziennych obowiązków.
+
+## ⚡ Instalacja
+
+**1. Sklonuj repozytorium:**
+
+```
+git clone https://github.com/karal63/time-manager-app-project && cd "Time Manager App"
+```
 
 ## ⚒ Wersyfikacja
 
