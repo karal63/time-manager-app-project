@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommentsList from "./CommentsList";
 import { useTimeRangeStore } from "../store";
 
 const CommentsPanel = () => {
-    const { isCommentPanelOpen, addComment } = useTimeRangeStore();
+    const { isCommentPanelOpen, addComment, isDarkMode } = useTimeRangeStore();
     const inputRef = useRef(null);
 
     const [comment, setComment] = useState({
         text: "",
-        color: "",
+        color: "#dcdcdc",
         date: "",
     });
     const [error, setError] = useState(false);
@@ -39,10 +39,17 @@ const CommentsPanel = () => {
 
         addComment({ ...comment, date: date.toISOString() });
         setComment({
+            ...comment,
             text: "",
-            color: "",
         });
     };
+
+    useEffect(() => {
+        setComment({
+            ...comment,
+            color: isDarkMode ? "#3e3e3e" : "#dcdcdc",
+        });
+    }, [isDarkMode]);
 
     return (
         <div

@@ -20,7 +20,7 @@ const SingleComment = ({ comment }) => {
 
     useEffect(() => {
         const checkClick = (e) => {
-            if (commentRef) {
+            if (commentRef.current) {
                 if (!commentRef.current.contains(e.target)) {
                     setIsContext(false);
                 } else setIsContext(true);
@@ -71,7 +71,7 @@ const SingleComment = ({ comment }) => {
                 </p>
             )}
             <div
-                className="bg-mainDullColor flex mr-5 rounded-sm px-2 py-1"
+                className="flex mr-5 rounded-sm px-2 py-1"
                 style={{
                     backgroundColor: comment.color,
                 }}
