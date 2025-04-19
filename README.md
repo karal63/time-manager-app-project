@@ -12,6 +12,8 @@ Aplikacja "ProducIVE" działa poprzez tworzenie list zadań oraz harmonogramów.
 
 ## Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawaniu, edytowaniu i usuwaniu zadań oraz planowaniu czasu za pomocą prostego interfejsu. Aplikacja dostosowuje się do preferencji użytkownika, ułatwiając organizację codziennych obowiązków.
 
+-----
+
 ## ⚡ Instalacja
 
 **1. Sklonuj repozytorium:**
