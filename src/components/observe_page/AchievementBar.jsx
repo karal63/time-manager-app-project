@@ -88,10 +88,6 @@ const AchievementBar = () => {
                             draggableAchievement.id,
                             currentAchievement
                         );
-                        console.log(
-                            "draggble achive when submiting",
-                            currentAchievement
-                        );
                         setDraggedAchievement({});
                         setIsDraggedAchievement(false);
                     } else {
@@ -100,7 +96,6 @@ const AchievementBar = () => {
                     clearAchievements();
                     clearTime();
                     clearCurrentAchievement();
-                    // unexpectedly working
                 }
             }
         }
@@ -119,11 +114,7 @@ const AchievementBar = () => {
             diff: draggableAchievement.diff,
         });
 
-        console.log("dragged achieve:", draggableAchievement);
-
         const time = draggableAchievement.time.split(":").map(Number);
-        // console.log(draggableAchievement.time);
-        // console.log(draggableAchievement.diff);
 
         setMinutes(time[1]);
         setSeconds(time[2]);
@@ -139,15 +130,6 @@ const AchievementBar = () => {
         });
         clearTime();
     };
-
-    // useEffect(() => {
-    //     console.log("draggble achievement: ");
-    //     console.log(draggableAchievement);
-    // }, [draggableAchievement]);
-
-    useEffect(() => {
-        console.log("current achieve", currentAchievement);
-    }, [currentAchievement]);
 
     return (
         <div

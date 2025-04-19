@@ -23,10 +23,10 @@ const App = () => {
         setMinutes,
         setHours,
         setSeconds,
-        setAchievement,
         currentAchievement,
         saveToLocalStorage,
         initializeCurrentAchievement,
+        updateTimeAndDiff,
     } = useTimeRangeStore();
 
     // Initializing dark mode
@@ -46,12 +46,9 @@ const App = () => {
     useEffect(() => {
         if (isRunning) {
             let achievementCopy = { ...currentAchievement };
-            console.log("achieve copy when started: ", achievementCopy);
 
             const startTime = new Date();
             let lastDiff = achievementCopy.diff || 0;
-
-            // console.log(achievementCopy);
 
             intervalRef.current = setInterval(() => {
                 const timeElapsed = Math.floor((new Date() - startTime) / 1000);
@@ -79,12 +76,10 @@ const App = () => {
                     diff: newDiff,
                 };
 
-                console.log(achievementCopy);
-
                 // console.log("Updated diff:", achievementCopy);
 
                 saveToLocalStorage("currentAchievement", achievementCopy);
-                setAchievement(achievementCopy);
+                updateTimeAndDiff(achievementCopy.time, achievementCopy.diff);
             }, 1000);
         } else {
             clearInterval(intervalRef.current);

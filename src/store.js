@@ -527,6 +527,17 @@ export const useTimeRangeStore = create((set, get) => ({
             };
         }),
 
+    updateTimeAndDiff: (time, diff) =>
+        set((state) => {
+            return {
+                currentAchievement: {
+                    ...state.currentAchievement,
+                    time,
+                    diff,
+                },
+            };
+        }),
+
     addAchievement: (achieve) =>
         set((state) => {
             const newAchievements = [
