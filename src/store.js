@@ -481,6 +481,7 @@ export const useTimeRangeStore = create((set, get) => ({
         name: "",
         category: "None",
         time: "",
+        diff: 0,
     },
 
     isRunning: false,
@@ -501,15 +502,15 @@ export const useTimeRangeStore = create((set, get) => ({
     hours: 0,
     setSeconds: (prevSeconds) =>
         set(() => ({
-            seconds: prevSeconds + 1,
+            seconds: prevSeconds,
         })),
     setMinutes: (prevMinutes) =>
         set(() => ({
-            minutes: prevMinutes + 1,
+            minutes: prevMinutes,
         })),
     setHours: (prevHours) =>
         set(() => ({
-            hours: prevHours + 1,
+            hours: prevHours,
         })),
 
     clearTime: () =>
@@ -604,7 +605,7 @@ export const useTimeRangeStore = create((set, get) => ({
     setIsSavedAchievements: (value) =>
         set(() => ({ isSavedAchievements: value })),
 
-    editAchievement: (id, { name, category, time }) =>
+    editAchievement: (id, { name, category, time, diff }) =>
         set((state) => {
             const newAchievements = state.achievements.map((achieve) => {
                 if (achieve.id === id) {
@@ -613,6 +614,7 @@ export const useTimeRangeStore = create((set, get) => ({
                         name,
                         category,
                         time,
+                        diff,
                     };
                 }
                 return achieve;

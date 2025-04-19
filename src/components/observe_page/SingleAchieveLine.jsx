@@ -7,6 +7,7 @@ const SingleAchieveLine = ({ achieve }) => {
         name: achieve.name,
         category: achieve.category,
         time: achieve.time,
+        diff: achieve.diff,
     });
     const [isShowingFullName, setIsShowingFullName] = useState(false);
 

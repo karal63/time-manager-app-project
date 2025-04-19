@@ -20,14 +20,11 @@ const App = () => {
         initializeDarkMode,
         isDarkMode,
         isRunning,
-        minutes,
         setMinutes,
         setHours,
-        seconds,
         setSeconds,
         setAchievement,
         currentAchievement,
-        hours,
         saveToLocalStorage,
         initializeCurrentAchievement,
     } = useTimeRangeStore();
@@ -48,34 +45,53 @@ const App = () => {
 
     useEffect(() => {
         if (isRunning) {
+            let achievementCopy = { ...currentAchievement };
+            console.log("achieve copy when started: ", achievementCopy);
+
+            const startTime = new Date();
+            let lastDiff = achievementCopy.diff || 0;
+
+            // console.log(achievementCopy);
+
             intervalRef.current = setInterval(() => {
-                if (minutes > 59) {
-                    setHours(hours);
-                    setMinutes(-1);
-                }
-                if (seconds >= 59) {
-                    setMinutes(minutes);
-                    setSeconds(-1);
-                } else {
-                    setSeconds(seconds);
-                }
-                const newAchievement = {
-                    ...currentAchievement,
-                    time: `${String(hours).padStart(2, "0")}:${String(
-                        minutes
-                    ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`,
+                const timeElapsed = Math.floor((new Date() - startTime) / 1000);
+
+                const newDiff = lastDiff + timeElapsed;
+                console.log(newDiff);
+
+                // calculating time
+                const diffSeconds = newDiff % 60;
+                const diffMinutes = Math.floor((newDiff % 3600) / 60);
+                const diffHours = Math.floor(newDiff / 3600);
+
+                setSeconds(diffSeconds);
+                setMinutes(diffMinutes);
+                setHours(diffHours);
+
+                achievementCopy = {
+                    ...achievementCopy,
+                    time: `${String(diffHours).padStart(2, "0")}:${String(
+                        diffMinutes
+                    ).padStart(2, "0")}:${String(diffSeconds).padStart(
+                        2,
+                        "0"
+                    )}`,
+                    diff: newDiff,
                 };
 
-                saveToLocalStorage("currentAchievement", newAchievement);
-                console.log(newAchievement);
-                setAchievement(newAchievement);
+                console.log(achievementCopy);
+
+                // console.log("Updated diff:", achievementCopy);
+
+                saveToLocalStorage("currentAchievement", achievementCopy);
+                setAchievement(achievementCopy);
             }, 1000);
         } else {
             clearInterval(intervalRef.current);
         }
 
         return () => clearInterval(intervalRef.current);
-    }, [isRunning, seconds, minutes, hours, currentAchievement]);
+    }, [isRunning]);
 
     useEffect(() => {
         initializeCurrentAchievement();
