@@ -1,6 +1,6 @@
 # ProductIVE
 
-## ♦ Cel
+## ♦ Cel aplikacji
 
 Aplikacja "ProducIVE" umożliwia efektywne zarządzanie czasem, ułatwiając planowanie codziennych zadań i organizację obowiązków. Dzięki intuicyjnemu interfejsowi, użytkownicy mogą łatwo tworzyć harmonogramy.
 
@@ -21,6 +21,24 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 ```
 git clone https://github.com/karal63/time-manager-app-project && cd "Time Manager App"
 ```
+
+**2. Zainstaluj zależności:**
+
+Upewnij się, że masz zainstalowany Node.js (najlepiej najnowszą wersję LTS).
+
+Następnie zainstaluj wymagane pakiety:
+
+```
+npm install
+```
+
+**3. Uruchom serwer deweloperski**
+
+```
+npm run dev
+```
+
+Twoja aplikacja powinna teraz działać pod adresem http://localhost:5173/ (lub na porcie określonym w konfiguracji).
 
 ## ⚒ Wersyfikacja
 
