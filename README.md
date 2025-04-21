@@ -265,3 +265,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ### **[ver. 1.15 Beta] - 2025-04-05**
 
 -   Tworzy panel z notatkami w podstronie "/planner"
+
+### **[ver. 1.16 Beta] - 2025-04-21**
+
+-   Naprawia błąd związany z niedziałającą funkcjonalnością, która aktualizuje czas bieżącego osiągnięcia w momencie, kiedy strona jest w tle.
