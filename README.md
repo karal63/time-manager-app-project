@@ -38,7 +38,7 @@ npm install
 npm run dev
 ```
 
-## Twoja aplikacja powinna teraz działać pod adresem http://localhost:5173/ (lub na porcie określonym w konfiguracji).
+Twoja aplikacja powinna teraz działać pod adresem http://localhost:5173/ (lub na porcie określonym w konfiguracji).
 
 ## Licencja
 
