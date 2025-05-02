@@ -272,4 +272,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### **[ver. 1.17 Beta] - 2025-05-02**
 
-Naprawia błąd z przypisywaniem starego czasu osiągnięcia przy jego aktualizowaniu.
+-   Naprawia błąd z przypisywaniem starego czasu osiągnięcia przy jego aktualizowaniu.
+-   Naprawia błąd, w którym w przypadku kiedy do trwającego osiągnięcia wstawiamy istniejące, nie następuje zmiana osiągnięć. Naprawia błąd z nieskończonym stopperem, w przypadku gdy cofamy nadpisanie osiągnięcia.

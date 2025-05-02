@@ -55,7 +55,6 @@ const AchievementBar = () => {
         setMinutes,
         setHours,
         clearTime,
-        initializeCurrentAchievement,
     } = useTimeRangeStore();
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -75,38 +74,34 @@ const AchievementBar = () => {
         localStorage.removeItem("currentAchievement");
     };
 
-    useEffect(() => {
-        if (!isRunning) {
-            if (currentAchievement.time) {
-                if (!currentAchievement.name) {
-                    return setIsError(true);
-                } else {
-                    setIsError(false);
+    const saveAchieve = () => {
+        if (currentAchievement.time) {
+            if (!currentAchievement.name) {
+                return setIsError(true);
+            } else {
+                setIsError(false);
 
-                    if (draggableAchievement.id && isDraggedAchievement) {
-                        editAchievement(
-                            draggableAchievement.id,
-                            currentAchievement
-                        );
-                        setDraggedAchievement({});
-                        setIsDraggedAchievement(false);
-                    } else {
-                        addAchievement(currentAchievement);
-                    }
-                    clearAchievements();
-                    clearTime();
-                    clearCurrentAchievement();
+                if (draggableAchievement.id && isDraggedAchievement) {
+                    editAchievement(
+                        draggableAchievement.id,
+                        currentAchievement
+                    );
+                    setDraggedAchievement({});
+                    setIsDraggedAchievement(false);
+                } else {
+                    addAchievement(currentAchievement);
                 }
+                clearAchievements();
+                clearTime();
+                clearCurrentAchievement();
             }
         }
-    }, [isRunning, addAchievement]);
-
-    const runStopper = () => {
-        setIsRunning(!isRunning);
     };
 
     const applyDraggableAchieve = () => {
         setIsDraggedAchievement(true);
+        setIsRunning(false);
+
         setAchievement({
             name: draggableAchievement.name,
             category: draggableAchievement.category,
@@ -127,8 +122,10 @@ const AchievementBar = () => {
             name: "",
             category: "None",
             time: "",
+            diff: 0,
         });
         clearTime();
+        setIsRunning(false);
     };
 
     return (
@@ -190,13 +187,26 @@ const AchievementBar = () => {
                 {/* {currentAchievement.time} */}
             </span>
 
-            <button
-                className="w-[115px] text-lg bg-darkPink active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 
-                border-2 border-transparent buttonStart text-white "
-                onClick={runStopper}
-            >
-                {isRunning ? "Stop" : "Start"}
-            </button>
+            {isRunning ? (
+                <button
+                    className="w-[115px] text-lg bg-darkPink active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 
+        border-2 border-transparent buttonStart text-white "
+                    onClick={() => {
+                        setIsRunning(false);
+                        saveAchieve();
+                    }}
+                >
+                    Stop
+                </button>
+            ) : (
+                <button
+                    className="w-[115px] text-lg bg-darkPink active:bg-darkPink transition-all ml-2 rounded-md py-1 px-7 
+            border-2 border-transparent buttonStart text-white "
+                    onClick={() => setIsRunning(true)}
+                >
+                    Start
+                </button>
+            )}
 
             {/* Showing info if achievement is dragged */}
             {isDraggedAchievement && (
