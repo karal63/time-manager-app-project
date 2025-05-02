@@ -269,3 +269,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ### **[ver. 1.16 Beta] - 2025-04-21**
 
 -   Naprawia błąd związany z niedziałającą funkcjonalnością, która aktualizuje czas bieżącego osiągnięcia w momencie, kiedy strona jest w tle.
+
+### **[ver. 1.17 Beta] - 2025-05-02**
+
+Naprawia błąd z przypisywaniem starego czasu osiągnięcia przy jego aktualizowaniu.
