@@ -59,6 +59,16 @@ const SingleAchieveLine = ({ achieve }) => {
         }
     }, [isSavedAchievements]);
 
+    // Every time your achieve changes update edited state for changed values
+    useEffect(() => {
+        setEditedValues({
+            name: achieve.name,
+            category: achieve.category,
+            time: achieve.time,
+            diff: achieve.diff,
+        });
+    }, [achieve]);
+
     return (
         <tr
             draggable={!isEditingAchievements}

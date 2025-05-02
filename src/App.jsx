@@ -54,7 +54,6 @@ const App = () => {
                 const timeElapsed = Math.floor((new Date() - startTime) / 1000);
 
                 const newDiff = lastDiff + timeElapsed;
-                console.log(newDiff);
 
                 // calculating time
                 const diffSeconds = newDiff % 60;
