@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { categories } from "../../constants";
 import { useTimeRangeStore } from "../../store";
