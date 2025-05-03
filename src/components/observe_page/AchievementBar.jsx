@@ -55,10 +55,11 @@ const AchievementBar = () => {
         setMinutes,
         setHours,
         clearTime,
+        isDraggedAchievement,
+        setIsDraggedAchievement,
     } = useTimeRangeStore();
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-    const [isDraggedAchievement, setIsDraggedAchievement] = useState(false);
     const [isError, setIsError] = useState(false);
 
     const clearAchievements = () => {
@@ -127,6 +128,10 @@ const AchievementBar = () => {
         clearTime();
         setIsRunning(false);
     };
+
+    useEffect(() => {
+        console.log(isDraggedAchievement);
+    }, [isDraggedAchievement]);
 
     return (
         <div

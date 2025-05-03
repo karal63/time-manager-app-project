@@ -722,6 +722,12 @@ export const useTimeRangeStore = create((set, get) => ({
         });
     },
 
+    isDraggedAchievement: false,
+    setIsDraggedAchievement: (value) =>
+        set(() => ({
+            isDraggedAchievement: value,
+        })),
+
     // Drag and drop
     draggableAchievement: {},
     setDraggedAchievement: (achieve) =>

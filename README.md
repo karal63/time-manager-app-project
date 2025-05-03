@@ -274,3 +274,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -   Naprawia błąd z przypisywaniem starego czasu osiągnięcia przy jego aktualizowaniu.
 -   Naprawia błąd, w którym w przypadku kiedy do trwającego osiągnięcia wstawiamy istniejące, nie następuje zmiana osiągnięć. Naprawia błąd z nieskończonym stopperem, w przypadku gdy cofamy nadpisanie osiągnięcia.
+-   Naprawia błąd, w którym podczas nadpisania osiągnięcia oraz opuszczenia dannej podstrony wyłączał się tryb nadpisania i po wciścięciu przycisku "stop", osiągnięcie dodawało się jako nowe, a nie jak nadpisane.
