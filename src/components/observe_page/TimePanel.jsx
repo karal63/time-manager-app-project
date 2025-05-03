@@ -47,7 +47,9 @@ const TimePanel = () => {
                             <CiTimer />
                         </span>
                         <p className="font-semibold">
-                            {currentAchievement.name}
+                            {currentAchievement.name.length < 18
+                                ? currentAchievement.name
+                                : `${currentAchievement.name.slice(0, 16)}...`}
                         </p>
                     </div>
                     <p
@@ -66,7 +68,7 @@ const TimePanel = () => {
                 {isHovering && (
                     <div className="mt-2 flex gap-1">
                         <button
-                            className="bg-pink-300 border border-pink-300 w-12 rounded-md h-8 flex items-center justify-center hover:border-mainLineColor transition-all text-white
+                            className="bg-pink-500 w-12 rounded-md h-8 flex items-center justify-center hover:bg-pink-600 transition-all text-white
                             text-2xl"
                             onClick={() => setIsRunning(!isRunning)}
                         >

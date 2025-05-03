@@ -75,8 +75,6 @@ const App = () => {
                     diff: newDiff,
                 };
 
-                console.log(achievementCopy);
-
                 saveToLocalStorage("currentAchievement", achievementCopy);
                 updateTimeAndDiff(achievementCopy.time, achievementCopy.diff);
             }, 1000);
