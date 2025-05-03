@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { categories } from "../../constants";
@@ -128,10 +127,6 @@ const AchievementBar = () => {
         clearTime();
         setIsRunning(false);
     };
-
-    useEffect(() => {
-        console.log(isDraggedAchievement);
-    }, [isDraggedAchievement]);
 
     return (
         <div
