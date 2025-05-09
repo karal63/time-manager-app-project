@@ -83,7 +83,11 @@ const AddTimeRangePanel = () => {
 
         const { timeStart, timeEnd } = timeRange;
         const [hoursStart, minutesStart] = timeStart.split(":").map(Number);
-        const [hoursEnd, minutesEnd] = timeEnd.split(":").map(Number);
+        let [hoursEnd, minutesEnd] = timeEnd.split(":").map(Number);
+
+        if (hoursEnd <= 0) {
+            hoursEnd = 24;
+        }
 
         let durationHours = hoursEnd - hoursStart;
         let durationMinutes = minutesEnd - minutesStart;
