@@ -124,14 +124,7 @@ const Sidebar = () => {
                             </Link>
                         </li>
 
-                        {/* think about animation or smth like that */}
-                        <li
-                            className={`relative ${
-                                location.pathname === "/notes"
-                                    ? "before:absolute before:w-2 before:h-2 before:bg-darkPink before:right-[110%] before:top-1/2 before:-translate-y-1/2 before:transform before:rotate-45"
-                                    : ""
-                            }`}
-                        >
+                        <li>
                             <Link
                                 to="/notes"
                                 className={`flex items-center gap-3`}
