@@ -103,6 +103,16 @@ const BlockMenu = ({ closeBlockMenu, blockMenu, range, entireSectionRef }) => {
             summedMinutesEnd -= 60;
         }
 
+        if (summedHoursEnd <= 0) {
+            setPopup(true, "You can't set a time later than 00:00.");
+            closeBlockMenu();
+            return;
+        }
+
+        if (summedHoursEnd === 24) {
+            summedHoursEnd = 0;
+        }
+
         const newRange = {
             ...range,
             timeStart:

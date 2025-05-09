@@ -62,12 +62,14 @@ const PopupWindow = () => {
                         {timeLeft}
                     </span>
                 </div>
-                <button
-                    className="px-3 py-1 border-[1px] border-gray-400 rounded-lg text-mainColor hover:text-darkPink hover:border-darkPink hover:shadow-main transition-all"
-                    onClick={undoDeleting}
-                >
-                    Undo
-                </button>
+                {popup.message !== "You can't set a time later than 00:00." && (
+                    <button
+                        className="px-3 py-1 border-[1px] border-gray-400 rounded-lg text-mainColor hover:text-darkPink hover:border-darkPink hover:shadow-main transition-all"
+                        onClick={undoDeleting}
+                    >
+                        Undo
+                    </button>
+                )}
             </div>
         </div>
     );
