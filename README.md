@@ -36,13 +36,11 @@ Jeśli nie masz Node.js, pobierz go ze strony: https://nodejs.org/
 
 **3. Zainstaluj zależności:**
 
-W katalogu projektu uruchom::
-
 ```
 npm install
 ```
 
-**4. Uruchom serwer deweloperski**
+**4. Uruchom serwer deweloperski:**
 
 ```
 npm run dev
