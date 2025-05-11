@@ -49,7 +49,7 @@ const SingleBlock = ({ range, zoomLevel }) => {
         endTimeMark.positionX = endTimeMark.positionX + timeEndMinuts;
     }
 
-    // == exact minuts | Algorithm
+    // == exact minutes | Algorithm
     // detect above things
     // if not detected check between what time it is ex. 14.37 is between 14 and 15
     // width between marks is 60px, get the position of 14:00 and add minuts (37)

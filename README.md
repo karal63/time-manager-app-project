@@ -16,23 +16,33 @@ Interakcja z użytkownikiem w aplikacji "ProducIVE" polega na intuicyjnym dodawa
 
 ## ⚡ Instalacja
 
-**1. Sklonuj repozytorium:**
+Wszystkie poniższe polecenia należy wpisać w terminalu (na macOS/Linux) lub w Wierszu poleceń / PowerShell / Terminalu VS Code (na Windows).
+
+**1. Sklonuj repozytorium i przejdź do folderu projektu:**
 
 ```
 git clone https://github.com/karal63/time-manager-app-project; cd time-manager-app-project
 ```
 
-**2. Zainstaluj zależności:**
+**2. Upewnij się, że masz zainstalowany Node.js (LTS)**
 
-Upewnij się, że masz zainstalowany Node.js (najlepiej najnowszą wersję LTS).
+Sprawdź wersję:
 
-Następnie zainstaluj wymagane pakiety:
+```
+node -v
+```
+
+Jeśli nie masz Node.js, pobierz go ze strony: https://nodejs.org/
+
+**3. Zainstaluj zależności:**
+
+W katalogu projektu uruchom::
 
 ```
 npm install
 ```
 
-**3. Uruchom serwer deweloperski**
+**4. Uruchom serwer deweloperski**
 
 ```
 npm run dev
