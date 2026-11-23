@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 :root {
-    --mainColor: black;
-    --mainBackground: white;
-    --mainHoverColor: rgb(243, 244, 246);
-    --mainLineColor: rgb(229, 231, 235);
-    --mainDullColor: rgb(220, 220, 220);
-
-    --lightGray: rgb(249, 250, 251);
-    --selectedAchieve: rgb(239, 246, 255);
+    color-scheme: light;
+    --mainColor: #211b27;
+    --mainBackground: #f8f7fa;
+    --mainHoverColor: #f0ebf3;
+    --mainLineColor: #e3dfe8;
+    --mainDullColor: #d9d1de;
+    --surfaceColor: #fff;
+    --surfaceTint: #f7f4f8;
+    --surfaceShadow: 0 6px 24px #2e173f0b;
+    --mutedColor: #61576b;
+    --accentColor: #a51e5b;
+    --accentSoft: #faeaf3;
+    --actionColor: #aa1b5b;
+    --actionHoverColor: #8d1248;
+    --focusColor: #a2398c;
+    --scrollbarThumb: #94869d;
 
     --redBgNote: rgb(254, 242, 242);
     --greenBgNote: rgb(240, 253, 244);
@@ -33,14 +41,20 @@ body {
 }
 
 .darkMode {
-    --mainColor: white;
-    --mainBackground: rgb(21, 21, 21);
-    --mainHoverColor: rgb(43, 43, 43);
-    --mainLineColor: rgb(59, 59, 59);
-    --mainDullColor: rgb(62, 62, 62);
-
-    --lightGray: rgb(43, 43, 43);
-    --selectedAchieve: rgb(28, 37, 47);
+    color-scheme: dark;
+    --mainColor: #f7effb;
+    --mainBackground: #18151c;
+    --mainHoverColor: var(--surfaceTint);
+    --mainLineColor: #443b4c;
+    --mainDullColor: #53465c;
+    --surfaceColor: #211d27;
+    --surfaceTint: #2b2532;
+    --surfaceShadow: 0 6px 24px #0003;
+    --mutedColor: #c1b4cc;
+    --accentColor: #ffa8d0;
+    --accentSoft: #47263d;
+    --focusColor: #f49cd0;
+    --scrollbarThumb: #766780;
 
     --redBgNote: rgb(43, 0, 0);
     --greenBgNote: rgb(0, 46, 13);
@@ -53,6 +67,27 @@ body {
 
     --timeIndicator: rgb(56, 56, 56);
     --timeAxis: rgb(30, 30, 30);
+}
+
+:root, .darkMode {
+    --lightGray: var(--surfaceColor);
+    --selectedAchieve: var(--accentSoft);
+}
+
+.text-darkPink, .hover\:text-darkPink:hover {
+    color: var(--accentColor);
+}
+
+.bg-darkPink, .hover\:bg-darkPink:hover, .active\:bg-darkPink:active {
+    background-color: var(--actionColor);
+}
+
+.bg-darkPinkTransp, .bg-darkPinkTransp\/15 {
+    background-color: var(--accentSoft);
+}
+
+.border-darkPink, .hover\:border-darkPink:hover {
+    border-color: var(--accentColor);
 }
 
 .screen-max-width {
@@ -80,27 +115,14 @@ body {
 
 /* Background of the scrollbar */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 6px;
-}
-
-.darkMode ::-webkit-scrollbar-track {
-    background: rgb(31, 31, 31);
+    background: var(--mainBackground);
     border-radius: 6px;
 }
 
 /* Scrollbar handle */
 ::-webkit-scrollbar-thumb {
-    background: #555;
+    background: var(--scrollbarThumb);
     border-radius: 6px;
-}
-
-.darkMode input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-
-.darkMode input[type="time"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
 }
 
 .card-width {
@@ -160,7 +182,7 @@ body {
 
 .buttonStart:focus,
 .buttonStart:focus-visible {
-    outline: 4px auto #ff04ea;
+    outline: 4px auto var(--focusColor);
 }
 
 .bubble {
